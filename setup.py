@@ -27,6 +27,7 @@ setup(
         "certifi==2023.7.22",
         "cffi==1.16.0",
         "charset-normalizer==3.3.0",
+        "click==8.1.7",
         "colorama==0.4.6",
         "courlan==0.9.4",
         "cryptography==41.0.4",
@@ -86,7 +87,7 @@ setup(
         ":python_version<'3.11'": ["typing_extensions>=4.3"],
     },
     entry_points={
-        "console_scripts": ["minall=minall.main:main"],
+        "console_scripts": ["minall=minall.cli:cli"],
     },
     zip_safe=True,
 )

@@ -1,5 +1,4 @@
 import json
-from argparse import ArgumentParser
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -14,33 +13,33 @@ from rich.progress import (
 )
 
 
-def parse_cli_args() -> None:
-    # Parse arguments from the command line
-    parser = ArgumentParser()
-    parser.add_argument("--input-links", type=str, required=True)
-    parser.add_argument("--input-shared-content", type=str, required=False)
-    parser.add_argument("--output-dir", type=str, required=True)
-    parser.add_argument("--buzzsumo-only", type=bool, default=False, required=False)
-    parser.add_argument("--config-file", type=str, required=True)
-    args = parser.parse_args()
-
-    # Verify argument's validity
-    buzzsumo_only = args.buzzsumo_only
-    if not isinstance(buzzsumo_only, bool):
-        raise ValueError
-    BUZZSUMO_ONLY = "BUZZSUMO_ONLY={}".format(buzzsumo_only)
-
-    if not Path(args.input_links).is_file():
+def parse_cli_args(
+    links_file: str,
+    shared_content_file: str | None,
+    output_dir: str,
+    buzzsumo_only: bool,
+    config_file: str,
+) -> None:
+    # Parse CLI argument for path to URLs file
+    if not Path(links_file).is_file():
         raise FileNotFoundError
-    Path(args.output_dir).mkdir(exist_ok=True)
-    INPUT_LINKS = "INPUT_LINKS={}".format(args.input_links)
-    OUTPUT_DIR = "OUTPUT_DIR={}".format(args.output_dir)
-    if args.input_shared_content and Path(args.input_shared_content).is_file():
-        SHARED_CONTENT = "INPUT_SHARED_CONTENT={}".format(args.input_shared_content)
+    INPUT_LINKS = "INPUT_LINKS={}".format(links_file)
+
+    # Parse CLI argument for path to shared media content file
+    if shared_content_file and Path(shared_content_file).is_file():
+        SHARED_CONTENT = "INPUT_SHARED_CONTENT={}".format(shared_content_file)
     else:
         SHARED_CONTENT = ""
 
-    with open(args.config_file) as f:
+    # Parse CLI argument for path to output directory
+    Path(output_dir).mkdir(exist_ok=True)
+    OUTPUT_DIR = "OUTPUT_DIR={}".format(output_dir)
+
+    # Boolean for whether or not to only collect Buzzsumo data
+    BUZZSUMO_ONLY = "BUZZSUMO_ONLY={}".format(buzzsumo_only)
+
+    # Parse configuration file
+    with open(config_file) as f:
         config = json.load(f)
     if not isinstance(config, dict):
         raise ValueError
@@ -68,7 +67,7 @@ def parse_cli_args() -> None:
         shared_content=SHARED_CONTENT,
     )
 
-    # Register arguments as python environment variables
+    # Register CLI arguments as Python environment variables
     dotenv_path.write_text(env)
 
 
