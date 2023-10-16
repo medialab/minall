@@ -112,10 +112,8 @@ def parse_env_vars() -> EnvVars:
     else:
         env_vars.bz_only = False
 
-    if YOUTUBE_KEY_LIST and isinstance(ast.literal_eval(YOUTUBE_KEY_LIST), list):
-        env_vars.yt_keys = ast.literal_eval(YOUTUBE_KEY_LIST)
-    else:
-        env_vars.yt_keys = []
+    if YOUTUBE_KEY_LIST:
+        env_vars.yt_keys = YOUTUBE_KEY_LIST.split(",")
 
     if CROWDTANGLE_RATE_LIMIT:
         try:
