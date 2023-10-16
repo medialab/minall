@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from dotenv import find_dotenv, load_dotenv
+from dotenv import dotenv_values
 from duckdb import DuckDBPyConnection
 
 from minall.links.links_table import LinksTable
@@ -13,8 +13,8 @@ def export_database(connection: DuckDBPyConnection):
     shared_content_table = SharedContentTable(connection=connection)
 
     # Get user-defined file paths
-    load_dotenv(find_dotenv())
-    output_dir = os.getenv("OUTPUT_DIR")
+    config = dotenv_values(Path.cwd().joinpath(".env"))
+    output_dir = config.get("OUTPUT_DIR")
     if not output_dir:
         raise KeyError
     outdir = Path(output_dir)
