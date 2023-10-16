@@ -38,7 +38,7 @@ class LinksTable:
         if sorted(infile_fieldnames) == sorted(["url", "link_id"]):
             sql = f"""
             INSERT INTO {self.table_name} ({", ".join(infile_fieldnames)})
-            SELECT * FROM 'links_view'
+            SELECT {", ".join(infile_fieldnames)} FROM 'links_view'
             ON CONFLICT (url, link_id)
             DO NOTHING
             """
@@ -52,7 +52,7 @@ class LinksTable:
             ]
             sql = f"""
             INSERT INTO {self.table_name} ({", ".join(infile_fieldnames)})
-            SELECT * FROM 'links_view'
+            SELECT {", ".join(infile_fieldnames)} FROM 'links_view'
             ON CONFLICT (url, link_id)
             DO UPDATE SET {", ".join(updated_fields)}
             """
