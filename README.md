@@ -6,7 +6,7 @@ CLI tool and Python library to apply a suite of Minet's data-mining tools on a h
 
 ## Description
 
-[`minet`](https://github.com/medialab/minet) is a Python library, maintained by the [médialab at Sciences Po](https://github.com/medialab/), that provides a suite of Python classes and functions to scrape data from the web and make API calls to various platforms. Normally to use `minet`, you call one of its CLI commands on a specific data set, such as a set of YouTube video IDs or a set URLs from Instagram. What `minall` does is take advantage of `minet`'s many platform-specific tools and applies them to a heterogenous set of URLs, without needing to manually specify which API should be called. `minall` parses the input URL, activates the appropriate `minet` tools, and returns a unified set of metadata common to all the input URLs, which allows for comparative analysis.
+[`minet`](https://github.com/medialab/minet) is a Python library, maintained by the [médialab at Sciences Po](https://github.com/medialab/), that provides a suite of Python classes and functions to scrape data from the web and make API calls to various platforms. Normally to use `minet`, you call one of its CLI commands on a specific data set, such as a set of YouTube video IDs or a set of URLs from Instagram. What `minall` does is take advantage of `minet`'s many platform-specific tools and applies them to a heterogenous set of URLs, without needing to manually specify which API should be called. `minall` parses the input URL, activates the appropriate `minet` tools, and returns a unified set of metadata common to all the input URLs, which allows for comparative analysis.
 
 ## Install CLI / library
 
@@ -23,7 +23,7 @@ CLI tool and Python library to apply a suite of Minet's data-mining tools on a h
 
 ## Use as a CLI tool
 
-````shell
+```shell
 usage: minall [-h] --input-links INPUT_LINKS [--input-shared-content INPUT_SHARED_CONTENT] --output-dir OUTPUT_DIR
               [--buzzsumo-only BUZZSUMO_ONLY] --config-file CONFIG_FILE
 
@@ -34,7 +34,7 @@ options:
   --output-dir OUTPUT_DIR
   --buzzsumo-only BUZZSUMO_ONLY
   --config-file CONFIG_FILE
-- ```
+```
 
 At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata and (2) a CSV of the media content shared on various posts in the set of URLs.
 
@@ -57,7 +57,7 @@ Finally, because `minall` makes API calls, it requires a JSON configuration file
     "key": "MY_YT_API_KEY"
   }
 }
-````
+```
 
 ### Required format for the input CSV
 
