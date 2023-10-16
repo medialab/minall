@@ -16,6 +16,9 @@ def setup_database(connection: DuckDBPyConnection):
 
     # Get user-defined file paths
     config = dotenv_values(find_dotenv())
+    from pprint import pprint
+
+    pprint(config)
     input_links_file = config.get("INPUT_LINKS")
     input_shared_content = config.get("INPUT_SHARED_CONTENT")
     output_dir = config.get("OUTPUT_DIR")
