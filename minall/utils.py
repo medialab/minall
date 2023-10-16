@@ -97,7 +97,7 @@ class EnvVars:
 
 
 def parse_env_vars() -> EnvVars:
-    config = dotenv_values(find_dotenv())
+    config = dotenv_values(Path.cwd().joinpath(".env"))
     BUZZSUMO_TOKEN = config.get("BUZZSUMO_TOKEN")
     BUZZSUMO_ONLY = config.get("BUZZSUMO_ONLY")
     CROWDTANGLE_TOKEN = config.get("CROWDTANGLE_TOKEN")
