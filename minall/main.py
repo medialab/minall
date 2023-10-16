@@ -1,5 +1,4 @@
 import duckdb
-import typer
 
 from minall.enrichment.enrichment import enrich_links
 from minall.export_db import export_database
@@ -23,4 +22,4 @@ def main():
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    main()
