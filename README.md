@@ -38,6 +38,17 @@ options:
 
 At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata (`links.csv`) and (2) a CSV of the media content shared on various posts in the set of URLs (`shared_content.csv`).
 
+<table>
+    <tr>
+        <th>link_id</th>
+        <th>url</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>https://www.facebook.com/EmmanuelMacron/posts/889664472515470</td>
+    </tr>
+</table>
+
 ```mermaid
 erDiagram
     links ||--o{ shared_content : has
