@@ -36,7 +36,20 @@ options:
   --config-file CONFIG_FILE
 ```
 
-At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata and (2) a CSV of the media content shared on various posts in the set of URLs.
+At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata (`links.csv`) and (2) a CSV of the media content shared on various posts in the set of URLs (`shared_content.csv`).
+
+```mermaid
+erDiagram
+    links ||--o{ shared_content : has
+    links {
+        string link_id
+        string url
+    }
+    shared_content {
+        string post_url "refers to links.url"
+        string content_url
+    }
+```
 
 The two files will be output to a directory, whose path the user declares (`--output-dir`).
 
