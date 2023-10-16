@@ -19,9 +19,7 @@ def setup_database(connection: DuckDBPyConnection):
     input_links_file = os.getenv("INPUT_LINKS")
     input_shared_content = os.getenv("INPUT_SHARED_CONTENT")
     output_dir = os.getenv("OUTPUT_DIR")
-    if not input_links_file or not output_dir:
-        raise KeyError
-    outdir = Path(output_dir)
+    outdir = Path(output_dir)  # type: ignore
     links_outfile = outdir.joinpath("links.csv")
     shared_content_outfile = outdir.joinpath("shared_content.csv")
 
@@ -32,7 +30,7 @@ def setup_database(connection: DuckDBPyConnection):
         shared_content_table.insert(infile=Path(input_shared_content))
 
     # Import data from input file of links
-    links_table.insert(infile=Path(input_links_file))
+    links_table.insert(infile=Path(input_links_file))  # type: ignore
 
     # Export tables to working data directory
     shared_content_table.export(outfile=shared_content_outfile)
