@@ -1,0 +1,80 @@
+[project]
+authors = [
+    { name = "Kelly Christensen", email = "kelly.christensen@sciencespo.fr" },
+]
+dependencies = [
+    "about-time==4.2.1",
+    "beautifulsoup4==4.12.2",
+    "browser-cookie3==0.17.1",
+    "casanova==1.16.0",
+    "certifi==2023.7.22",
+    "cffi==1.16.0",
+    "charset-normalizer==3.3.0",
+    "colorama==0.4.6",
+    "courlan==0.9.4",
+    "cryptography==41.0.4",
+    "dateparser==1.1.8",
+    "duckdb==0.9.0",
+    "ebbe==1.13.2",
+    "entrypoints==0.4",
+    "file-read-backwards==2.0.0",
+    "greenlet==2.0.2",
+    "htmldate==1.5.1",
+    "idna==3.4",
+    "jeepney==0.8.0",
+    "json5==0.9.14",
+    "jusText==3.0.0",
+    "keyring==19.2.0",
+    "langcodes==3.3.0",
+    "lxml==4.9.2",
+    "lz4==4.3.2",
+    "markdown-it-py==3.0.0",
+    "mdurl==0.1.2",
+    "minet==1.0.0a53",
+    "nanoid==2.0.0",
+    "ndjson==0.3.1",
+    "persist-queue==0.8.1",
+    "playwright==1.35.0",
+    "playwright-stealth==1.0.6",
+    "pycountry==18.12.8",
+    "pycparser==2.21",
+    "pycryptodomex==3.19.0",
+    "pyee==9.0.4",
+    "Pygments==2.16.1",
+    "python-dateutil==2.8.2",
+    "python-dotenv==1.0.0",
+    "pytz==2023.3.post1",
+    "PyYAML==6.0.1",
+    "quenouille==1.9.0",
+    "regex==2023.10.3",
+    "requests==2.31.0",
+    "rich==13.6.0",
+    "rich-argparse==1.3.0",
+    "SecretStorage==3.3.3",
+    "six==1.16.0",
+    "soupsieve==2.5",
+    "tenacity==8.2.3",
+    "termcolor==2.3.0",
+    "tld==0.13",
+    "tqdm==4.66.1",
+    "trafilatura==1.6.2",
+    "twitter==2.0a2",
+    "twitwi==0.18.1",
+    "typing_extensions==4.8.0",
+    "tzlocal==5.1",
+    "ural==1.1.0",
+    "urllib3==1.26.17",
+]
+description = "Library for updating metadata on a heterogenous set of URLs"
+license = { file = "LICENSE" }
+name = "minall"
+readme = "README.md"
+requires-python = ">=3.11"
+version = "0.0.1"
+
+[project.scripts]
+minall = "minall.main:main"
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
