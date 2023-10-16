@@ -15,6 +15,8 @@ def setup_database(connection: DuckDBPyConnection):
     shared_content_table = SharedContentTable(connection=connection)
 
     # Get user-defined file paths
+    env_file = find_dotenv()
+    print(env_file)
     config = dotenv_values(find_dotenv())
     from pprint import pprint
 
