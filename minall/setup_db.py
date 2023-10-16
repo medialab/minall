@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from dotenv import find_dotenv, load_dotenv
+from dotenv import dotenv_values, find_dotenv
 from duckdb import DuckDBPyConnection
 
 from minall.links.links_table import LinksTable
@@ -15,10 +15,10 @@ def setup_database(connection: DuckDBPyConnection):
     shared_content_table = SharedContentTable(connection=connection)
 
     # Get user-defined file paths
-    load_dotenv(find_dotenv())
-    input_links_file = os.getenv("INPUT_LINKS")
-    input_shared_content = os.getenv("INPUT_SHARED_CONTENT")
-    output_dir = os.getenv("OUTPUT_DIR")
+    config = dotenv_values(find_dotenv())
+    input_links_file = config.get("INPUT_LINKS")
+    input_shared_content = config.get("INPUT_SHARED_CONTENT")
+    output_dir = config.get("OUTPUT_DIR")
     outdir = Path(output_dir)  # type: ignore
     links_outfile = outdir.joinpath("links.csv")
     shared_content_outfile = outdir.joinpath("shared_content.csv")

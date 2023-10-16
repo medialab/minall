@@ -6,7 +6,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from dotenv import find_dotenv, load_dotenv
+from dotenv import dotenv_values, find_dotenv
 from rich.progress import (
     BarColumn,
     MofNCompleteColumn,
@@ -97,13 +97,13 @@ class EnvVars:
 
 
 def parse_env_vars() -> EnvVars:
-    load_dotenv(find_dotenv())
-    BUZZSUMO_TOKEN = os.getenv("BUZZSUMO_TOKEN")
-    BUZZSUMO_ONLY = os.getenv("BUZZSUMO_ONLY")
-    CROWDTANGLE_TOKEN = os.getenv("CROWDTANGLE_TOKEN")
-    CROWDTANGLE_RATE_LIMIT = os.getenv("CROWDTANGLE_RATE_LIMIT")
-    YOUTUBE_KEY_LIST = os.getenv("YOUTUBE_KEYS")
-    OUTPUT_DIR = os.getenv("OUTPUT_DIR")
+    config = dotenv_values(find_dotenv())
+    BUZZSUMO_TOKEN = config.get("BUZZSUMO_TOKEN")
+    BUZZSUMO_ONLY = config.get("BUZZSUMO_ONLY")
+    CROWDTANGLE_TOKEN = config.get("CROWDTANGLE_TOKEN")
+    CROWDTANGLE_RATE_LIMIT = config.get("CROWDTANGLE_RATE_LIMIT")
+    YOUTUBE_KEY_LIST = config.get("YOUTUBE_KEYS")
+    OUTPUT_DIR = config.get("OUTPUT_DIR")
 
     env_vars = EnvVars()
 
