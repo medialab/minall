@@ -24,16 +24,19 @@ CLI tool and Python library to apply a suite of Minet's data-mining tools on a h
 ## Use as a CLI tool
 
 ```shell
-usage: minall [-h] --input-links INPUT_LINKS [--input-shared-content INPUT_SHARED_CONTENT] --output-dir OUTPUT_DIR
-              [--buzzsumo-only BUZZSUMO_ONLY] --config-file CONFIG_FILE
+Usage: minall [OPTIONS]
 
-options:
-  -h, --help            show this help message and exit
-  --input-links INPUT_LINKS
-  --input-shared-content INPUT_SHARED_CONTENT
-  --output-dir OUTPUT_DIR
-  --buzzsumo-only BUZZSUMO_ONLY
-  --config-file CONFIG_FILE
+Options:
+  -i, --input-links TEXT          Path to file of URLs to be enriched
+                                  [required]
+  -s, --input-shared-content TEXT
+                                  Path to file of shared media content
+  -o, --output-dir TEXT           Path to directory for enriched files
+                                  [required]
+  -b, --buzzsumo-only BOOLEAN     [default: False]
+  -c, --config-file TEXT          Path to file with API keys and configuration
+                                  details  [required]
+  --help                          Show this message and exit.
 ```
 
 At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata (`links.csv`) and (2) a CSV of the media content shared on various posts in the set of URLs (`shared_content.csv`).
