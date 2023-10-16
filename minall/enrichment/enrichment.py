@@ -74,6 +74,7 @@ def enrich_links(connection: DuckDBPyConnection):
 
         # --- OTHER SOCIAL MEDIA -- #
         # Add 'SocialMediaPosting' if type value is null
+        print(f"{bar}Adding CreativeWork type data")
         other_social_media = [
             (url, link_id)
             for url, link_id in data
@@ -105,8 +106,9 @@ def enrich_links(connection: DuckDBPyConnection):
                 "snapchat.com",
             ]
         ]
-        get_article_text(data=links_to_scrape, outfile=results_file)  # type: ignore
-        links_table.insert(infile=results_file)
+        if len(links_to_scrape) > 0:
+            get_article_text(data=links_to_scrape, outfile=results_file)  # type: ignore
+            links_table.insert(infile=results_file)
 
     # ---- EVERYTHING --- #
     # Replace any remaining null values with metadata from Buzzsumo API to database's links
