@@ -38,6 +38,8 @@ options:
 
 At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata (`links.csv`) and (2) a CSV of the media content shared on various posts in the set of URLs (`shared_content.csv`).
 
+`./input.csv`
+
 <table>
     <tr>
         <th>link_id</th>
@@ -68,6 +70,8 @@ Optionally, if you already have a relational table of shared media content (`--i
 
 Finally, because `minall` makes API calls, it requires a JSON configuration file with multiple API keys. The model for this file is `minet`'s configuration file.
 
+`./config.json`
+
 ```json
 {
   "buzzsumo": {
@@ -81,6 +85,12 @@ Finally, because `minall` makes API calls, it requires a JSON configuration file
     "key": "MY_YT_API_KEY"
   }
 }
+```
+
+Example CLI command
+
+```shell
+minall --input-links input.csv --config-file config.json --output-dir ./output
 ```
 
 ### Required format for the input CSV
