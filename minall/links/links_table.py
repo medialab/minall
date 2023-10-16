@@ -51,7 +51,7 @@ class LinksTable:
                 for field in fields_without_primary_key
             ]
             sql = f"""
-            INSERT INTO {self.table_name} ({", ".join(LINKS_FIELDNAMES)})
+            INSERT INTO {self.table_name} ({", ".join(infile_fieldnames)})
             SELECT * FROM 'links_view'
             ON CONFLICT (url, link_id)
             DO UPDATE SET {", ".join(updated_fields)}
