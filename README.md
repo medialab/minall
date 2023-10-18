@@ -11,14 +11,9 @@ CLI tool and Python library to apply a suite of Minet's data-mining tools on a h
 ## Install CLI / library
 
 1. Create and activate a virtual Python environment, >= 3.11
-2. Clone this repository and change into the newly created directory.
+2. Install the tool with `pip`.
    ```shell
-   git clone https://github.com/medialab/minall.git
-   cd minall
-   ```
-3. Install the library in the activated virtual Python environment.
-   ```shell
-   pip install -e .
+   pip install git+https://github.com/medialab/minall.git
    ```
 
 ## Use as a CLI tool
