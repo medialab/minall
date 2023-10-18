@@ -19,4 +19,4 @@ def get_data(data: list[tuple[str, str]], outfile: Path):
         for result in executor.map(scraper, data):
             if result != {}:
                 writer.writerow(result)
-                progress.advance(t)
+            progress.advance(t)
