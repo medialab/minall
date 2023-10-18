@@ -52,6 +52,8 @@ class SharedContentTable:
     def export(self, outfile: Path):
         print(f"\n\tWriting table '{self.table_name}' to path '{outfile}'")
         file_name = str(outfile)
-        duckdb.table(self.table_name, connection=self.connection).write_csv(
+        duckdb.table(self.table_name, connection=self.connection).order(
+            "post_url"
+        ).write_csv(
             file_name=file_name, header=True
         )  # type: ignore
