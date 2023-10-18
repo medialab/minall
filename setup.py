@@ -44,7 +44,7 @@ setup(
         "jusText==3.0.0",
         "keyring==19.2.0",
         "langcodes==3.3.0",
-        "lxml==4.9.2",
+        "lxml>=4.9.2,<=4.9.3",
         "lz4==4.3.2",
         "markdown-it-py==3.0.0",
         "mdurl==0.1.2",
