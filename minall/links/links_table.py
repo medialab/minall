@@ -3,7 +3,6 @@ from pathlib import Path
 import casanova
 import duckdb
 from duckdb import DuckDBPyConnection
-
 from minall.links.constants import LINKS_DTYPES, LINKS_FIELDNAMES
 
 
@@ -46,6 +45,11 @@ class LinksTable:
             fields_without_primary_key = LINKS_FIELDNAMES.copy()
             fields_without_primary_key.remove("url")
             fields_without_primary_key.remove("link_id")
+            fields_without_primary_key = [
+                field
+                for field in fields_without_primary_key
+                if field in infile_fieldnames
+            ]
             updated_fields = [
                 f"{field} = COALESCE(excluded.{field}, {self.table_name}.{field})"
                 for field in fields_without_primary_key
