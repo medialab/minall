@@ -11,7 +11,7 @@ CLI tool and Python library to apply a suite of Minet's data-mining tools on a h
 ## Enrichment
 
 ```mermaid
-graph LR
+graph TD
 A("What is the nature of the URL?")
 B("Is the URL of a video?")
 C["Call YouTube API for video metadata, including channel ID."]
