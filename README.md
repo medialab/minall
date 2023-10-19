@@ -56,55 +56,19 @@ K---L
 
 ## Use as a CLI tool
 
+To enrich a set of URLs in CSV `input.csv` and to write the results in directory `output/` in your current working directory, run the following command:
+
 ```shell
-Usage: minall [OPTIONS]
-
-Options:
-  -i, --input-links TEXT          Path to file of URLs to be enriched
-                                  [required]
-  -s, --input-shared-content TEXT
-                                  Path to file of shared media content
-  -o, --output-dir TEXT           Path to directory for enriched files
-                                  [required]
-  -b, --buzzsumo-only BOOLEAN     [default: False]
-  -c, --config-file TEXT          Path to file with API keys and configuration
-                                  details  [required]
-  --help                          Show this message and exit.
+minall --input-links input.csv --config-file config.json --output-dir ./output
 ```
 
-At minimum, `minall` takes in a CSV of URLs (`--input-links`) and outputs two files: (1) a CSV of the same links but with metadata (`links.csv`) and (2) a CSV of the media content shared on various posts in the set of URLs (`shared_content.csv`).
+The input CSV file needs to have the columns `link_id` and `url`. (Future development: allow user to specify column names)
 
-`./input.csv`
+| link_id  | url         |
+| -------- | ----------- |
+| ID/12345 | example.com |
 
-<table>
-    <tr>
-        <th>link_id</th>
-        <th>url</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>https://www.facebook.com/EmmanuelMacron/posts/889664472515470</td>
-    </tr>
-</table>
-
-```mermaid
-erDiagram
-    links ||--o{ shared_content : has
-    links {
-        string link_id
-        string url
-    }
-    shared_content {
-        string post_url "refers to links.url"
-        string content_url
-    }
-```
-
-The two files will be output to a directory, whose path the user declares (`--output-dir`).
-
-Optionally, if you already have a relational table of shared media content (`--input-shared-content`) whose metadata you want to update, you can provide that file as input too.
-
-Finally, because `minall` makes API calls, it requires a JSON configuration file with multiple API keys. The model for this file is `minet`'s configuration file.
+With the option `--config-file`, you will need to provide a JSON-formatted configuration file, which contains the necessary API keys for the metadata collection.
 
 `./config.json`
 
@@ -123,19 +87,9 @@ Finally, because `minall` makes API calls, it requires a JSON configuration file
 }
 ```
 
-Example CLI command
+A special feature of `minall` is that it creates an in-memory SQL database during the enrichment process and updates any metadata provided at input without losing any data. For example, if you have already used `minall` on a set of URLs, you can update those metrics by inputting the previous run's out-files. This is useful because, if a URL has been deleted or an API no longer returns a response for it, `minall`'s result files will keep the old data, rather than overwriting it with null values.
 
-```shell
-minall --input-links input.csv --config-file config.json --output-dir ./output
-```
-
-### Required format for the input CSV
-
-The input files must conform to the output format's CSV headers.
-
-`minall` produces a file of the input URLs with the following headers for the added metadata.
-
-The input file must have, at minimum, the columns `link_id` and `url` and it cannot have any columns that are not part of `minall`'s [unified set](<(https://github.com/medialab/minall/blob/main/minall/links/constants.py)>) of metadata fields, shown below.
+### Data fields for enriched URLs file
 
 - `link_id` : some kind of unique identifier, which can refer to the URL or to some other entity to which the URL relates
 - `url` : the URL that will be used for the metadata collection
@@ -176,5 +130,3 @@ The input file must have, at minimum, the columns `link_id` and `url` and it can
 - `youtube_favorite` : number of favorite reactions the URL has received on YouTube
 - `youtube_subscribe` : if the URL is of a YouTube channel, the channel's number of subscribers
 - `create_video`: if the URL is of a YouTube channel, the number of videos the channel has created
-
-A feature of `minall` is that it creates an in-memory SQL database during the enrichment process and updates any metadata provided at input. For example, if you have already used `minall` on a set of URLs and have collected metadata, you can update those metrics by inputting the enriched CSV file. This is useful because many metadata fields rely on Buzzsumo's aggregated database, whose API occasionally does not return good responses.
