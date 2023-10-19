@@ -1,4 +1,3 @@
-import click
 import duckdb
 
 from minall.enrichment.enrichment import enrich_links
