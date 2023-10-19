@@ -8,6 +8,44 @@ CLI tool and Python library to apply a suite of Minet's data-mining tools on a h
 
 [`minet`](https://github.com/medialab/minet) is a Python library, maintained by the [médialab at Sciences Po](https://github.com/medialab/), that provides a suite of Python classes and functions to scrape data from the web and make API calls to various platforms. Normally to use `minet`, you call one of its CLI commands on a specific data set, such as a set of YouTube video IDs or a set of URLs from Instagram. What `minall` does is take advantage of `minet`'s many platform-specific tools and applies them to a heterogenous set of URLs, without needing to manually specify which API should be called. `minall` parses the input URL, activates the appropriate `minet` tools, and returns a unified set of metadata common to all the input URLs, which allows for comparative analysis.
 
+## Enrichment
+
+```mermaid
+graph TD
+A("What is the nature of the URL?")
+B("Is the URL of a video?")
+C["Call YouTube API for video metadata, including channel ID."]
+D("Is the URL of a channel?")
+E["Call YouTube API for channel metadata"]
+
+F("Is the URL of a Facebook post?")
+G["Call CrowdTangle API for post metadata"]
+
+H("Is the URL from a media platform other than YouTube or Facebook?")
+I["Assign '@type' = 'SocialMediaPosting'."]
+
+J("Is the URL not from a social media platform?")
+K["Scrape text and metadata."]
+
+L["Call Buzzsumo API for metadata."]
+
+A==YouTube==>B
+B==Y==>C
+B==N==>D
+C---E
+D---E
+A==Facebook==>F
+F---G
+A==Other Social Media==>H
+H---I
+A==Article==>J
+J---K
+E---L
+G---L
+I---L
+K---L
+```
+
 ## Install CLI / library
 
 1. Create and activate a virtual Python environment, >= 3.11
