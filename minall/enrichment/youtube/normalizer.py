@@ -28,7 +28,7 @@ class YoutubeNormalizer:
                 "abstract": getattr(data.channel, "description"),
                 "keywords": getattr(data.channel, "keywords"),
                 "title": getattr(data.channel, "title"),
-                "youtube_subsribe": getattr(data.channel, "subscriber_count"),
+                "youtube_subscribe": getattr(data.channel, "subscriber_count"),
                 "create_video": getattr(data.channel, "video_count"),
             }
 

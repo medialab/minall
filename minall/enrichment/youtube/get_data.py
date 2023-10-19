@@ -22,13 +22,11 @@ def get_youtube_data(data: list[tuple[str, str]], keys: list[str], outfile: Path
         ParsedChannelLink(url=url, link_id=link_id, id=getattr(parsed_link, "id"))
         for url, link_id, parsed_link in parsed_links
         if isinstance(parsed_link, YoutubeChannel)
-        and getattr(parsed_link, "id") is not None
     ]
     video_links = [
         ParsedVideoLink(url=url, link_id=link_id, id=getattr(parsed_link, "id"))
         for url, link_id, parsed_link in parsed_links
         if isinstance(parsed_link, YoutubeVideo)
-        and getattr(parsed_link, "id") is not None
     ]
 
     # Set up minet's YouTube API client

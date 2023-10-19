@@ -26,7 +26,11 @@ class YoutubeCommands:
             url = getattr(channel, "url")
             link_id = getattr(channel, "link_id")
             channel_id = getattr(channel, "id")
-            for _, result in self.client.channels(channels_target=[channel_id]):
+            if not channel_id:
+                target = url
+            else:
+                target = channel_id
+            for _, result in self.client.channels(channels_target=[target]):
                 yield MinetResult(
                     url=url, link_id=link_id, id=channel_id, result=result
                 )
