@@ -43,6 +43,7 @@ class YoutubeNormalizer:
                 "duration": getattr(data.video, "duration"),
                 "title": getattr(data.video, "title"),
                 "abstract": getattr(data.video, "description"),
+                "keywords": getattr(data.channel, "keywords"),
                 "youtube_watch": getattr(data.video, "view_count"),
                 "youtube_comment": getattr(data.video, "comment_count"),
                 "youtube_like": getattr(data.video, "like_count"),
