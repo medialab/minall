@@ -50,7 +50,11 @@ class TestYouTube(unittest.TestCase):
             reader = csv.DictReader(f)
             for row in reader:
                 for field in CHANNEL_CHECK:
-                    assert row[field] is not None
+                    try:
+                        assert row[field] != ""
+                    except AssertionError as e:
+                        print(f"\nMissing {field}")
+                        raise e
                 break
         self.OUTFILE.unlink()
 
