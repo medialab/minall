@@ -31,7 +31,7 @@ def get_buzzsumo_data(data: list[tuple[str, str]], token: str, outfile: Path):
             t = progress.add_task("[green]Buzzsumo", total=len(data))
             for result in executor.map(client, data):
                 normalized_result = normalizer(
-                    url=result.url, link_id=result.link_id, data=result._asdict()
+                    url=result.url, link_id=result.link_id, data=result.BuzzsumoExactURL
                 )
                 writer.writerow(normalized_result)
                 progress.advance(t)
