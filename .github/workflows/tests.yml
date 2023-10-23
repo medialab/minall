@@ -3,7 +3,8 @@ name: Tests
 on:
   push:
     paths:
-      - "minall/*"
+      - "minall/**"
+      - "tests/**"
 
 jobs:
   update:
