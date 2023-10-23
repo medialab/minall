@@ -1,4 +1,4 @@
-name: Tests
+name: Minall Tests
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   update:
-    name: Tests
+    name: Minall Tests
     runs-on: ubuntu-latest
     env:
       BUZZSUMO_TOKEN: ${{ secrets.BUZZSUMO_TOKEN }}
