@@ -1,0 +1,37 @@
+name: Tests
+
+on: push
+
+jobs:
+  update:
+    name: Tests
+    runs-on: ubuntu-latest
+    env:
+      BUZZSUMO_TOKEN: ${{ secrets.BUZZSUMO_TOKEN }}
+      CROWDTANGLE_TOKEN: ${{ secrets.CROWDTANGLE_TOKEN }}
+      YOUTUBE_KEY: ${{ secrets.YOUTUBE_KEY }}
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install .
+
+      - name: Test YouTube collection
+        run: python tests/youtube.py
+
+      - name: Test CrowdTangle collection
+        run: python tests/crowdtangle.py
+
+      - name: Test Buzzsumo collection
+        run: python tests/buzzsumo.py
