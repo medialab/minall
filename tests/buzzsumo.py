@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -30,14 +31,18 @@ FIELD_CHECK = list(
 
 class TestBuzzsumo(unittest.TestCase):
     CONFIG = Path.cwd().joinpath("config.json")
-    OUTFILE = Path.cwd().joinpath("test").joinpath("test.csv")
+    OUTFILE = Path.cwd().joinpath("tests").joinpath("test.csv")
 
     def setUp(self):
-        with open(self.CONFIG) as f:
-            config = json.load(f)
+        if self.CONFIG.is_file():
+            with open(self.CONFIG) as f:
+                config = json.load(f)
             self.token = config["buzzsumo"]["token"]
+        else:
+            self.token = os.getenv("BUZZSUMO_TOKEN")
 
     def test_channel(self):
+        assert self.token is not None
         data = [
             (
                 str(

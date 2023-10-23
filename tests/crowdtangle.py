@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -29,15 +30,19 @@ POST_CHECK = list(
 
 class TestFacebook(unittest.TestCase):
     CONFIG = Path.cwd().joinpath("config.json")
-    LINKS_OUTFILE = Path.cwd().joinpath("test").joinpath("appearances.csv")
-    SHARED_CONTENT_OUTFILE = Path.cwd().joinpath("test").joinpath("shared_content.csv")
+    LINKS_OUTFILE = Path.cwd().joinpath("tests").joinpath("appearances.csv")
+    SHARED_CONTENT_OUTFILE = Path.cwd().joinpath("tests").joinpath("shared_content.csv")
 
     def setUp(self):
-        with open(self.CONFIG) as f:
-            config = json.load(f)
+        if self.CONFIG.is_file():
+            with open(self.CONFIG) as f:
+                config = json.load(f)
             self.token = config["crowdtangle"]["token"]
+        else:
+            self.token = os.getenv("CROWDTANGLE_TOKEN")
 
     def test_post(self):
+        assert self.token is not None
         data = [
             (
                 str(
@@ -50,7 +55,7 @@ class TestFacebook(unittest.TestCase):
             data=data,
             appearances_outfile=self.LINKS_OUTFILE,
             token=self.token,
-            rate_limit=50,
+            rate_limit=10,
             shared_content_outfile=self.SHARED_CONTENT_OUTFILE,
         )
         with open(self.LINKS_OUTFILE) as f:

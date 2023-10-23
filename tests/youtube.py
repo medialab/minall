@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -36,14 +37,18 @@ VIDEO_CHECK = [
 
 class TestYouTube(unittest.TestCase):
     CONFIG = Path.cwd().joinpath("config.json")
-    OUTFILE = Path.cwd().joinpath("test").joinpath("test.csv")
+    OUTFILE = Path.cwd().joinpath("tests").joinpath("test.csv")
 
     def setUp(self):
-        with open(self.CONFIG) as f:
-            config = json.load(f)
+        if self.CONFIG.is_file():
+            with open(self.CONFIG) as f:
+                config = json.load(f)
             self.key = config["youtube"]["key"]
+        else:
+            self.key = os.getenv("YOUTUBE_KEY")
 
     def test_channel(self):
+        assert self.key is not None
         data = [(str("https://www.youtube.com/@sciencespo"), str("LINK-ID"))]
         get_youtube_data(data=data, keys=[self.key], outfile=self.OUTFILE)
         with open(self.OUTFILE) as f:
@@ -59,6 +64,7 @@ class TestYouTube(unittest.TestCase):
         self.OUTFILE.unlink()
 
     def test_video(self):
+        assert self.key is not None
         data = [(str("https://www.youtube.com/watch?v=DrAUDPShQRg"), str("ID"))]
         get_youtube_data(data=data, keys=[self.key], outfile=self.OUTFILE)
         with open(self.OUTFILE) as f:
