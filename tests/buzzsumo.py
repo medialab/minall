@@ -30,7 +30,7 @@ FIELD_CHECK = list(
 
 
 class TestBuzzsumo(unittest.TestCase):
-    CONFIG = Path.cwd().joinpath("config.json")
+    CONFIG = Path()
     OUTFILE = Path.cwd().joinpath("tests").joinpath("test.csv")
 
     def setUp(self):
@@ -41,7 +41,7 @@ class TestBuzzsumo(unittest.TestCase):
         else:
             self.token = os.getenv("BUZZSUMO_TOKEN")
 
-    def test_channel(self):
+    def test_result(self):
         assert self.token is not None
         data = [
             (
@@ -61,6 +61,23 @@ class TestBuzzsumo(unittest.TestCase):
                     except AssertionError as e:
                         print(f"\nMissing {field}")
                         raise e
+                break
+        self.OUTFILE.unlink()
+
+    def test_no_result(self):
+        assert self.token is not None
+        data = [
+            (
+                str("https://medialab.github.io/"),
+                str("LINK-ID"),
+            )
+        ]
+        get_buzzsumo_data(data=data, outfile=self.OUTFILE, token=self.token)
+        with open(self.OUTFILE) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                for field in FIELD_CHECK:
+                    assert row[field] == ""
                 break
         self.OUTFILE.unlink()
 

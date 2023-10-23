@@ -51,32 +51,38 @@ class BuzzsumoNormalizer:
             else:
                 return datetime.fromtimestamp(ts)
 
-    def __call__(self, url: str, link_id: str, data: BuzzsumoResult) -> dict:
+    def __call__(self, url: str, link_id: str, data: BuzzsumoResult | None) -> dict:
         domain = get_domain(url)
-
-        buzzsumo_type = self.parse_buzzsumo_type(data=data)
 
         all_fields = {
             "url": url,
             "link_id": link_id,
             "domain": domain,
-            "type": buzzsumo_type,
-            "twitter_share": getattr(data, "twitter_shares"),
-            "facebook_share": getattr(data, "total_facebook_shares"),
-            "title": getattr(data, "title"),
-            "date_published": self.parse_timestamp(getattr(data, "published_date")),
-            "pinterest_share": getattr(data, "pinterest_shares"),
-            "creator_name": getattr(data, "author_name"),
-            "creator_identifier": getattr(data, "twitter_user_id"),
-            "duration": getattr(data, "video_length"),
-            "facebook_comment": getattr(data, "facebook_comments"),
-            "youtube_watch": getattr(data, "youtube_views"),
-            "youtube_like": getattr(data, "youtube_likes"),
-            "youtube_comment": getattr(data, "youtube_comments"),
-            "tiktok_share": getattr(data, "tiktok_share_count"),
-            "tiktok_comment": getattr(data, "tiktok_comment_count"),
-            "reddit_engagement": getattr(data, "total_reddit_engagements"),
         }
+        if data:
+            buzzsumo_type = self.parse_buzzsumo_type(data=data)
+            all_fields.update(
+                {
+                    "type": buzzsumo_type,
+                    "twitter_share": getattr(data, "twitter_shares"),
+                    "facebook_share": getattr(data, "total_facebook_shares"),
+                    "title": getattr(data, "title"),
+                    "date_published": self.parse_timestamp(
+                        getattr(data, "published_date")
+                    ),
+                    "pinterest_share": getattr(data, "pinterest_shares"),
+                    "creator_name": getattr(data, "author_name"),
+                    "creator_identifier": getattr(data, "twitter_user_id"),
+                    "duration": getattr(data, "video_length"),
+                    "facebook_comment": getattr(data, "facebook_comments"),
+                    "youtube_watch": getattr(data, "youtube_views"),
+                    "youtube_like": getattr(data, "youtube_likes"),
+                    "youtube_comment": getattr(data, "youtube_comments"),
+                    "tiktok_share": getattr(data, "tiktok_share_count"),
+                    "tiktok_comment": getattr(data, "tiktok_comment_count"),
+                    "reddit_engagement": getattr(data, "total_reddit_engagements"),
+                }
+            )
 
         keep = {k: v for k, v in all_fields.items() if k in self.fields}
 
