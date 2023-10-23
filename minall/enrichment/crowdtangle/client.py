@@ -12,7 +12,7 @@ from minet.web import create_request_retryer
 
 from minall.enrichment.crowdtangle.constants import CrowdTangleResult
 
-logging.basicConfig(filename="crowdtangle.log", encoding="utf-8", level=logging.DEBUG)
+logging.basicConfig(filename="crowdtangle.log", encoding="utf-8")
 
 
 class FacebookPostCommand:
