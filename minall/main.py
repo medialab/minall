@@ -12,7 +12,7 @@ class Minall:
     def __init__(
         self,
         database: str | None,
-        config: str | dict,
+        config: str | dict | None,
         output_dir: str,
         links_file: str,
         url_col: str,
