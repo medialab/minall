@@ -58,45 +58,50 @@ K---L
 
 ## Use as a CLI tool
 
-To enrich a set of URLs in CSV `input.csv` and to write the results in directory `output/` in your current working directory, run the following command:
+Quick example command for a CSV dataset `input.csv` with URLs in the column `url` :
 
 ```shell
-minall --input-links input.csv --config-file config.json --output-dir ./output
+minall --config minetrc.yml --output-dir ./output --links input.csv --url-col url
 ```
 
-The input CSV file needs to have the columns `link_id` and `url`. (Future development: allow user to specify column names)
+With the option `--config`, you provide a [Minet configuration file](https://github.com/medialab/minet/blob/master/docs/cli.md#minetrc), which contains the necessary API keys for the metadata collection.
 
-| link_id  | url         |
-| -------- | ----------- |
-| ID/12345 | example.com |
+`./config.yml`
 
-With the option `--config-file`, you will need to provide a JSON-formatted configuration file, which contains the necessary API keys for the metadata collection.
-
-`./config.json`
-
-```json
-{
-  "buzzsumo": {
-    "token": "MY_BZ_TOKEN"
-  },
-  "crowdtangle": {
-    "token": "MY_CT_TOKEN",
-    "rate_limit": 10
-  },
-  "youtube": {
-    "key": "MY_YT_API_KEY"
-  }
-}
+```yml
+---
+buzzsumo:
+  token: "TOKEN" # Used as --token for `minet bz` commands
+crowdtangle:
+  token: "TOKEN" # Used as --token for `minet ct` commands
+  rate_limit: 10 # Used as --rate-limit for `minet ct` commands
+youtube:
+  key: "KEY" # Used as --key for `minet yt` commands
 ```
 
-A special feature of `minall` is that it creates an in-memory SQL database during the enrichment process and updates any metadata provided at input without losing any data. For example, if you have already used `minall` on a set of URLs, you can update those metrics by inputting the previous run's out-files. This is useful because, if a URL has been deleted or an API no longer returns a response for it, `minall`'s result files will keep the old data, rather than overwriting it with null values.
+```shell
+usage: Minall [-h] [--database DATABASE] [--config CONFIG] --output-dir OUTPUT_DIR --links LINKS_FILE --url-col URL_COL [--shared-content SHARED_CONTENT_FILE] [--buzzsumo-only]
 
-### Data fields for enriched URLs file
+options:
+  -h, --help            show this help message and exit
+  --database DATABASE   [Optional] Path to SQLite database. If not given, database written to memory.
+  --config CONFIG       [Optional] Path to configuration file. If not given, environment variables are expected.
+  --output-dir OUTPUT_DIR
+                        [Required] Path to directory in which a links and shared_content file will be written.
+  --links LINKS_FILE    [Required] Path to links file.
+  --url-col URL_COL     [Required] Name of URL column in links file.
+  --shared-content SHARED_CONTENT_FILE
+                        [Optional] Path to shared_content file.
+  --buzzsumo-only       [Optional] Flag indicating only Buzzsumo API will be called on links file.
+```
 
-- `link_id` : some kind of unique identifier, which can refer to the URL or to some other entity to which the URL relates
+A special feature of `minall` is that it creates an SQL database during the enrichment process and updates metadata provided at input without losing any data. For example, if you have already used `minall` on a set of URLs, you can update those metrics by inputting the files that minall previously produced. This is useful because, if a URL has been deleted or if an API no longer returns a response for it, `minall`'s result files will keep the old data, rather than overwriting it with null values.
+
+### Output fields for enriched URLs file (`links.csv`)
+
 - `url` : the URL that will be used for the metadata collection
 - `domain` : the URL's domain name
-- `type` : a [Schema.org](https://schema.org/CreativeWork) classification for the URL as a CreativeWork
+- `work_type` : a [Schema.org](https://schema.org/CreativeWork) classification for the URL as a CreativeWork
 - `duration` : if the URL is of a video, the video's duration
 - `identifier` : the identifier given to the URL via a platform (i.e. YouTube ID, Twitter user ID)
 - `date_published` : date (YYYY-MM-DD) when the URL's content was originally published

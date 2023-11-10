@@ -1,22 +1,20 @@
-import csv
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from minall.enrichment.article_text.scraper import ArticleScraper
-from minall.links.constants import LINKS_FIELDNAMES
-from minall.utils import progress_bar
+from minall.enrichment.article_text.constants import NormalizedScrapedWebPage
+from minall.enrichment.article_text.contexts import ContextManager
+from minall.enrichment.article_text.scraper import scraper
 
 
 def get_data(data: list[tuple[str, str]], outfile: Path):
-    scraper = ArticleScraper()
-
-    with ThreadPoolExecutor() as executor, progress_bar() as progress, open(
-        outfile, "w"
-    ) as of:
-        writer = csv.DictWriter(of, fieldnames=LINKS_FIELDNAMES)
-        writer.writeheader()
-        t = progress.add_task(description="[yellow]Article text", total=len(data))
-        for result in executor.map(scraper, data):
-            if result != {}:
-                writer.writerow(result)
+    with ContextManager(links_file=outfile) as contexts:
+        writer, executor, progress = contexts
+        t = progress.add_task(
+            description="[bold yellow]Scraping webpage", total=len(data)
+        )
+        for url, result in executor.map(scraper, data):
+            if result:
+                formatted_result = NormalizedScrapedWebPage.from_payload(
+                    url=url, result=result
+                )
+                writer.writerow(formatted_result.as_csv_dict_row())
             progress.advance(t)

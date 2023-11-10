@@ -32,10 +32,7 @@ jobs:
           pip install .
 
       - name: Test YouTube collection
-        run: python tests/youtube.py
-
-      - name: Test CrowdTangle collection
-        run: python tests/crowdtangle.py
+        run: python tests/links_table.py
 
       - name: Test Buzzsumo collection
         run: python tests/buzzsumo.py

@@ -1,16 +1,14 @@
 import csv
 from pathlib import Path
 
-from minall.links.constants import LINKS_FIELDNAMES
+from minall.tables.links.constants import LinksConstants
 
 
 def add_data(data: list[tuple[str, str]], outfile: Path):
     with open(outfile, "w") as f:
-        writer = csv.DictWriter(f, fieldnames=LINKS_FIELDNAMES)
+        writer = csv.DictWriter(f, fieldnames=LinksConstants.col_names)
         writer.writeheader()
         [
-            writer.writerow(
-                {"url": url, "link_id": link_id, "type": "SocialMediaPosting"}
-            )
-            for url, link_id in data
+            writer.writerow({"url": url, "work_type": "SocialMediaPosting"})
+            for url in data
         ]

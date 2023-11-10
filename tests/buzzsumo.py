@@ -1,32 +1,23 @@
-import csv
-import json
-import os
 import sys
 import unittest
 from pathlib import Path
 
-from minall.enrichment.buzzsumo.get_data import get_buzzsumo_data
+import casanova
 
-data = {}
-FIELD_CHECK = list(
-    {
-        "twitter_share": data.get("twitter_shares"),
-        "facebook_share": data.get("total_facebook_shares"),
-        "title": data.get("title"),
-        "date_published": None,
-        "pinterest_share": data.get("pinterest_shares"),
-        # "creator_name": data.get("author_name"),
-        # "creator_identifier": data.get("twitter_user_id"),
-        # "duration": data.get("video_length"),
-        "facebook_comment": data.get("facebook_comments"),
-        # "youtube_watch": data.get("youtube_views"),
-        # "youtube_like": data.get("youtube_likes"),
-        # "youtube_comment": data.get("youtube_comments"),
-        # "tiktok_share": data.get("tiktok_share_count"),
-        # "tiktok_comment": data.get("tiktok_comment_count"),
-        "reddit_engagement": data.get("total_reddit_engagements"),
-    }.keys()
-)
+from minall.enrichment.buzzsumo.get_data import get_buzzsumo_data
+from minall.tables.links.constants import LinksConstants
+from minall.utils.parse_config import APIKeys
+
+EXPECTED_VALUES = [
+    "domain",
+    "twitter_share",
+    "facebook_share",
+    "title",
+    "date_published",
+    "pinterest_share",
+    "facebook_comment",
+    "reddit_engagement",
+]
 
 
 class TestBuzzsumo(unittest.TestCase):
@@ -34,55 +25,32 @@ class TestBuzzsumo(unittest.TestCase):
     OUTFILE = Path.cwd().joinpath("tests").joinpath("test.csv")
 
     def setUp(self):
-        if self.CONFIG.is_file():
-            with open(self.CONFIG) as f:
-                config = json.load(f)
-            self.token = config["buzzsumo"]["token"]
+        if not self.CONFIG.is_file():
+            config = None
         else:
-            self.token = os.getenv("BUZZSUMO_TOKEN")
+            config = str(self.CONFIG)
+        self.keys = APIKeys(config)
 
-    def test_result(self):
-        assert self.token is not None
+    def test_match(self):
+        assert self.keys.buzzsumo_token is not None
         data = [
-            (
-                str(
-                    "https://www.lemonde.fr/idees/article/2023/10/23/maintenir-la-pression-pour-lutter-contre-l-evasion-fiscale_6196088_3232.html"
-                ),
-                str("LINK-ID"),
-            )
+            "https://www.lemonde.fr/idees/article/2023/10/23/maintenir-la-pression-pour-lutter-contre-l-evasion-fiscale_6196088_3232.html"
         ]
-        get_buzzsumo_data(data=data, outfile=self.OUTFILE, token=self.token)
-        with open(self.OUTFILE) as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                for field in FIELD_CHECK:
-                    try:
-                        assert row[field] != ""
-                    except AssertionError as e:
-                        print(f"\nMissing {field}")
-                        raise e
-                break
-        self.OUTFILE.unlink()
-
-    def test_no_result(self):
-        assert self.token is not None
-        data = [
-            (
-                str("https://medialab.github.io/"),
-                str("LINK-ID"),
-            )
-        ]
-        get_buzzsumo_data(data=data, outfile=self.OUTFILE, token=self.token)
-        with open(self.OUTFILE) as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                for field in FIELD_CHECK:
-                    assert row[field] == ""
-                break
+        get_buzzsumo_data(
+            data=data, token=self.keys.buzzsumo_token, outfile=self.OUTFILE
+        )
+        with casanova.reader(self.OUTFILE) as reader:
+            row = reader.__next__()
+            row_dict = dict(zip(LinksConstants.col_names, row))
+            for c in EXPECTED_VALUES:
+                try:
+                    assert row_dict[c] != ""
+                except AssertionError:
+                    raise AssertionError(f"\nMissing expected value in column {c}")
         self.OUTFILE.unlink()
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         TestBuzzsumo.CONFIG = Path(sys.argv.pop())
-    unittest.main(buffer=True)
+    unittest.main()
