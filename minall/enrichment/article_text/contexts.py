@@ -19,14 +19,14 @@ class ContextManager:
 
     def __enter__(self):
         # Set up links file writer
-        self.links_file_obj = open(self.links_file, mode="w")
+        self.links_file_obj = open(self.links_file, mode="w", encoding="utf-8")
         self.links_file_writer = csv.DictWriter(
             self.links_file_obj, fieldnames=LinksConstants.col_names
         )
         self.links_file_writer.writeheader()
 
         # Set up multi-threading pool
-        self.executor = ThreadPoolExecutor()
+        self.executor = ThreadPoolExecutor(max_workers=3)
 
         # Set up progress bar
         self.progress_bar = Progress(
