@@ -4,15 +4,12 @@ import minet.facebook as facebook
 from minet.crowdtangle.client import CrowdTangleAPIClient
 from minet.crowdtangle.exceptions import (
     CrowdTangleInvalidJSONError,
-    CrowdTanglePostNotFound,
     CrowdTangleRateLimitExceeded,
     CrowdTangleServerError,
 )
 from minet.web import create_request_retryer
 
 from minall.enrichment.crowdtangle.exceptions import NoPostID, PostNotFound
-
-logging.basicConfig(filename="crowdtangle.log", encoding="utf-8")
 
 
 def parse_rate_limit(rate_limit):
@@ -51,6 +48,9 @@ class FacebookPostCommand:
                 post = self.client.post(post_id=post_id)
                 if post is not None:
                     result = post
-            except CrowdTanglePostNotFound as error:
-                logging.warning(PostNotFound(url, error))
+            except Exception as e:
+                if not result:
+                    logging.warning(PostNotFound(url, e))
+                else:
+                    logging.exception(e)
         return (url, result)

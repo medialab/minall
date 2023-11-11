@@ -1,5 +1,4 @@
 import logging
-import os
 from typing import Tuple
 
 from bs4 import UnicodeDammit  # type: ignore
@@ -7,17 +6,7 @@ from minet.extraction import TrafilaturaResult, extract
 from minet.web import request
 from rich.progress import Progress
 
-logger = logging.getLogger("trafilatura")
-logger.propagate = False
-
-log_file = "scrape.log"
-logging.basicConfig(
-    filename=log_file, filemode="w", encoding="utf-8", level=logging.INFO
-)
-file_handler = logging.FileHandler(log_file)
-formatter = logging.Formatter("%(asctime)s : %(levelname)s : %(name)s : %(message)s")
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+from minall.enrichment import logger
 
 
 class Scraper:
