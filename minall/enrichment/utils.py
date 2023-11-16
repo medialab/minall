@@ -1,4 +1,4 @@
-from sqlite3 import Connection
+from typing import Tuple
 
 import ural
 from ural.facebook import is_facebook_url
@@ -6,6 +6,7 @@ from ural.youtube import YOUTUBE_DOMAINS  # type: ignore
 from ural.youtube import is_youtube_url
 
 from minall.tables.base import BaseTable
+from minall.tables.links.constants import LinksConstants
 
 
 def get_domain(url: str):
@@ -13,6 +14,18 @@ def get_domain(url: str):
     if domain_name in YOUTUBE_DOMAINS:
         domain_name = "youtube.com"
     return domain_name
+
+
+def apply_domain(url: str) -> Tuple[str | None, str | None]:
+    query = None
+    domain = get_domain(url)
+    if domain:
+        query = f"""
+        UPDATE {LinksConstants.table_name}
+        SET domain = '{domain}'
+        WHERE {LinksConstants.primary_key} = '{url}'
+        """
+    return query, domain
 
 
 class FilteredLinks:

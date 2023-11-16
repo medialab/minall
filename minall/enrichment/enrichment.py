@@ -2,10 +2,11 @@ from minall.enrichment.article_text import get_article_text
 from minall.enrichment.buzzsumo import get_buzzsumo_data
 from minall.enrichment.crowdtangle import get_facebook_post_data
 from minall.enrichment.other_social_media import add_type_data
-from minall.enrichment.utils import FilteredLinks
+from minall.enrichment.utils import FilteredLinks, apply_domain
 from minall.enrichment.youtube import get_youtube_data
 from minall.exceptions import MissingAPIKey
 from minall.tables.base import BaseTable
+from minall.utils.database import SQLiteWrapper
 from minall.utils.parse_config import APIKeys
 
 bar = "\n===============\n"
@@ -79,6 +80,14 @@ class Enrichment:
             raise MissingAPIKey("YouTube")
 
     def __call__(self, buzzsumo_only: bool):
+        executor = SQLiteWrapper(connection=self.links_table.connection)
+        # apply domain to all urls
+        for link in self.filtered_links.all_links:
+            query, domain = apply_domain(link)
+            if query and domain:
+                self.links_table.connection
+                executor(query=query)
+
         if not buzzsumo_only:
             if len(self.filtered_links.youtube) > 0:
                 self.youtube()
