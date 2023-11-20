@@ -4,7 +4,6 @@ from minall.enrichment.crowdtangle import get_facebook_post_data
 from minall.enrichment.other_social_media import add_type_data
 from minall.enrichment.utils import FilteredLinks, apply_domain
 from minall.enrichment.youtube import get_youtube_data
-from minall.exceptions import MissingAPIKey
 from minall.tables.base import BaseTable
 from minall.utils.database import SQLiteWrapper
 from minall.utils.parse_config import APIKeys
@@ -32,8 +31,6 @@ class Enrichment:
                 outfile=self.links_table.outfile,
             )
             self.links_table.coalesce(infile=self.links_table.outfile)
-        else:
-            raise MissingAPIKey("Buzzsumo")
 
     def scraper(self):
         # In multiple threads, scrape HTML data and write to a CSV file
@@ -63,8 +60,6 @@ class Enrichment:
             # Coalesce the results in the CSV File to the links table
             self.links_table.coalesce(infile=self.links_table.outfile)
             self.shared_content_table.coalesce(infile=self.shared_content_table.outfile)
-        else:
-            raise MissingAPIKey("CrowdTangle")
 
     def youtube(self):
         if self.keys.youtube_key:
@@ -76,8 +71,6 @@ class Enrichment:
             )
             # Coalesce the results in the CSV File to the links table
             self.links_table.coalesce(infile=self.links_table.outfile)
-        else:
-            raise MissingAPIKey("YouTube")
 
     def __call__(self, buzzsumo_only: bool):
         executor = SQLiteWrapper(connection=self.links_table.connection)
