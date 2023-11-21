@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Tuple
 
 from minall.enrichment.enrichment import Enrichment
 from minall.tables.base import BaseTable
@@ -16,9 +17,21 @@ class Minall:
         output_dir: str,
         links_file: str,
         url_col: str,
-        shared_content_file: str | None,
+        shared_content_file: str | None = None,
         buzzsumo_only: bool = False,
     ) -> None:
+        """Main app for running Minall workflow.
+
+        Args:
+            database (str | None): Path name to SQLite database. If None, creates database in memory.
+            config (str | dict | None): Credentials for API keys.
+            output_dir (str): Path name to directory for enriched CSV files.
+            links_file (str): Path name to in-file for URLs.
+            url_col (str): Name of URL column in URLs file.
+            shared_content_file (str | None): Path name to CSV file of shared content related to URLs.
+            buzzsumo_only (bool, optional): Whether to only run Buzzsumo enrichment. Defaults to False.
+        """
+
         # Connect to the SQLite database
         self.connection = connect_to_database(database=database)
 
@@ -59,6 +72,12 @@ class Minall:
         )
         enricher(buzzsumo_only=self.buzzsumo_only)
 
-    def export(self):
+    def export(self) -> Tuple[Path, Path]:
+        """Write enriched tables to CSV files.
+
+        Returns:
+            Tuple[Path, Path]: Paths to links and shared content CSV files.
+        """
         self.links_table.export()
         self.shared_content_table.export()
+        return self.links_file, self.shared_contents_file
