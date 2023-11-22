@@ -31,8 +31,5 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install .
 
-      - name: Test Links table setup
-        run: python tests/links_table.py
-
-      - name: Test Buzzsumo collection
-        run: python tests/buzzsumo.py
+      - name: Run test suite
+        run: python -m unittest discover -s tests/

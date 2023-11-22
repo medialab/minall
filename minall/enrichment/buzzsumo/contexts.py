@@ -1,5 +1,4 @@
 import csv
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from rich.progress import (
@@ -24,10 +23,6 @@ class ContextManager:
             self.links_file_obj, fieldnames=LinksConstants.col_names
         )
         self.links_file_writer.writeheader()
-
-        # Set up multi-threading pool
-        self.executor = ThreadPoolExecutor()
-
         # Set up progress bar
         self.progress_bar = Progress(
             TextColumn("[progress.description]{task.description}"),
@@ -39,12 +34,10 @@ class ContextManager:
 
         return (
             self.links_file_writer,
-            self.executor,
             self.progress_bar,
         )
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.links_file_obj:
             self.links_file_obj.close()
-        self.executor.shutdown(wait=False, cancel_futures=True)
         self.progress_bar.stop()
