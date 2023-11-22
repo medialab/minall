@@ -53,7 +53,7 @@ class NormalizedBuzzsumoResult(TabularRecord):
             "is_what_post",
             "is_why_post",
         ]
-        work_type = "MediaObject"
+        work_type = "WebPage"
         if data:
             for t in video_types:
                 if getattr(data, t):
