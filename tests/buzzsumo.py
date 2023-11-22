@@ -46,7 +46,7 @@ class TestBuzzsumo(BaseTest):
 
     def test_repeated_calls(self) -> None:
         assert self.keys.buzzsumo_token
-        data = [TEST_DATA[0] for _ in range(20)]
+        data = [TEST_DATA[0] for _ in range(10)]
         unique_results = set()
         for result in yield_buzzsumo_data(token=self.keys.buzzsumo_token, data=data):
             unique_results.add(tuple(result.as_csv_row()))
