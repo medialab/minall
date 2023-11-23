@@ -1,13 +1,14 @@
 import itertools
 import os
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
-from typing import List
+from pathlib import Path
+from typing import List, Tuple
 
 from ebbe import Timer
 from minet.buzzsumo.client import BuzzSumoAPIClient
-from rich import print
-from rich.panel import Panel
+from minet.buzzsumo.types import BuzzsumoArticle
 from rich.progress import (
     BarColumn,
     MofNCompleteColumn,
@@ -16,6 +17,10 @@ from rich.progress import (
     TextColumn,
     TimeElapsedColumn,
 )
+
+single_thread_log = Path.cwd().joinpath("single.log")
+mulithread_log = Path.cwd().joinpath("mulithread.log")
+
 
 BEGINDATE = int(datetime.strptime("2020-01-01", "%Y-%m-%d").timestamp())
 
@@ -46,6 +51,17 @@ def duplicate_examples(data: List[str]) -> List[str]:
     )
 
 
+class ThreadedClient:
+    def __init__(self, token: str, logfile) -> None:
+        self.client = BuzzSumoAPIClient(token=token)
+        self.open_logfile = logfile
+
+    def __call__(self, url: str) -> Tuple[str, BuzzsumoArticle | None]:
+        with Timer(file=self.open_logfile, name=f"Time for {url}"):
+            result = self.client.exact_url(url, BEGINDATE, ENDDATE)
+        return url, result
+
+
 class ClientTest(unittest.TestCase):
     def setUp(self):
         self.token = os.environ["BUZZSUMO_TOKEN"]
@@ -61,31 +77,51 @@ class ClientTest(unittest.TestCase):
             MofNCompleteColumn(),
             TimeElapsedColumn(),
         )
+        self.threaded_client = ThreadedClient(token=self.token, logfile=None)
 
     def test_loop(self) -> None:
         # Affirm the token isn't None
         token = self.token
         assert token
 
-        with Timer(), self.progress_bar as p:
-            t = p.add_task("Call Buzzsumo API", total=len(self.data))
+        with open(single_thread_log, "w") as f:
+            with Timer(
+                file=f, name=f"Single-thread on {len(self.data)} URLs"
+            ), self.progress_bar as p:
+                task = p.add_task("Call Buzzsumo API", total=len(self.data))
 
-            # Set up print for showing which URL is taking time
-            current_url = None
-            for url in self.data:
-                if url != current_url:
-                    print(Panel.fit(f"Testing URL: '{url}'"))
-                    current_url = url
+                for url in self.data:
+                    # Call minet's Buzzsumo API client
+                    with Timer(file=f, name=f"Time for {url}"):
+                        result = self.client.exact_url(
+                            search_url=url,
+                            begin_timestamp=BEGINDATE,
+                            end_timestamp=ENDDATE,
+                        )
 
-                # Call minet's Buzzsumo API client
-                result = self.client.exact_url(
-                    search_url=url, end_timestamp=ENDDATE, begin_timestamp=BEGINDATE
-                )
+                    # Advance the progress bar and assert known matches aren't None
+                    p.advance(task)
+                    if not url == self.url_without_result:
+                        self.assertIsNotNone(getattr(result, "title"))
 
-                # Advance the progress bar and assert known matches aren't None
-                p.advance(t)
-                if not url == self.url_without_result:
-                    self.assertIsNotNone(getattr(result, "title"))
+    def test_multithread(self) -> None:
+        # Affirm the token isn't None
+        token = self.token
+        assert token
+
+        with open(mulithread_log, "w") as f:
+            self.threaded_client.open_logfile = f
+            with Timer(
+                file=f, name=f"Multi-thread on {len(self.data)} URLs"
+            ), self.progress_bar as p, ThreadPoolExecutor() as executor:
+                t = p.add_task("Call Buzzsumo API", total=len(self.data))
+
+                for result in executor.map(self.threaded_client, self.data):
+                    url, bz_result = result
+                    # Advance the progress bar and assert known matches aren't None
+                    p.advance(t)
+                    if not url == self.url_without_result:
+                        self.assertIsNotNone(getattr(bz_result, "title"))
 
 
 if __name__ == "__main__":
