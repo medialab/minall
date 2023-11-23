@@ -19,7 +19,7 @@ setup(
     license="GPL-3.0",
     python_requires=">=3.11",
     packages=find_packages(exclude=["test"]),
-    install_requires=["minet==1.1.7"],
+    install_requires=["minet==1.1.8"],
     extra_require={
         ":python_version<'3.11'": ["typing_extensions>=4.3"],
     },

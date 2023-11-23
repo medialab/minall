@@ -7,6 +7,9 @@ from minall.enrichment.buzzsumo.get_data import yield_buzzsumo_data
 from minall.utils.parse_config import APIKeys
 from tests.base import BaseTest
 
+BIG_DATA_FILE = Path(__file__).parent.joinpath("urls.csv")
+
+
 EXPECTED_VALUES = [
     "domain",
     "twitter_share",
@@ -41,7 +44,7 @@ class Buzzsumo(BaseTest):
             except AssertionError:
                 raise AssertionError(f"Missing expected value in column {c}")
 
-    def test_multiple_calls(self) -> None:
+    def test_repeated_calls(self) -> None:
         token = self.keys.buzzsumo_token
         assert token
         data = [TEST_DATA[0] for _ in range(11)]
@@ -50,6 +53,18 @@ class Buzzsumo(BaseTest):
             for result in yield_buzzsumo_data(token=token, data=data):
                 unique_results.add(tuple(result.as_csv_row()))
         self.assertEqual(len(unique_results), 1)
+
+    def test_many_calls(self) -> None:
+        token = self.keys.buzzsumo_token
+        assert token
+        data = [TEST_DATA[0] for _ in range(20)]
+        with Timer():
+            for result in yield_buzzsumo_data(token=token, data=data):
+                try:
+                    self.assertIsNotNone(getattr(result, "title"))
+                except AssertionError as e:
+                    print(result)
+                    raise e
 
     def tearDown(self) -> None:
         if OUTFILE.is_file():

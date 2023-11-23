@@ -3,9 +3,8 @@ name: Minall Tests
 on:
   push:
     paths:
-      - "minall/__version__.py"
-      # - "minall/**"
-      # - "tests/**"
+      - "minall/**"
+      - "tests/**"
 
 jobs:
   update:
