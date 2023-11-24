@@ -1,15 +1,8 @@
 import logging
 
-import minet.facebook as facebook
 from minet.crowdtangle.client import CrowdTangleAPIClient
-from minet.crowdtangle.exceptions import (
-    CrowdTangleInvalidJSONError,
-    CrowdTangleRateLimitExceeded,
-    CrowdTangleServerError,
-)
-from minet.web import create_request_retryer
-
-from minall.enrichment.crowdtangle.exceptions import NoPostID, PostNotFound
+from minet.facebook import post_id_from_url
+from ural.facebook import parse_facebook_url
 
 
 def parse_rate_limit(rate_limit):
@@ -20,37 +13,45 @@ def parse_rate_limit(rate_limit):
     return rate_limit
 
 
-class FacebookPostCommand:
+def adhoc_post_id_parser(url: str):
+    post_id = post_id_from_url(url)
+    if post_id:
+        return post_id
+    else:
+        parsed_url = parse_facebook_url(url)
+        if parsed_url:
+            if hasattr(parsed_url, "id"):
+                post_id = getattr(parsed_url, "id")
+            else:
+                return
+            if hasattr(parsed_url, "parent_handle"):
+                parent_id = getattr(parsed_url, "parent_handle")
+            elif hasattr(parsed_url, "parent_id"):
+                parent_id = getattr(parsed_url, "parent_id")
+            else:
+                return
+            if post_id and parent_id:
+                try:
+                    int(post_id)
+                except Exception:
+                    return
+                try:
+                    int(parent_id)
+                except Exception:
+                    return
+                return post_id + "_" + parent_id
+
+
+class CTClient:
     def __init__(self, token: str, rate_limit: int) -> None:
         self.client = CrowdTangleAPIClient(token=token, rate_limit=rate_limit)
-        self.client.retryer = create_request_retryer(
-            additional_exceptions=[
-                CrowdTangleRateLimitExceeded,
-                CrowdTangleInvalidJSONError,
-                CrowdTangleServerError,
-            ]
-        )
 
-    def __call__(self, url: str) -> tuple:
-        # Parse the incoming tuple of data
-        post_id = None
-        result = None
-
-        # Attempt to parse the post's ID
-        try:
-            post_id = facebook.post_id_from_url(url)
-        except Exception as error:
-            logging.warning(NoPostID(error, url))
-
-        if post_id is not None:
-            # Attempt to collect the post's data
+    def __call__(self, url: str):
+        post_id = adhoc_post_id_parser(url)
+        post = None
+        if post_id:
             try:
                 post = self.client.post(post_id=post_id)
-                if post is not None:
-                    result = post
             except Exception as e:
-                if not result:
-                    logging.warning(PostNotFound(url, e))
-                else:
-                    logging.exception(e)
-        return (url, result)
+                logging.exception(e)
+        return post

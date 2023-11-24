@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from casanova import TabularRecord
+from minet.crowdtangle.formatters import CrowdTanglePost
 
 
 @dataclass
@@ -61,11 +62,18 @@ class NormalizedFacebookPost(TabularRecord):
     def from_payload(
         cls,
         url: str,
-        result,
+        result: CrowdTanglePost,
     ) -> "NormalizedFacebookPost":
+        work_type = "SocialMediaPosting"
+        if hasattr(result, "type"):
+            if result.type == "photo":
+                work_type = "ImageObject"
+            elif result.type == "video":
+                work_type = "VideoObject"
+
         return NormalizedFacebookPost(
             url=url,
-            work_type="SocialMediaPosting",
+            work_type=work_type,
             duration=result.video_length_ms,
             identifier=result.id,
             date_published=result.date,
