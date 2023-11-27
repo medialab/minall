@@ -27,7 +27,7 @@ class BaseTest(unittest.TestCase):
                 "buzzsumo": {"token": os.environ["BUZZSUMO_TOKEN"]},
                 "crowdtangle": {
                     "token": os.environ["CROWDTANGLE_TOKEN"],
-                    "rate_limit": 10,
+                    "rate_limit": 50,
                 },
                 "youtube": {"key": os.environ["YOUTUBE_KEY"]},
             }

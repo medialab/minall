@@ -1,4 +1,8 @@
 import unittest
+from collections import Counter
+
+from ebbe import Timer
+from rich.progress import track
 
 from minall.enrichment.crowdtangle.get_data import parse_rate_limit, yield_facebook_data
 from minall.utils.parse_config import APIKeys
@@ -26,6 +30,23 @@ class CTest(BaseTest):
             self.assertIsNotNone(url)
             self.assertIsNotNone(response)
 
+    def test_batch(self):
+        data = [POST[0] for _ in range(200)]
+        counter = Counter()
+        with Timer(name=f"CT batch {len(data)}"):
+            for url, response in track(
+                yield_facebook_data(
+                    data=data, token=self.token, rate_limit=self.rate_limit
+                ),
+                total=len(data),
+            ):
+                if response:
+                    self.assertEqual(getattr(response, "platform"), "Facebook")
+                    counter.update([url])
+        self.assertEqual(counter.total(), 200)
+
 
 if __name__ == "__main__":
     unittest.main()
+##
+##

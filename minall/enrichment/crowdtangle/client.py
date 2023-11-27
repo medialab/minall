@@ -54,4 +54,4 @@ class CTClient:
                 post = self.client.post(post_id=post_id)
             except Exception as e:
                 logging.exception(e)
-        return post
+        return url, post

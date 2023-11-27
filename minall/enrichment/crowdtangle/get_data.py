@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, Generator, List, Tuple
 
@@ -38,6 +39,6 @@ def yield_facebook_data(
     data: List[str], token: str, rate_limit: int
 ) -> Generator[Tuple[Any, Any], None, None]:
     client = CTClient(token=token, rate_limit=rate_limit)
-    for url in data:
-        response = client(url)
-        yield url, response
+    with ThreadPoolExecutor() as executor:
+        for url, response in executor.map(client, data):
+            yield url, response
