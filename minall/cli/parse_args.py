@@ -1,26 +1,65 @@
+# minall/cli/parse_args.py
+
+"""Helper functions for CLI action.
+
+This module contains the following helper functions for parsing command-line arguments:
+
+- `cli_args()` - Parse CLI arguments.
+- `dir_path(path_name)` - Create directory and necessary parent directories.
+- `file_path(path_name)` - Verify existence of given file.
+- `has_parent(path_name)` - Create necessary parent directories for file path.
+"""
+
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from pathlib import Path
 
 
-def dir_path(string):
-    if Path(string).is_dir():
-        return string
+def dir_path(path_name: str) -> str:
+    """Function to convert argument to created directory.
+
+    Args:
+        path_name (str): Path to target directory.
+
+    Returns:
+        str: Path to prepared directory.
+    """
+    if Path(path_name).is_dir():
+        return path_name
     else:
-        Path(string).mkdir(exist_ok=True)
-        [p.mkdir(exist_ok=True) for p in Path(string).parents]
-        return string
+        Path(path_name).mkdir(exist_ok=True)
+        [p.mkdir(exist_ok=True) for p in Path(path_name).parents]
+        return path_name
 
 
-def file_path(string):
-    if Path(string).is_file():
-        return string
+def file_path(path_name: str) -> str:
+    """Function to convert argument to verified, found file path.
+
+    Args:
+        path_name (str): Path to data file.
+
+    Raises:
+        FileNotFoundError: Data file not found at given path.
+
+    Returns:
+        str: Verified path to data file.
+    """
+    if Path(path_name).is_file():
+        return path_name
     else:
-        raise FileNotFoundError(string)
+        raise FileNotFoundError(path_name)
 
 
-def has_parent(string):
-    [p.mkdir(exist_ok=True) for p in Path(string).parents]
-    return string
+def has_parent(path_name: str) -> str:
+    """Function to convert argument to file path with created parent directories.
+
+    Args:
+        path_name (str): Path to out-file.
+
+    Returns:
+        str: Path to out-file with created parent directories.
+    """
+    [p.mkdir(exist_ok=True) for p in Path(path_name).parents]
+    return path_name
 
 
 CLI_ARGS = [
@@ -35,6 +74,11 @@ CLI_ARGS = [
 
 
 def cli_args() -> dict:
+    """Function to call and parse command-line arguments.
+
+    Returns:
+        dict: Dictionary of parsed command-line arguments.
+    """
     parser = ArgumentParser(
         add_help=True, prog="Minall", formatter_class=RawDescriptionHelpFormatter
     )

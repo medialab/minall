@@ -1,3 +1,16 @@
+# minall/main.py
+
+"""Minall enrichment workflow.
+
+With the class `Minall`, this module manages the entire workflow.
+
+The class contains the following methods:
+
+- `__init__(database, config, output_dir, links_file, url_col, shared_content_file, buzzsumo_only)` - Intialize SQLite database and out-file paths.
+- `collect_and_coalesce()` - Collect new data and coalesce with existing data in relevant SQL tables.
+- `export()` - Write enriched SQL tables to CSV out-files.
+"""
+
 from pathlib import Path
 from typing import Tuple
 
@@ -20,7 +33,7 @@ class Minall:
         shared_content_file: str | None = None,
         buzzsumo_only: bool = False,
     ) -> None:
-        """Main app for running Minall workflow.
+        """Intialize SQLite database and out-file paths.
 
         Args:
             database (str | None): Path name to SQLite database. If None, creates database in memory.
@@ -64,7 +77,7 @@ class Minall:
         )
 
     def collect_and_coalesce(self):
-        """Collect new data and coalesce with existing data in SQL table."""
+        """Collect new data and coalesce with existing data in relevant SQL tables."""
         enricher = Enrichment(
             links_table=self.links_table,
             shared_content_table=self.shared_content_table,
@@ -73,7 +86,7 @@ class Minall:
         enricher(buzzsumo_only=self.buzzsumo_only)
 
     def export(self) -> Tuple[Path, Path]:
-        """Write enriched tables to CSV files.
+        """Write enriched SQL tables to CSV out-files.
 
         Returns:
             Tuple[Path, Path]: Paths to links and shared content CSV files.

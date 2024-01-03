@@ -1,3 +1,14 @@
+# minall/enrichment/enrichment.py
+
+"""Class for data collection and coalescing.
+
+With the class `Enrichment`, this module manages the data collection process.
+
+The class contains the following methods:
+
+- `__init__(links_table, shared_content_table, keys)` - 
+"""
+
 from minall.enrichment.article_text import get_article_text
 from minall.enrichment.buzzsumo import get_buzzsumo_data
 from minall.enrichment.crowdtangle import get_facebook_post_data
@@ -18,12 +29,22 @@ class Enrichment:
         shared_content_table: BaseTable,
         keys: APIKeys,
     ) -> None:
+        """From given API keys and URL data set, filter URLs by domain and initialize data enrichment class.
+
+        Args:
+            links_table (BaseTable): BaseTable class instance of SQL table for URL dataset.
+            shared_content_table (BaseTable): BaseTable class instance of SQL table for shared content related to URLs in dataset.
+            keys (APIKeys): APIKeys class instance of minet API client configurations.
+        """
+
         self.links_table = links_table
         self.shared_content_table = shared_content_table
         self.keys = keys
         self.filtered_links = FilteredLinks(self.links_table)
 
     def buzzsumo(self):
+        """For all URLs, collect data from Buzzsumo and coalesce in the database's 'links' table."""
+
         if self.keys.buzzsumo_token:
             get_buzzsumo_data(
                 data=self.filtered_links.all_links,
@@ -33,6 +54,8 @@ class Enrichment:
             self.links_table.coalesce(infile=self.links_table.outfile)
 
     def scraper(self):
+        """For select URLs, collect data via scraping and coalesce in the database's 'links' table."""
+
         # In multiple threads, scrape HTML data and write to a CSV file
         get_article_text(
             data=self.filtered_links.to_scrape, outfile=self.links_table.outfile
@@ -41,6 +64,7 @@ class Enrichment:
         self.links_table.coalesce(infile=self.links_table.outfile)
 
     def other_social_media(self):
+        """For select URLs, update the 'work_type' column in the database's 'links' table with the value 'SocialMediaPosting'."""
         # Assign default type to social media post
         add_type_data(
             data=self.filtered_links.other_social, outfile=self.links_table.outfile
@@ -49,6 +73,7 @@ class Enrichment:
         self.links_table.coalesce(infile=self.links_table.outfile)
 
     def facebook(self):
+        """For Facebook URLs, collect data from CrowdTangle and coalesce in the database's 'links' and 'shared_content' tables."""
         if self.keys.crowdtangle_token:
             get_facebook_post_data(
                 data=self.filtered_links.facebook,
@@ -62,6 +87,7 @@ class Enrichment:
             self.shared_content_table.coalesce(infile=self.shared_content_table.outfile)
 
     def youtube(self):
+        """For YouTube URLs, collect data from YouTube API and coalesce in the database's 'links' table."""
         if self.keys.youtube_key:
             # In single thread, collect YouTube API data and write to a CSV file
             get_youtube_data(

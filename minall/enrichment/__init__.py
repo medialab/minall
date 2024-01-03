@@ -1,3 +1,14 @@
+# minall/enrichment/__init__.py
+
+"""Scripts to execute data collection.
+
+Modules exported by this package:
+
+- `enrichment`: Class that manages steps of data collection.
+- `utils`: Module that provides helper functions for enrichment.
+"""
+
+
 import logging
 
 logger = logging.getLogger("trafilatura")
