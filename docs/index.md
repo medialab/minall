@@ -17,10 +17,6 @@ and consists of four separate parts:
 Quickly find what you're looking for depending on
 your use case by looking at the different pages.
 
-## Project Overview
-
-::: minall
-
 ## Acknowledgements
 
 This project was developed as a response to research needs in the [European project](https://edmo.eu/) [_De Facto_](https://defacto-observatoire.fr/) and with the help of members of the [médialab](https://medialab.sciencespo.fr/) at Sciences Po. In particular, the project depends on the excellent work of Guillaume Plique and other contributors to the médialab's tool [`minet`](https://github.com/medialab/minet).

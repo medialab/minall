@@ -23,6 +23,8 @@ from minall.utils.parse_config import APIKeys
 
 
 class Minall:
+    """Class to store variables and execute steps of enrichment."""
+
     def __init__(
         self,
         database: str | None,
