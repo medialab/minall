@@ -394,6 +394,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#minall.exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.exceptions.check_csv_headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      check_csv_headers()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -642,6 +666,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#minall.exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.exceptions.check_csv_headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      check_csv_headers()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -707,6 +755,8 @@
 
   <div class="doc doc-contents ">
 
+  
+      <p>Class to store variables and execute steps of enrichment.</p>
 
             <details class="quote">
               <summary>Source code in <code>minall/main.py</code></summary>
@@ -781,7 +831,11 @@
 <span class="normal">93</span>
 <span class="normal">94</span>
 <span class="normal">95</span>
-<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Minall</span><span class="p">:</span>
+<span class="normal">96</span>
+<span class="normal">97</span>
+<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Minall</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to store variables and execute steps of enrichment.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">database</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -1000,9 +1054,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -1051,7 +1103,9 @@
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span>
-<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">database</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -1127,14 +1181,14 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">collect_and_coalesce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">collect_and_coalesce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect new data and coalesce with existing data in relevant SQL tables.&quot;&quot;&quot;</span>
     <span class="n">enricher</span> <span class="o">=</span> <span class="n">Enrichment</span><span class="p">(</span>
         <span class="n">links_table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="p">,</span>
@@ -1190,15 +1244,15 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span>
 <span class="normal">94</span>
 <span class="normal">95</span>
-<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Path</span><span class="p">]:</span>
+<span class="normal">96</span>
+<span class="normal">97</span>
+<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Path</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write enriched SQL tables to CSV out-files.</span>
 
 <span class="sd">    Returns:</span>
@@ -1221,6 +1275,267 @@
 
 </div>
 
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+
+<h2 id="minall.exceptions" class="doc doc-heading">
+          <code>minall.exceptions</code>
+
+
+</h2>
+
+  <div class="doc doc-contents first">
+  
+      <p>Tools to validate CSV file used for creating SQLite table.</p>
+<p>This module contains a function and exceptions to manage the process of validating a CSV file given as the URL dataset for the enrichment process. The function is called when one of the SQLite's tables are being created. The module contains the following function and exceptions:</p>
+<ul>
+<li><code>check_csv_headers(table_name, infile_path, url_col)</code> - Parse columns in CSV file and raise exception if invalid.</li>
+<li><code>NoCSVHeaders</code> - The CSV does not have headers.</li>
+<li><code>NoURLColumn</code> - When building the 'links' table, the declared URL column is not in the CSV file.</li>
+<li><code>NoPrimaryKeyColumns</code> - When building the 'shared_content' table, either the 'post_url' column or the 'content_url' column are missing from the CSV file.</li>
+</ul>
+<p>When creating the 'links' table, the input CSV file must have a column for URLs; the URLs must be cleaned and/or ready to serve as the source for the data collection. The name of the URL column can vary and must be declared.</p>
+<p>When creating the 'shared_content' table, the column names are not modifiable. The CSV must have the columns 'post_url' and 'content_url;' the former relates to a URL in the 'links' table, and the latter incidates a URL for content embedded in the Web Content of the former.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="minall.exceptions.check_csv_headers" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">check_csv_headers</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">infile_path</span><span class="p">,</span> <span class="n">url_col</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>table_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile_path</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>url_col</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Raises:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="minall.exceptions.NoCSVHeaders">NoCSVHeaders</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="minall.exceptions.NoURLColumn">NoURLColumn</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="minall.exceptions.NoPrimaryKeyColumns">NoPrimaryKeyColumns</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>List[str]: <em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/exceptions.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_csv_headers</span><span class="p">(</span>
+    <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">infile_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        table_name (str): _description_</span>
+<span class="sd">        infile_path (str): _description_</span>
+<span class="sd">        url_col (str | None): _description_</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NoCSVHeaders: _description_</span>
+<span class="sd">        NoURLColumn: _description_</span>
+<span class="sd">        NoPrimaryKeyColumns: _description_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">casanova</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">infile_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">fieldnames</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">List</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">NoCSVHeaders</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s2">&quot;links&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">url_col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoURLColumn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">url_col</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s2">&quot;shared_content&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;post_url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoPrimaryKeyColumns</span><span class="p">(</span><span class="s2">&quot;post_url&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;content_url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoPrimaryKeyColumns</span><span class="p">(</span><span class="s2">&quot;content_url&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">columns</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
 
 
 
