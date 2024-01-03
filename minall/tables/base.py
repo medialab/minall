@@ -1,3 +1,15 @@
+# minall/tables/cli.py
+
+"""Create and execute queries on SQLite tables.
+
+This module contains the class `BaseTable` that manages the SQLite database's tables. It contains the following methods:
+
+- `__init__(sqlite_connection, infile, outfile, table, url_col)`
+- `columns_to_update()`
+- `coalesce(infile)`
+- `export()`
+"""
+
 import csv
 from pathlib import Path
 from sqlite3 import Connection
@@ -22,6 +34,15 @@ class BaseTable:
         table: LinksConstants | ShareContentConstants,
         url_col: str | None = None,
     ) -> None:
+        """_summary_
+
+        Args:
+            sqlite_connection (Connection): _description_
+            infile (str | None): _description_
+            outfile (Path): _description_
+            table (LinksConstants | ShareContentConstants): _description_
+            url_col (str | None, optional): _description_. Defaults to None.
+        """
         self.connection = sqlite_connection
         self.executor = SQLiteWrapper(sqlite_connection)
         self.outfile = outfile
@@ -50,6 +71,11 @@ class BaseTable:
         )
 
     def columns_to_update(self) -> str:
+        """_summary_
+
+        Returns:
+            str: _description_
+        """
         columns = []
         for column in self.columnparser.infile_standardized:
             if column not in self.table.pk_list:
@@ -57,6 +83,11 @@ class BaseTable:
         return ", ".join(columns)
 
     def coalesce(self, infile: Path):
+        """_summary_
+
+        Args:
+            infile (Path): _description_
+        """
         table_columns = self.columnparser.infile_standardized
         columns_to_update = self.columns_to_update()
         with open(infile, "r") as f:
@@ -73,6 +104,7 @@ class BaseTable:
                 self.executor(query=query, values=values)  # type: ignore
 
     def export(self):
+        """_summary_"""
         cursor = self.connection.cursor()
         rows = cursor.execute(f"SELECT * FROM {self.table.table_name}").fetchall()
         headers = self.columnparser.infile_standardized

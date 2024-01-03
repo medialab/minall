@@ -1,7 +1,15 @@
+# minall/tables/utils.py
+
+"""Something.
+
+This module contains helper functions and methods used by the SQLite tables.
+
+"""
+
 import csv
 from dataclasses import dataclass, field
 from sqlite3 import Connection
-from typing import List
+from typing import Dict, List
 
 from minall.exceptions import check_csv_headers
 from minall.tables.links.constants import LinksConstants
@@ -11,10 +19,19 @@ from minall.utils.database import SQLiteWrapper
 
 @dataclass
 class ColumnParser:
+    """_summary_
+
+    Attributes:
+        infile_dtype_string (str): __something__
+        infile_original (List[str]): __something__
+        infile_standardized (List[str]): __something__
+        infile_dtypes (Dict): __something__
+    """
+
     infile_dtype_string: str
-    infile_original: list[str] = field(default_factory=list)
-    infile_standardized: list[str] = field(default_factory=list)
-    infile_dtypes: dict = field(default_factory=dict)
+    infile_original: List[str] = field(default_factory=List)
+    infile_standardized: List[str] = field(default_factory=List)
+    infile_dtypes: Dict = field(default_factory=Dict)
 
     def __init__(
         self,
@@ -23,6 +40,14 @@ class ColumnParser:
         infile: str | None,
         url_col: str | None,
     ):
+        """_summary_
+
+        Args:
+            connection (Connection): _description_
+            table_constants (LinksConstants | ShareContentConstants): _description_
+            infile (str | None): _description_
+            url_col (str | None): _description_
+        """
         self.connection = connection
         self.infile = infile
         self.url_col = url_col
@@ -36,6 +61,14 @@ class ColumnParser:
         )
 
     def parse_original_infile_columns(self) -> List[str]:
+        """_summary_
+
+        Raises:
+            e: _description_
+
+        Returns:
+            List[str]: _description_
+        """
         columns = list(self.table.col_names)
         if self.infile:
             try:
@@ -47,6 +80,11 @@ class ColumnParser:
         return columns
 
     def standardize_infile_columns(self) -> List[str]:
+        """_summary_
+
+        Returns:
+            List[str]: _description_
+        """
         # Copy all the columns from the in-file
         standardized_infile_headers = self.infile_original.copy()
         # If missing, add standardized columns to the list of in-file's columns
@@ -56,6 +94,11 @@ class ColumnParser:
         return standardized_infile_headers
 
     def set_infile_column_dtypes(self) -> dict:
+        """_summary_
+
+        Returns:
+            dict: _description_
+        """
         dtypes = {}
         for col_name in self.infile_standardized:
             if not self.table.dtypes.get(col_name):
@@ -72,6 +115,15 @@ def insert_infile(
     table_name: str,
     url_col: str | None = None,
 ):
+    """_summary_
+
+    Args:
+        infile (str | None): _description_
+        standardized_columns (list): _description_
+        connection (Connection): _description_
+        table_name (str): _description_
+        url_col (str | None, optional): _description_. Defaults to None.
+    """
     if not infile:
         pass
     else:
@@ -93,8 +145,18 @@ def insert_infile(
 
 
 def parse_rows(
-    infile_standardized: list, row: dict, url_col: str | None = None
+    infile_standardized: List, row: Dict, url_col: str | None = None
 ) -> tuple:
+    """_summary_
+
+    Args:
+        infile_standardized (List): _description_
+        row (Dict): _description_
+        url_col (str | None, optional): _description_. Defaults to None.
+
+    Returns:
+        tuple: _description_
+    """
     values = []
     for col in infile_standardized:
         if col == "url" and url_col:
