@@ -8,6 +8,13 @@ plugins:
   - autorefs
   - mkdocstrings
 
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
 nav:
   - Home: "index.md"
   - Tutorials: "tutorials.md"
@@ -16,6 +23,7 @@ nav:
       - "root": "reference/root.md"
       - "cli": "reference/cli.md"
       - "utils": "reference/utils.md"
+      - "tables": "reference/tables.md"
       - "enrichment":
           - "root": "reference/enrichment.md"
           - "article_text": "reference/enrichment/article_text.md"

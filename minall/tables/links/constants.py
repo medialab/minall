@@ -1,8 +1,24 @@
+# minall/tables/links/constants.py
+
 from dataclasses import dataclass
 
 
 @dataclass
 class LinksConstants:
+    """Dataclass to manage 'links' table.
+
+    This dataclass manages the 'links' table's required column names and their data types. Being a dataclass, however, the instance of the class can also be subsequently modified to include other column names (and their data types) according to the input data.
+
+    For example, if the input dataset's target URL column has a name other than 'url,' such as the name 'cleaned_urls,' this dataclass's `dtypes` and `col_names` attributes can be modified to preserve the data file's additional column names. However, the column 'url' must indicate the target URLs. If the input dataset does not have a 'url' column, one will be created. If it already has a 'url' column, that will be parsed and treated as the target URL column.
+
+    Attributes:
+        table_name (str): Name of the table. Default = "links".
+        primary_key (str): Text string of primary key. Default = "url".
+        pk_list (list): List of primary key columns. Default = ["url"]
+        dtypes (dict): Key-value pairs of column names and SQLite data type descriptions.
+        col_names (list): List of column names.
+    """
+
     table_name: str = "links"
     primary_key: str = "url"
     pk_list = ["url"]
