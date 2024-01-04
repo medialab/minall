@@ -659,18 +659,66 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#minall.enrichment.article_text.get_data" class="md-nav__link">
+  <a href="#minall.enrichment.article_text.scraper" class="md-nav__link">
     <span class="md-ellipsis">
-      get_data
+      scraper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="scraper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.scraper.Scraper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scraper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scraper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.scraper.Scraper.__call__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __call__()
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#minall.enrichment.article_text.scraper" class="md-nav__link">
+  <a href="#minall.enrichment.article_text.scraper.Scraper.__init__" class="md-nav__link">
     <span class="md-ellipsis">
-      scraper
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.scraper.good_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      good_response()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.get_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_data
     </span>
   </a>
   
@@ -964,18 +1012,66 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#minall.enrichment.article_text.get_data" class="md-nav__link">
+  <a href="#minall.enrichment.article_text.scraper" class="md-nav__link">
     <span class="md-ellipsis">
-      get_data
+      scraper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="scraper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.scraper.Scraper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scraper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scraper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.scraper.Scraper.__call__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __call__()
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#minall.enrichment.article_text.scraper" class="md-nav__link">
+  <a href="#minall.enrichment.article_text.scraper.Scraper.__init__" class="md-nav__link">
     <span class="md-ellipsis">
-      scraper
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.scraper.good_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      good_response()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.enrichment.article_text.get_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_data
     </span>
   </a>
   
@@ -2421,15 +2517,189 @@
 
 
 
-<h3 id="minall.enrichment.article_text.get_data" class="doc doc-heading">
-          <code>minall.enrichment.article_text.get_data</code>
+<h3 id="minall.enrichment.article_text.scraper" class="doc doc-heading">
+          <code>minall.enrichment.article_text.scraper</code>
 
 
 </h3>
 
   <div class="doc doc-contents first">
   
-      <p>Something.</p>
+      <p>Class and helper function for scraping HTML.</p>
+<p>This module's <code>Scraper</code> class enhances minet's <code>request()</code> and <code>extract()</code> methods by providing additional support for unexpected HTML encodings.</p>
+<ol>
+<li>Uses minet's <code>request()</code> method on a target URL to get a <code>Response</code> object.</li>
+<li>Verifies that the <code>Response</code> object is encoded in some form of utf-8.</li>
+<li>Extracts the HTML body from the <code>Response</code>. [<code>text = response.text()</code>]</li>
+<li>Uses bs4's fool-proof <code>UnicodeDammit</code> to parse the exact encoding. [<code>UnicodeDammit(text, "html.parser").declared_html_encoding</code>]</li>
+<li>Gives the encoding to bs4's <code>BeautifulSoup</code> to parse the HTML.</li>
+<li>Gives the <code>BeautifulSoup</code> result to minet's <code>extract()</code> method in order to return minet's <code>TrafilaturaResult</code> object.</li>
+</ol>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="minall.enrichment.article_text.scraper.Scraper" class="doc doc-heading">
+          <code>Scraper</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Class to manage HTML scraping.</p>
+
+
+
+<p><strong>Examples:</strong></p>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">scraper</span> <span class="o">=</span> <span class="n">Scraper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">scraper</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://zenodo.org/records/7974793&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">==</span> <span class="n">result</span><span class="o">.</span><span class="n">canonical_url</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Minet, a webmining CLI tool &amp; library for python.&#39;</span>
+</code></pre></div>
+
+            <details class="quote">
+              <summary>Source code in <code>minall/enrichment/article_text/scraper.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Scraper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to manage HTML scraping.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; scraper = Scraper()</span>
+<span class="sd">        &gt;&gt;&gt; url, result = scraper(url=&#39;https://zenodo.org/records/7974793&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; url == result.canonical_url</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; result.title</span>
+<span class="sd">        &#39;Minet, a webmining CLI tool &amp; library for python.&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="n">Progress</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;If provided the context of a rich progress bar, save it to the class instance and add the task &#39;Scraping webpage&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            progress (Progress | None, optional): Context of a rich progress bar instance. Defaults to None.</span>
+<span class="sd">            total (int | None, optional): Total number of items treated during progress context. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
+        <span class="k">if</span> <span class="n">progress</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">progress</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
+                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;[bold yellow]Scraping webpage&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">t</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TrafilaturaResult</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Requests and scrapes HTML, returning minet&#39;s Trafilatura Result object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url (str): Target URL.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[str, TrafilaturaResult | None]: The target URL and, if scraping was successful, minet&#39;s Trafilatura Result object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Request URL&#39;s HTML</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="c1"># Parse requested HTML</span>
+        <span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">good_response</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Avoid input conversion error, deriving from inside Trafilatura&#39;s lxml dependency</span>
+                <span class="n">encoding</span> <span class="o">=</span> <span class="n">UnicodeDammit</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">declared_html_encoding</span>
+                <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s2">&quot;lxml&quot;</span><span class="p">,</span> <span class="n">from_encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">url</span><span class="p">,</span> <span class="n">result</span>
+</code></pre></div></td></tr></table></div>
+            </details>
 
   
 
@@ -2444,6 +2714,364 @@
 
 
 
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="minall.enrichment.article_text.scraper.Scraper.__call__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Requests and scrapes HTML, returning minet's Trafilatura Result object.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>url</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Target URL.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Tuple">Tuple</span>[str, <span title="minet.extraction.TrafilaturaResult">TrafilaturaResult</span> | None]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Tuple[str, TrafilaturaResult | None]: The target URL and, if scraping was successful, minet's Trafilatura Result object.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/enrichment/article_text/scraper.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TrafilaturaResult</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Requests and scrapes HTML, returning minet&#39;s Trafilatura Result object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        url (str): Target URL.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple[str, TrafilaturaResult | None]: The target URL and, if scraping was successful, minet&#39;s Trafilatura Result object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Request URL&#39;s HTML</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1"># Parse requested HTML</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">good_response</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Avoid input conversion error, deriving from inside Trafilatura&#39;s lxml dependency</span>
+            <span class="n">encoding</span> <span class="o">=</span> <span class="n">UnicodeDammit</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">declared_html_encoding</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s2">&quot;lxml&quot;</span><span class="p">,</span> <span class="n">from_encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">url</span><span class="p">,</span> <span class="n">result</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="minall.enrichment.article_text.scraper.Scraper.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>If provided the context of a rich progress bar, save it to the class instance and add the task 'Scraping webpage'.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>progress</code></td>
+          <td>
+                <code><span title="rich.progress.Progress">Progress</span> | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Context of a rich progress bar instance. Defaults to None.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>total</code></td>
+          <td>
+                <code>int | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Total number of items treated during progress context. Defaults to None.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/enrichment/article_text/scraper.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="n">Progress</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If provided the context of a rich progress bar, save it to the class instance and add the task &#39;Scraping webpage&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        progress (Progress | None, optional): Context of a rich progress bar instance. Defaults to None.</span>
+<span class="sd">        total (int | None, optional): Total number of items treated during progress context. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
+    <span class="k">if</span> <span class="n">progress</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">progress</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;[bold yellow]Scraping webpage&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">t</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.enrichment.article_text.scraper.good_response" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">good_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Verifies that the response that minet's request method returned is valid for scraping.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>response</code></td>
+          <td>
+                <code><span title="minet.web.Response">Response</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Response object returned from minet's request method.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="minet.web.Response">Response</span> | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Response | None: If valid, the Response; otherwise None.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/enrichment/article_text/scraper.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">good_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verifies that the response that minet&#39;s request method returned is valid for scraping.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        response (Response): Response object returned from minet&#39;s request method.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response | None: If valid, the Response; otherwise None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">is_text</span>
+        <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">encoding</span>
+        <span class="ow">and</span> <span class="s2">&quot;utf&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">encoding</span>
+        <span class="ow">and</span> <span class="s2">&quot;8&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">encoding</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
 
   </div>
 
@@ -2456,8 +3084,8 @@
 
 
 
-<h3 id="minall.enrichment.article_text.scraper" class="doc doc-heading">
-          <code>minall.enrichment.article_text.scraper</code>
+<h3 id="minall.enrichment.article_text.get_data" class="doc doc-heading">
+          <code>minall.enrichment.article_text.get_data</code>
 
 
 </h3>

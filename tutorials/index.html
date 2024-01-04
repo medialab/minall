@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#example-dataset" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -253,6 +258,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -262,6 +278,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example dataset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-required-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up required files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up required files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      API keys
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-minall" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install minall
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding the results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buzzsumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buzzsumo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -484,6 +592,89 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example dataset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-required-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up required files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up required files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      API keys
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-minall" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install minall
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding the results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buzzsumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buzzsumo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -499,25 +690,222 @@
 
   <h1>Tutorials</h1>
 
-<p>This part of the project documentation focuses on a
-<strong>learning-oriented</strong> approach. You'll learn how to
-get started with the code in this project.</p>
-<blockquote>
-<p><strong>Note:</strong> Expand this section by considering the
-following points:</p>
-</blockquote>
+<p>This tutorial will walk you through a real-life example of why and how to use <code>minall</code>.</p>
+<h2 id="example-dataset">Example dataset</h2>
+<p>Let's say we have a list of URLs whose basic metadata and propagation online we want to study. We've stored those URLs in a CSV file under the column <code>target_url</code>. Both are about Guillaume Plique's presentation of <code>minet</code> at the FOSDEM conference in 2020. One of the URLs is of a web page from the conference's site and the other is a YouTube video, published by the conference organization.</p>
+<table>
+<thead>
+<tr>
+<th>target_url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/</td>
+</tr>
+<tr>
+<td>https://www.youtube.com/watch?v=BTvfWbAjh1w</td>
+</tr>
+</tbody>
+</table>
+<p>If using <code>minet</code>, we'd need to run 2 different commands based on the type of URL, <code>minet yt</code> for the YouTube video and <code>minet fetch</code> / <code>minet extract</code> for the web page. When working with just 2 URLs, that's not such a problem. However, let's imagine our list of URLs is much bigger than these 2 rows and that we don't aleady know what type of content is in it. Plus, we want to be able to work with the collected data as a set, comparing identical attributes of both the web page and the YouTube video. <code>minet</code>'s commands write their results in data fields that are unique to each sub-command. This idiosyncracy complicates comparative analysis. What <code>minall</code> does, in one single command, is output fewer but harmonized data fields, which apply to all types of web content.</p>
+<h2 id="set-up-required-files">Set up required files</h2>
+<p>For the purposes of this tutorial, let's create two files in our current working directory. One is the dataset described above (<code>data.csv</code>) and the second is a YAML configuation file, which is the <a href="https://github.com/medialab/minet/blob/master/docs/cli.md#minetrc-config-files">same as that used in <code>minet</code></a> (<code>config.yml</code>).</p>
+<div class="highlight"><pre><span></span><code>.
+│
+├── config.yml
+│
+└── data.csv
+</code></pre></div>
+<p>Because API keys are not always available, <code>minall</code> does not require them to function. However, the majority of its enrichments depend on various APIs and, if not using any, we might as well just use <code>minet</code>'s scraping commands directly.</p>
+<p>Let's assume we only have a YouTube API key, which is free and can be <a href="https://developers.google.com/youtube/v3/getting-started">obtained from Google</a> with a Gmail account. We'll set up the configuration file like so:</p>
+<p><code>config.yml</code>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">youtube</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;XXXX&quot;</span>
+</code></pre></div></p>
+<h3 id="api-keys">API keys</h3>
+<p>Technically, <code>minall</code> does not require a configuration file to function because it can skip over any enrichment methods that require API keys the user did not provide. Only the dataset file, which contains target URLs, is absolutley necessary. However, the purpose of using <code>minall</code> is to take advantage of <code>minet</code>'s many API clients in one single command. Thus, though not important for this tutorial, it's best if you can fill out the entire configuration file below:</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">buzzsumo</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;XXXX&quot;</span><span class="w"> </span><span class="c1"># Used as --token for `minet bz` commands</span>
+<span class="nt">crowdtangle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;XXXX&quot;</span><span class="w"> </span><span class="c1"># Used as --token for `minet ct` commands</span>
+<span class="w">  </span><span class="nt">rate_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w"> </span><span class="c1"># Used as --rate-limit for `minet ct` commands</span>
+<span class="nt">youtube</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;XXXX&quot;</span><span class="w"> </span><span class="c1"># Used as --key for `minet yt` commands</span>
+</code></pre></div>
 <ul>
-<li>Help newcomers with getting started</li>
-<li>Teach readers about your library by making them
-  write code</li>
-<li>Inspire confidence through examples that work for
-  everyone, repeatably</li>
-<li>Give readers an immediate sense of achievement</li>
-<li>Show concrete examples, no abstractions</li>
-<li>Provide the minimum necessary explanation</li>
-<li>Avoid any distractions</li>
+<li>YouTube's API key can be <a href="https://developers.google.com/youtube/v3/getting-started">requested from Google</a>.</li>
+<li>CrowdTangle's API key can be <a href="https://help.crowdtangle.com/en/articles/4302208-crowdtangle-for-academics-and-researchers">requested from Meta</a></li>
+<li>Buzzsumo's API key can be <a href="http://help.buzzsumo.com/en/articles/3883145-api-access-for-paid-web-app-subscriptions">purchased from Buzzsumo</a>.</li>
 </ul>
-<p>Example from <a href="https://realpython.com/python-project-documentation-with-mkdocs/">https://realpython.com/python-project-documentation-with-mkdocs/</a></p>
+<h2 id="install-minall">Install <code>minall</code></h2>
+<p>Because <code>minall</code> is written entirely in Python, we need to <a href="https://docs.python-guide.org/starting/installation/">have Python installed</a>, specifically version 3.11-something. We also need to create a <a href="https://docs.python-guide.org/dev/virtualenvs/">"virtual" Python environment</a>.</p>
+<p>In a shell with the virtual Python environment activated, install <code>minall</code> from GitHub.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/medialab/minall.git
+</code></pre></div>
+<p>Let's check that we installed it correctly by entering the command <code>minall --help</code>. The following should show up in the console:</p>
+<div class="highlight"><pre><span></span><code>usage:<span class="w"> </span>Minall<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--database<span class="w"> </span>DATABASE<span class="o">]</span><span class="w"> </span><span class="o">[</span>--config<span class="w"> </span>CONFIG<span class="o">]</span><span class="w"> </span>--output-dir
+<span class="w">              </span>OUTPUT_DIR<span class="w"> </span>--links<span class="w"> </span>LINKS_FILE<span class="w"> </span>--url-col<span class="w"> </span>URL_COL
+<span class="w">              </span><span class="o">[</span>--shared-content<span class="w"> </span>SHARED_CONTENT_FILE<span class="o">]</span><span class="w"> </span><span class="o">[</span>--buzzsumo-only<span class="o">]</span>
+
+options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>--database<span class="w"> </span>DATABASE<span class="w">   </span><span class="o">[</span>Optional<span class="o">]</span><span class="w"> </span>Path<span class="w"> </span>to<span class="w"> </span>SQLite<span class="w"> </span>database.<span class="w"> </span>If<span class="w"> </span>not<span class="w"> </span>given,
+<span class="w">                        </span>database<span class="w"> </span>written<span class="w"> </span>to<span class="w"> </span>memory.
+<span class="w">  </span>--config<span class="w"> </span>CONFIG<span class="w">       </span><span class="o">[</span>Optional<span class="o">]</span><span class="w"> </span>Path<span class="w"> </span>to<span class="w"> </span>configuration<span class="w"> </span>file.<span class="w"> </span>If<span class="w"> </span>not
+<span class="w">                        </span>given,<span class="w"> </span>environment<span class="w"> </span>variables<span class="w"> </span>are<span class="w"> </span>expected.
+<span class="w">  </span>--output-dir<span class="w"> </span>OUTPUT_DIR
+<span class="w">                        </span><span class="o">[</span>Required<span class="o">]</span><span class="w"> </span>Path<span class="w"> </span>to<span class="w"> </span>directory<span class="w"> </span><span class="k">in</span><span class="w"> </span>which<span class="w"> </span>a<span class="w"> </span>links<span class="w"> </span>and
+<span class="w">                        </span>shared_content<span class="w"> </span>file<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>written.
+<span class="w">  </span>--links<span class="w"> </span>LINKS_FILE<span class="w">    </span><span class="o">[</span>Required<span class="o">]</span><span class="w"> </span>Path<span class="w"> </span>to<span class="w"> </span>links<span class="w"> </span>file.
+<span class="w">  </span>--url-col<span class="w"> </span>URL_COL<span class="w">     </span><span class="o">[</span>Required<span class="o">]</span><span class="w"> </span>Name<span class="w"> </span>of<span class="w"> </span>URL<span class="w"> </span>column<span class="w"> </span><span class="k">in</span><span class="w"> </span>links<span class="w"> </span>file.
+<span class="w">  </span>--shared-content<span class="w"> </span>SHARED_CONTENT_FILE
+<span class="w">                        </span><span class="o">[</span>Optional<span class="o">]</span><span class="w"> </span>Path<span class="w"> </span>to<span class="w"> </span>shared_content<span class="w"> </span>file.
+<span class="w">  </span>--buzzsumo-only<span class="w">       </span><span class="o">[</span>Optional<span class="o">]</span><span class="w"> </span>Flag<span class="w"> </span>indicating<span class="w"> </span>only<span class="w"> </span>Buzzsumo<span class="w"> </span>API<span class="w"> </span>will
+<span class="w">                        </span>be<span class="w"> </span>called<span class="w"> </span>on<span class="w"> </span>links<span class="w"> </span>file.
+</code></pre></div>
+<h2 id="run">Run</h2>
+<p>Now we're ready to run <code>minall</code> on our dataset of URLs about Guillaume Plique's FOSDEM presentation. The <code>minall</code> command will produce 2 new CSV files, one has all of the dataset's URLs and their newly collected metadata (<code>links.csv</code>), the other has URLs pointing to media content that was embedded inside the target URL's web content (<code>shared_content.csv</code>).</p>
+<blockquote>
+<p><em>Note: Currently, <code>minall</code> only records the URLS of embedded media content when it's shared inside a Facebook post. This feature, however, should be expanded to include media (images, videos) shared inside articles.</em></p>
+</blockquote>
+<p>We'll ask <code>minall</code> to write the 2 new files to a directory named <code>output</code>, which will eventually (at the end of the workflow) change our current working directory like so:</p>
+<div class="highlight"><pre><span></span><code>.
+│
+├── config.yml
+│
+├── data.csv
+│
+└── output/
+    ├── links.csv
+    └── shared_content.csv
+</code></pre></div>
+<p>To run <code>minall</code>, we'll call the command with the following options:</p>
+<ul>
+<li><code>--config</code> : Path to the YAML configuration file, <code>./config.yml</code></li>
+<li><code>--links</code> : Path to the dataset of target URLs, <code>./data.csv</code></li>
+<li><code>--url-col</code>: Name of the column in the dataset file with the target URLs. <code>target_url</code></li>
+<li><code>--output-dir</code>: Path to where <code>minall</code> will export its results. <code>./output/</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>minall<span class="w"> </span>--config<span class="w"> </span>config.yml<span class="w"> </span>--output-dir<span class="w"> </span>output/<span class="w"> </span>--links<span class="w"> </span>data.csv<span class="w"> </span>--url-col<span class="w"> </span>target_url
+</code></pre></div>
+<p>While <code>minall</code> is running, we'll see the following commands proceed:</p>
+<div class="highlight"><pre><span></span><code>Querying YouTube videos   1/1 0:00:00
+Querying YouTube channels   1/1 0:00:00
+Scraping webpage   1/1 0:00:00
+</code></pre></div>
+<p>Had our dataset included URLs from Facebook and had we provided a CrowdTangle API key, <code>minall</code> would have also called the CrowdTangle API. But because our dataset only included the URL of a web page and of a YouTube video, it ran through only its YouTube API and scraping utilities. Had we provided a Buzzsumo API key, it would have also called the Buzzsumo API twice, searching for both the web page's URL and the YouTube video's URL in Buzzsumo's database.</p>
+<h2 id="understanding-the-results">Understanding the results</h2>
+<p>A portion of the <code>output/links.csv</code> file that <code>minall</code> created is shown below.</p>
+<table>
+<thead>
+<tr>
+<th>target_url</th>
+<th>url</th>
+<th>domain</th>
+<th>work_type</th>
+<th>duration</th>
+<th>identifier</th>
+<th>date_published</th>
+<th>...</th>
+<th>title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/</td>
+<td>https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/</td>
+<td>fosdem.org</td>
+<td>WebPage</td>
+<td></td>
+<td></td>
+<td>2020-02-01</td>
+<td>...</td>
+<td>FOSDEM 2020 - Empowering social scientists with web mining tools</td>
+</tr>
+<tr>
+<td>https://www.youtube.com/watch?v=BTvfWbAjh1w</td>
+<td>https://www.youtube.com/watch?v=BTvfWbAjh1w</td>
+<td>youtube.com</td>
+<td>VideoObject</td>
+<td>1431</td>
+<td>BTvfWbAjh1w</td>
+<td>2021-07-12T06:53:30</td>
+<td>...</td>
+<td>Empowering social scientists with web mining tools Why and how to enable researchers to perform com…</td>
+</tr>
+</tbody>
+</table>
+<p>We see that <code>minall</code> read the columns in our data file, specifically <code>target_url</code>, conserved the original column, and appended the enrichment's additional columns to the right.</p>
+<p>We also see that FOSDEM published the announcement of Guillaume Plique's presentation about <code>minet</code> on their website just before the conference, on 1 February 2020. However, FOSDEM uploaded a video of the presentation to YouTube over a year later, on 12 July 2021. Though we have no way of knowing how many people viewed the web page, YouTube's API allows us know how many people viewed, commented on, and liked the video.</p>
+<table>
+<thead>
+<tr>
+<th>target_url</th>
+<th>...</th>
+<th>reddit_engagement</th>
+<th>youtube_watch</th>
+<th>youtube_comment</th>
+<th>youtube_like</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>https://www.youtube.com/watch?v=BTvfWbAjh1w</td>
+<td></td>
+<td></td>
+<td>69</td>
+<td>0</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="buzzsumo">Buzzsumo</h3>
+<p>Because we didn't provide <code>minall</code> with a Buzzsumo API key, it was unable to ask Buzzsumo if the database had cached metadata about either of our dataset's URLs. Had we included Buzzsumo in our configuration file, <code>minall</code> would have told us that Buzzsumo does have information about the FOSDEM video on YouTube; however, it does not have any information about the web page on FOSDEM's site.</p>
+<p>We know when Buzzsumo has stored information about one of our target URLs because certain data fields in the <code>links.csv</code> file will have a value. For example, if we were to run <code>minall</code> again with a Buzzsumo API key in the configuration file, we would know Buzzsumo cached our dataset's YouTube video because we see values in data fields that are beyond the scope of YouTube's API, specifically <code>facebook_comment</code>, <code>pinterest_share</code>, and <code>twitter_share</code>. It is normal that some of Buzzsumo's data fields, such as <code>tiktok_share</code>, are empty even though Buzzsumo found an exact match of our target URL in its database. The fact that none of the data fields for our dataset's web page have any value means that Buzzsumo did not find the FOSDEM URL.</p>
+<table>
+<thead>
+<tr>
+<th>target_url</th>
+<th>...</th>
+<th>facebook_comment</th>
+<th>facebook_like</th>
+<th>pinterest_share</th>
+<th>twitter_share</th>
+<th>tiktok_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>https://www.youtube.com/watch?v=BTvfWbAjh1w</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
 

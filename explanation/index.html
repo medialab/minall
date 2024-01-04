@@ -71,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#data-fields" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -450,6 +455,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Explanation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -459,6 +475,32 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data fields
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -481,6 +523,23 @@
   
   
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data fields
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -513,6 +572,47 @@ following points:</p>
 <li>Help the reader make connections</li>
 <li>Avoid writing instructions or technical descriptions
   here</li>
+</ul>
+<h2 id="data-fields">Data fields</h2>
+<ul>
+<li><code>url</code> : the URL that will be used for the metadata collection</li>
+<li><code>domain</code> : the URL's domain name</li>
+<li><code>work_type</code> : a <a href="https://schema.org/CreativeWork">Schema.org</a> classification for the URL as a CreativeWork</li>
+<li><code>duration</code> : if the URL is of a video, the video's duration</li>
+<li><code>identifier</code> : the identifier given to the URL via a platform (i.e. YouTube ID, Twitter user ID)</li>
+<li><code>date_published</code> : date (YYYY-MM-DD) when the URL's content was originally published</li>
+<li><code>date_modified</code> : date (YYYY-MM-DD) when the URL's content was last updated</li>
+<li><code>country_of_origin</code> : if the URL is of a YouTube channel, the channel's registered country</li>
+<li><code>abstract</code> : abbreviated description of the URL's content</li>
+<li><code>keywords</code> : keywords associated with the URL</li>
+<li><code>title</code> : title given to the URL's content</li>
+<li><code>text</code> : the URL's main textual content</li>
+<li><code>hashtags</code> : hashtags associated with the URL</li>
+<li><code>creator_type</code> : a <a href="https://schema.org/creator">Schema.org</a> or <a href="https://github.com/AFP-Medialab/defacto-rss/blob/main/Defactor_rss.adoc">De Facto</a> classification for the creator of the URL's content</li>
+<li><code>creator_date_created</code> : if the URL's content was created by a social media account, the date of the account's creation on the site</li>
+<li><code>creator_location_created</code> : if the URL's content was created by a social media account, the country in which the account is registered</li>
+<li><code>creator_identifier</code> if the URL's content was created by a social media account, the social media platform's identifier for the account</li>
+<li><code>creator_facebook_follow</code> : if the URL is a Facebook post, the number of Facebook followers the creator's account has</li>
+<li><code>creator_facebook_subscribe</code> : if the URL is a Facebook post, the number of Facebook subscribers the creator's account has</li>
+<li><code>creator_twitter_follow</code> : if the URL is a Tweet, the number of Twitter / X followers the creator's account has</li>
+<li><code>creator_youtube_subscribe</code> : if the URL is a YouTube video, the number of YouTube channel subscribers the channel has</li>
+<li><code>creator_create_video</code> : if the URL is a YouTube video, the number of videos the YouTube channel has created</li>
+<li><code>creator_name</code> : the name of the creator of the URL's content</li>
+<li><code>creator_url</code> : if the URL is a social media post, a link to the creator's account page on the platform</li>
+<li><code>facebook_comment</code> : number of comments the URL has received on Facebook</li>
+<li><code>facebook_like</code> : number of likes the URL has received on Facebook</li>
+<li><code>facebook_share</code> : number of shares the URL has received on Facebook</li>
+<li><code>pinterest_share</code> : number of shares the URL has received on Pinterest</li>
+<li><code>twitter_share</code> : number of shares the URL has received on Twitter / X</li>
+<li><code>tiktok_share</code> : number of shares the URL has received on TikTok</li>
+<li><code>tiktok_comment</code> : number of comments the URL has received on TikTok</li>
+<li><code>reddit_engagement</code> : metric engagement the URL has received on Reddit</li>
+<li><code>youtube_watch</code> : number of views the URL has received on YouTube</li>
+<li><code>youtube_comment</code> : number of comments the URL has received on YouTube</li>
+<li><code>youtube_like</code> : number of likes the URL has received on YouTube</li>
+<li><code>youtube_favorite</code> : number of favorite reactions the URL has received on YouTube</li>
+<li><code>youtube_subscribe</code> : if the URL is of a YouTube channel, the channel's number of subscribers</li>
+<li><code>create_video</code>: if the URL is of a YouTube channel, the number of videos the channel has created</li>
 </ul>
 <p>Example from <a href="https://realpython.com/python-project-documentation-with-mkdocs/">https://realpython.com/python-project-documentation-with-mkdocs/</a></p>
 

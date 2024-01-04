@@ -821,7 +821,8 @@
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
-<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Minall</span><span class="p">:</span>
+<span class="normal">120</span>
+<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Minall</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to store variables and execute steps of enrichment.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -842,7 +843,7 @@
 <span class="sd">            &gt;&gt;&gt; LINKS_FILE = OUT_DIR.joinpath(&#39;minall_init_example.csv&#39;)</span>
 <span class="sd">            &gt;&gt;&gt;</span>
 <span class="sd">            &gt;&gt;&gt; # Create Minall instance.</span>
-<span class="sd">            &gt;&gt;&gt; minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col=&#39;url&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col=&#39;target_url&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; minall.links_table.table</span>
 <span class="sd">            LinksConstants(table_name=&#39;links&#39;, primary_key=&#39;url&#39;)</span>
 <span class="sd">            &gt;&gt;&gt;</span>
@@ -870,8 +871,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">buzzsumo_only</span> <span class="o">=</span> <span class="n">buzzsumo_only</span>
 
         <span class="c1"># Set paths to output directory and out-files</span>
-        <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">links_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;links.csv&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shared_contents_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;shared_content.csv&quot;</span><span class="p">)</span>
 
@@ -955,7 +957,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">LINKS_FILE</span> <span class="o">=</span> <span class="n">OUT_DIR</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;minall_init_example.csv&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create Minall instance.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">minall</span> <span class="o">=</span> <span class="n">Minall</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{},</span> <span class="n">output_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">OUT_DIR</span><span class="p">),</span> <span class="n">links_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">LINKS_FILE</span><span class="p">),</span> <span class="n">url_col</span><span class="o">=</span><span class="s1">&#39;url&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minall</span> <span class="o">=</span> <span class="n">Minall</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{},</span> <span class="n">output_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">OUT_DIR</span><span class="p">),</span> <span class="n">links_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">LINKS_FILE</span><span class="p">),</span> <span class="n">url_col</span><span class="o">=</span><span class="s1">&#39;target_url&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">minall</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">table</span>
 <span class="go">LinksConstants(table_name=&#39;links&#39;, primary_key=&#39;url&#39;)</span>
 <span class="gp">&gt;&gt;&gt;</span>
@@ -1145,7 +1147,8 @@
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">database</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -1163,7 +1166,7 @@
 <span class="sd">        &gt;&gt;&gt; LINKS_FILE = OUT_DIR.joinpath(&#39;minall_init_example.csv&#39;)</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Create Minall instance.</span>
-<span class="sd">        &gt;&gt;&gt; minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col=&#39;url&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col=&#39;target_url&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; minall.links_table.table</span>
 <span class="sd">        LinksConstants(table_name=&#39;links&#39;, primary_key=&#39;url&#39;)</span>
 <span class="sd">        &gt;&gt;&gt;</span>
@@ -1191,8 +1194,9 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">buzzsumo_only</span> <span class="o">=</span> <span class="n">buzzsumo_only</span>
 
     <span class="c1"># Set paths to output directory and out-files</span>
-    <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">links_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;links.csv&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">shared_contents_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;shared_content.csv&quot;</span><span class="p">)</span>
 
@@ -1237,8 +1241,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
-<span class="normal"> 97</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
@@ -1249,7 +1252,8 @@
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">collect_and_coalesce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">collect_and_coalesce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect new data and coalesce with existing data in relevant SQL tables.</span>
 
 <span class="sd">    This method creates an instance of the class `Enrichment` (from `minall.enrichment.enrichment`), providing the target URL table (&#39;links&#39; table, `self.links_table`), the minet API credentials (`self.keys`), and the related shared content table (`self.shared_content_table`) which may go unused depending on parameters used when `Enrichment` is called.</span>
@@ -1311,8 +1315,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/main.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
-<span class="normal">111</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
@@ -1321,7 +1324,8 @@
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
-<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Path</span><span class="p">]:</span>
+<span class="normal">120</span>
+<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Path</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Write enriched SQL tables to CSV out-files.</span>
 
 <span class="sd">    This method simply exports to CSV files both of the `Minall` class instance&#39;s SQL tables, `self.links_table` and `self.shared_content_table`. The class that manages the SQL tables (`minall.tables.base.BaseTable`), stores each table&#39;s out-file path as an instance variable. The parent directory for both out-files was declared during `Minall`&#39;s `__init__()` method via the parameter `output_dir`, from which the out-file paths were subsequently derived.</span>
