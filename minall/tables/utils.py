@@ -11,7 +11,9 @@ from dataclasses import dataclass, field
 from sqlite3 import Connection
 from typing import Dict, List
 
-from minall.exceptions import check_csv_headers
+import casanova
+
+from minall.tables.exceptions import NoCSVHeaders, NoPrimaryKeyColumns, NoURLColumn
 from minall.tables.links.constants import LinksConstants
 from minall.tables.shared_content.constants import ShareContentConstants
 from minall.utils.database import SQLiteWrapper
@@ -182,3 +184,39 @@ def create_table(
 
     query = f"CREATE TABLE '{table_name}' ({dtype_string}, PRIMARY KEY ({primary_key}))"
     executor(query=query)
+
+
+def check_csv_headers(
+    table_name: str, infile_path: str, url_col: str | None
+) -> List[str]:
+    """_summary_
+
+    Args:
+        table_name (str): _description_
+        infile_path (str): _description_
+        url_col (str | None): _description_
+
+    Raises:
+        NoCSVHeaders: _description_
+        NoURLColumn: _description_
+        NoPrimaryKeyColumns: _description_
+
+    Returns:
+        List[str]: _description_
+    """
+    with casanova.reader(infile_path) as reader:
+        columns = reader.fieldnames
+
+    if not isinstance(columns, List):
+        raise NoCSVHeaders()
+
+    if table_name == "links":
+        if url_col not in columns:
+            raise NoURLColumn(str(url_col))
+
+    elif table_name == "shared_content":
+        if "post_url" not in columns:
+            raise NoPrimaryKeyColumns("post_url")
+        if "content_url" not in columns:
+            raise NoPrimaryKeyColumns("content_url")
+    return columns

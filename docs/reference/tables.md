@@ -1,9 +1,9 @@
-::: minall.tables
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: false
-      heading_level: 1
+---
+icon: material/folder-outline
+---
+
+# Table tools
+
 
 With SQLite, the module `minall/tables` manages the data during the enrichment process, from the data input at the start to the updated version exported at the end. The process relies on the following two tables:
 
@@ -102,6 +102,13 @@ erDiagram
       heading_level: 2
 
 ::: minall.tables.utils
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: true
+      heading_level: 2
+
+::: minall.tables.exceptions
     handler: python
     options:
       show_root_heading: true

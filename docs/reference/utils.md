@@ -1,9 +1,10 @@
-::: minall.utils
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: false
-      heading_level: 1
+---
+icon: material/folder-outline
+---
+
+# Utilities
+
+Little blurb
 
 ---
 

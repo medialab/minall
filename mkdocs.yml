@@ -2,6 +2,23 @@ site_name: Minall Documentation
 
 theme:
   name: "material"
+  features:
+    - search.suggest
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: deep-purple
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
 
 plugins:
   - search
@@ -20,11 +37,9 @@ nav:
   - Tutorials: "tutorials.md"
   - How-To Guides: "how-to-guides.md"
   - "Reference":
-      - "root": "reference/root.md"
+      - "main": "reference/main.md"
       - "cli": "reference/cli.md"
       - "utils": "reference/utils.md"
       - "tables": "reference/tables.md"
-      - "enrichment":
-          - "root": "reference/enrichment.md"
-          - "article_text": "reference/enrichment/article_text.md"
+      - "enrichment": "reference/enrichment.md"
   - Explanation: "explanation.md"

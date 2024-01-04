@@ -11,7 +11,7 @@ and consists of four separate parts:
 
 1. [Tutorials](tutorials.md)
 2. [How-To Guides](how-to-guides.md)
-3. [Reference](reference/root.md)
+3. [Reference](reference/main.md)
 4. [Explanation](explanation.md)
 
 Quickly find what you're looking for depending on

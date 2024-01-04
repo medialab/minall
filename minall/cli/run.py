@@ -2,11 +2,7 @@
 
 """CLI action for minall workflow.
 
-This module runs the minall workflow as a CLI tool.
-
-The module contains the following function:
-
-- `cli()` - 
+This module contains the function `cli()`, which runs the minall workflow as a CLI tool. Using the imported helper function `cli_args()`, the function parses command-line arguments and uses the necessary parameters to create and instance of the `Minall` class. Finally, the function deploys the whole `Minall` workflow. 
 """
 
 from minall.cli.parse_args import cli_args

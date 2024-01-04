@@ -1,3 +1,8 @@
+# minall/enrichment/article_text/get_data.py
+
+"""Something.
+"""
+
 from pathlib import Path
 
 from minall.enrichment.article_text.constants import NormalizedScrapedWebPage

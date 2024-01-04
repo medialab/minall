@@ -1,3 +1,8 @@
+# minall/enrichment/article_text/scraper.py
+
+"""Something.
+"""
+
 import logging
 from typing import Tuple
 

@@ -11,6 +11,7 @@ The class contains the following methods:
 - `export()` - Write enriched SQL tables to CSV out-files.
 """
 
+import os
 from pathlib import Path
 from typing import Tuple
 
@@ -36,6 +37,20 @@ class Minall:
         buzzsumo_only: bool = False,
     ) -> None:
         """Intialize SQLite database and out-file paths.
+
+        Examples:
+            >>> # Set file path variables.
+            >>> OUT_DIR = Path(__file__).parent.parent.joinpath("docs").joinpath("doctest")
+            >>> LINKS_FILE = OUT_DIR.joinpath('minall_init_example.csv')
+            >>>
+            >>> # Create Minall instance.
+            >>> minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col='url')
+            >>> minall.links_table.table
+            LinksConstants(table_name='links', primary_key='url')
+            >>>
+            >>> # Check that Minall's SQLite database connection has committed 1 change (creating the 'links' table).
+            >>> minall.connection.total_changes
+            1
 
         Args:
             database (str | None): Path name to SQLite database. If None, creates database in memory.
@@ -79,7 +94,12 @@ class Minall:
         )
 
     def collect_and_coalesce(self):
-        """Collect new data and coalesce with existing data in relevant SQL tables."""
+        """Collect new data and coalesce with existing data in relevant SQL tables.
+
+        This method creates an instance of the class `Enrichment` (from `minall.enrichment.enrichment`), providing the target URL table ('links' table, `self.links_table`), the minet API credentials (`self.keys`), and the related shared content table (`self.shared_content_table`) which may go unused depending on parameters used when `Enrichment` is called.
+
+        Having prepared the `Enrichment` instance, the method then calls the class, providing its `self.buzzsumo_only` instance attribute as the argument for `Enrichment`'s `buzzsumo_only` parameter. The latter boolean parameter determines whether all of the `Enrichment` class's methods will be deployed or only its Buzzsumo method.
+        """
         enricher = Enrichment(
             links_table=self.links_table,
             shared_content_table=self.shared_content_table,
@@ -89,6 +109,8 @@ class Minall:
 
     def export(self) -> Tuple[Path, Path]:
         """Write enriched SQL tables to CSV out-files.
+
+        This method simply exports to CSV files both of the `Minall` class instance's SQL tables, `self.links_table` and `self.shared_content_table`. The class that manages the SQL tables (`minall.tables.base.BaseTable`), stores each table's out-file path as an instance variable. The parent directory for both out-files was declared during `Minall`'s `__init__()` method via the parameter `output_dir`, from which the out-file paths were subsequently derived.
 
         Returns:
             Tuple[Path, Path]: Paths to links and shared content CSV files.
