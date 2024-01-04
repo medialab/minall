@@ -26,6 +26,9 @@
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -55,7 +58,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -64,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#minall.tables" class="md-skip">
+        <a href="#table-tools" class="md-skip">
           Skip to content
         </a>
       
@@ -107,6 +117,32 @@
       </div>
     </div>
     
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
     
       <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
@@ -134,6 +170,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
       
     </form>
     <div class="md-search__output">
@@ -292,11 +330,13 @@
   
   
     <li class="md-nav__item">
-      <a href="../root/" class="md-nav__link">
+      <a href="../main/" class="md-nav__link">
         
   
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.11.89 2 2 2h12c1.11 0 2-.89 2-2V8l-6-6m4 18H6V4h7v5h5v11m-8.46-4.35 2.09 2.09L10.35 19 7 15.65l3.35-3.35 1.28 1.26-2.09 2.09m7.46 0L13.65 19l-1.27-1.26 2.09-2.09-2.09-2.09 1.27-1.26L17 15.65Z"/></svg>
+  
   <span class="md-ellipsis">
-    root
+    main
   </span>
   
 
@@ -315,6 +355,8 @@
     <li class="md-nav__item">
       <a href="../cli/" class="md-nav__link">
         
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18H4V8h16m0-2h-8l-2-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/></svg>
   
   <span class="md-ellipsis">
     cli
@@ -336,6 +378,8 @@
     <li class="md-nav__item">
       <a href="../utils/" class="md-nav__link">
         
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18H4V8h16m0-2h-8l-2-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/></svg>
   
   <span class="md-ellipsis">
     utils
@@ -367,6 +411,8 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18H4V8h16m0-2h-8l-2-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/></svg>
+  
   <span class="md-ellipsis">
     tables
   </span>
@@ -377,6 +423,8 @@
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18H4V8h16m0-2h-8l-2-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/></svg>
   
   <span class="md-ellipsis">
     tables
@@ -485,6 +533,63 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable" class="md-nav__link">
+    <span class="md-ellipsis">
+      BaseTable
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.coalesce" class="md-nav__link">
+    <span class="md-ellipsis">
+      coalesce()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.columns_to_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      columns_to_update()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.export" class="md-nav__link">
+    <span class="md-ellipsis">
+      export()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -493,6 +598,132 @@
       utils
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="utils">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser" class="md-nav__link">
+    <span class="md-ellipsis">
+      ColumnParser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ColumnParser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.parse_original_infile_columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse_original_infile_columns()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.set_infile_column_dtypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_infile_column_dtypes()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.standardize_infile_columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      standardize_infile_columns()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.check_csv_headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      check_csv_headers()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.insert_infile" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert_infile()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.parse_rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse_rows()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minall.tables.exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.exceptions.NoCSVHeaders" class="md-nav__link">
+    <span class="md-ellipsis">
+      NoCSVHeaders
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.exceptions.NoPrimaryKeyColumns" class="md-nav__link">
+    <span class="md-ellipsis">
+      NoPrimaryKeyColumns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.exceptions.NoURLColumn" class="md-nav__link">
+    <span class="md-ellipsis">
+      NoURLColumn
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -511,82 +742,18 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
+    <li class="md-nav__item">
+      <a href="../enrichment/" class="md-nav__link">
         
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18H4V8h16m0-2h-8l-2-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/></svg>
   
   <span class="md-ellipsis">
     enrichment
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            enrichment
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../enrichment/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    root
-  </span>
-  
-
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../enrichment/article_text/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    article_text
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -730,6 +897,63 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable" class="md-nav__link">
+    <span class="md-ellipsis">
+      BaseTable
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseTable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.coalesce" class="md-nav__link">
+    <span class="md-ellipsis">
+      coalesce()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.columns_to_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      columns_to_update()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.base.BaseTable.export" class="md-nav__link">
+    <span class="md-ellipsis">
+      export()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -738,6 +962,132 @@
       utils
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="utils">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser" class="md-nav__link">
+    <span class="md-ellipsis">
+      ColumnParser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ColumnParser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.parse_original_infile_columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse_original_infile_columns()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.set_infile_column_dtypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_infile_column_dtypes()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.ColumnParser.standardize_infile_columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      standardize_infile_columns()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.check_csv_headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      check_csv_headers()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.insert_infile" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert_infile()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.utils.parse_rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse_rows()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minall.tables.exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.exceptions.NoCSVHeaders" class="md-nav__link">
+    <span class="md-ellipsis">
+      NoCSVHeaders
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.exceptions.NoPrimaryKeyColumns" class="md-nav__link">
+    <span class="md-ellipsis">
+      NoPrimaryKeyColumns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minall.tables.exceptions.NoURLColumn" class="md-nav__link">
+    <span class="md-ellipsis">
+      NoURLColumn
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -756,38 +1106,8 @@
                   
 
 
-<div class="doc doc-object doc-module">
-
-
-
-
-<h1 id="minall.tables" class="doc doc-heading">
-          <code>minall.tables</code>
-
-
-</h1>
-
-  <div class="doc doc-contents first">
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  </div>
-
-</div><p>With SQLite, the module <code>minall/tables</code> manages the data during the enrichment process, from the data input at the start to the updated version exported at the end. The process relies on the following two tables:</p>
+<h1 id="table-tools">Table tools</h1>
+<p>With SQLite, the module <code>minall/tables</code> manages the data during the enrichment process, from the data input at the start to the updated version exported at the end. The process relies on the following two tables:</p>
 <ol>
 <li>
 <p>The <code>links</code> table, which is the backbone of the enrichment, stores the target URLs and their enriched metadata.</p>
@@ -1400,6 +1720,15 @@
 </h2>
 
   <div class="doc doc-contents first">
+  
+      <p>Create and execute queries on SQLite tables.</p>
+<p>This module contains the class <code>BaseTable</code> that manages the SQLite database's tables. It contains the following methods:</p>
+<ul>
+<li><code>__init__(sqlite_connection, infile, outfile, table, url_col)</code></li>
+<li><code>columns_to_update()</code></li>
+<li><code>coalesce(infile)</code></li>
+<li><code>export()</code></li>
+</ul>
 
   
 
@@ -1411,6 +1740,621 @@
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h3 id="minall.tables.base.BaseTable" class="doc doc-heading">
+          <code>BaseTable</code>
+
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+
+            <details class="quote">
+              <summary>Source code in <code>minall/tables/base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseTable</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sqlite_connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span>
+        <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">outfile</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">table</span><span class="p">:</span> <span class="n">LinksConstants</span> <span class="o">|</span> <span class="n">ShareContentConstants</span><span class="p">,</span>
+        <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sqlite_connection (Connection): _description_</span>
+<span class="sd">            infile (str | None): _description_</span>
+<span class="sd">            outfile (Path): _description_</span>
+<span class="sd">            table (LinksConstants | ShareContentConstants): _description_</span>
+<span class="sd">            url_col (str | None, optional): _description_. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite_connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executor</span> <span class="o">=</span> <span class="n">SQLiteWrapper</span><span class="p">(</span><span class="n">sqlite_connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span> <span class="o">=</span> <span class="n">outfile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span> <span class="o">=</span> <span class="n">ColumnParser</span><span class="p">(</span>
+            <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+            <span class="n">table_constants</span><span class="o">=</span><span class="n">table</span><span class="p">,</span>
+            <span class="n">infile</span><span class="o">=</span><span class="n">infile</span><span class="p">,</span>
+            <span class="n">url_col</span><span class="o">=</span><span class="n">url_col</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Create table upon creation of class instance</span>
+        <span class="n">create_table</span><span class="p">(</span>
+            <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+            <span class="n">dtype_string</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_dtype_string</span><span class="p">,</span>
+            <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Insert in-file data</span>
+        <span class="n">insert_infile</span><span class="p">(</span>
+            <span class="n">infile</span><span class="o">=</span><span class="n">infile</span><span class="p">,</span>
+            <span class="n">standardized_columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span><span class="p">,</span>
+            <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+            <span class="n">url_col</span><span class="o">=</span><span class="n">url_col</span><span class="p">,</span>
+            <span class="n">table_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">columns_to_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">pk_list</span><span class="p">:</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">=COALESCE(excluded.</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">coalesce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            infile (Path): _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">table_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span>
+        <span class="n">columns_to_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_update</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">parse_rows</span><span class="p">(</span><span class="n">infile_standardized</span><span class="o">=</span><span class="n">table_columns</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">)</span>
+                <span class="n">n_values</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;?&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))])</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                INSERT INTO </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">table_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">                VALUES (</span><span class="si">{</span><span class="n">n_values</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">                ON CONFLICT (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">primary_key</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">                DO UPDATE SET </span><span class="si">{</span><span class="n">columns_to_update</span><span class="si">}</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">executor</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.base.BaseTable.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">sqlite_connection</span><span class="p">,</span> <span class="n">infile</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">url_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>sqlite_connection</code></td>
+          <td>
+                <code><span title="sqlite3.Connection">Connection</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>outfile</code></td>
+          <td>
+                <code><span title="pathlib.Path">Path</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>table</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="minall.tables.links.constants.LinksConstants" href="#minall.tables.links.constants.LinksConstants">LinksConstants</a> | <a class="autorefs autorefs-internal" title="minall.tables.shared_content.constants.ShareContentConstants" href="#minall.tables.shared_content.constants.ShareContentConstants">ShareContentConstants</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>url_col</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em>. Defaults to None.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">sqlite_connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span>
+    <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">outfile</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">:</span> <span class="n">LinksConstants</span> <span class="o">|</span> <span class="n">ShareContentConstants</span><span class="p">,</span>
+    <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sqlite_connection (Connection): _description_</span>
+<span class="sd">        infile (str | None): _description_</span>
+<span class="sd">        outfile (Path): _description_</span>
+<span class="sd">        table (LinksConstants | ShareContentConstants): _description_</span>
+<span class="sd">        url_col (str | None, optional): _description_. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite_connection</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">executor</span> <span class="o">=</span> <span class="n">SQLiteWrapper</span><span class="p">(</span><span class="n">sqlite_connection</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span> <span class="o">=</span> <span class="n">outfile</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span> <span class="o">=</span> <span class="n">ColumnParser</span><span class="p">(</span>
+        <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+        <span class="n">table_constants</span><span class="o">=</span><span class="n">table</span><span class="p">,</span>
+        <span class="n">infile</span><span class="o">=</span><span class="n">infile</span><span class="p">,</span>
+        <span class="n">url_col</span><span class="o">=</span><span class="n">url_col</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create table upon creation of class instance</span>
+    <span class="n">create_table</span><span class="p">(</span>
+        <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+        <span class="n">dtype_string</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_dtype_string</span><span class="p">,</span>
+        <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Insert in-file data</span>
+    <span class="n">insert_infile</span><span class="p">(</span>
+        <span class="n">infile</span><span class="o">=</span><span class="n">infile</span><span class="p">,</span>
+        <span class="n">standardized_columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span><span class="p">,</span>
+        <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+        <span class="n">url_col</span><span class="o">=</span><span class="n">url_col</span><span class="p">,</span>
+        <span class="n">table_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.base.BaseTable.coalesce" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>infile</code></td>
+          <td>
+                <code><span title="pathlib.Path">Path</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">coalesce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        infile (Path): _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">table_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span>
+    <span class="n">columns_to_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns_to_update</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">parse_rows</span><span class="p">(</span><span class="n">infile_standardized</span><span class="o">=</span><span class="n">table_columns</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">n_values</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;?&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))])</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            INSERT INTO </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">table_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">            VALUES (</span><span class="si">{</span><span class="n">n_values</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">            ON CONFLICT (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">primary_key</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">            DO UPDATE SET </span><span class="si">{</span><span class="n">columns_to_update</span><span class="si">}</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">executor</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.base.BaseTable.columns_to_update" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">columns_to_update</span><span class="p">()</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>str</code></td>          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">columns_to_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">pk_list</span><span class="p">:</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">=COALESCE(excluded.</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.base.BaseTable.export" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">export</span><span class="p">()</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_&quot;&quot;&quot;</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnparser</span><span class="o">.</span><span class="n">infile_standardized</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
@@ -1433,6 +2377,1433 @@
 </h2>
 
   <div class="doc doc-contents first">
+  
+      <p>Something.</p>
+<p>This module contains helper functions and methods used by the SQLite tables.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h3 id="minall.tables.utils.ColumnParser" class="doc doc-heading">
+          <code>ColumnParser</code>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>infile_dtype_string</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><strong>something</strong></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile_original</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><strong>something</strong></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile_standardized</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><strong>something</strong></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile_dtypes</code></td>
+          <td>
+                <code><span title="typing.Dict">Dict</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><strong>something</strong></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>minall/tables/utils.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ColumnParser</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        infile_dtype_string (str): __something__</span>
+<span class="sd">        infile_original (List[str]): __something__</span>
+<span class="sd">        infile_standardized (List[str]): __something__</span>
+<span class="sd">        infile_dtypes (Dict): __something__</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">infile_dtype_string</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">infile_original</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">List</span><span class="p">)</span>
+    <span class="n">infile_standardized</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">List</span><span class="p">)</span>
+    <span class="n">infile_dtypes</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">Dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span>
+        <span class="n">table_constants</span><span class="p">:</span> <span class="n">LinksConstants</span> <span class="o">|</span> <span class="n">ShareContentConstants</span><span class="p">,</span>
+        <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            connection (Connection): _description_</span>
+<span class="sd">            table_constants (LinksConstants | ShareContentConstants): _description_</span>
+<span class="sd">            infile (str | None): _description_</span>
+<span class="sd">            url_col (str | None): _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">=</span> <span class="n">infile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_col</span> <span class="o">=</span> <span class="n">url_col</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table_constants</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile_original</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_original_infile_columns</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile_standardized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">standardize_infile_columns</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile_dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_infile_column_dtypes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile_dtype_string</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_dtype</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">parse_original_infile_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            e: _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[str]: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">col_names</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">columns</span> <span class="o">=</span> <span class="n">check_csv_headers</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_col</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">return</span> <span class="n">columns</span>
+
+    <span class="k">def</span> <span class="nf">standardize_infile_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[str]: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Copy all the columns from the in-file</span>
+        <span class="n">standardized_infile_headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># If missing, add standardized columns to the list of in-file&#39;s columns</span>
+        <span class="k">for</span> <span class="n">standard_column_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">col_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">standard_column_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_original</span><span class="p">:</span>
+                <span class="n">standardized_infile_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">standard_column_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">standardized_infile_headers</span>
+
+    <span class="k">def</span> <span class="nf">set_infile_column_dtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dtypes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_standardized</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span>
+                <span class="n">dtypes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">col_name</span><span class="p">:</span> <span class="s2">&quot;TEXT&quot;</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dtypes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">col_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">col_name</span><span class="p">]})</span>
+        <span class="k">return</span> <span class="n">dtypes</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.utils.ColumnParser.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">table_constants</span><span class="p">,</span> <span class="n">infile</span><span class="p">,</span> <span class="n">url_col</span><span class="p">)</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>connection</code></td>
+          <td>
+                <code><span title="sqlite3.Connection">Connection</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>table_constants</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="minall.tables.links.constants.LinksConstants" href="#minall.tables.links.constants.LinksConstants">LinksConstants</a> | <a class="autorefs autorefs-internal" title="minall.tables.shared_content.constants.ShareContentConstants" href="#minall.tables.shared_content.constants.ShareContentConstants">ShareContentConstants</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>url_col</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span>
+    <span class="n">table_constants</span><span class="p">:</span> <span class="n">LinksConstants</span> <span class="o">|</span> <span class="n">ShareContentConstants</span><span class="p">,</span>
+    <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        connection (Connection): _description_</span>
+<span class="sd">        table_constants (LinksConstants | ShareContentConstants): _description_</span>
+<span class="sd">        infile (str | None): _description_</span>
+<span class="sd">        url_col (str | None): _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connection</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">=</span> <span class="n">infile</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">url_col</span> <span class="o">=</span> <span class="n">url_col</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table_constants</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">infile_original</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_original_infile_columns</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">infile_standardized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">standardize_infile_columns</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">infile_dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_infile_column_dtypes</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">infile_dtype_string</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_dtype</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.utils.ColumnParser.parse_original_infile_columns" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">parse_original_infile_columns</span><span class="p">()</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Raises:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>e</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>List[str]: <em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">parse_original_infile_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        e: _description_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">check_csv_headers</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_col</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+    <span class="k">return</span> <span class="n">columns</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.utils.ColumnParser.set_infile_column_dtypes" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">set_infile_column_dtypes</span><span class="p">()</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>dict</code></td>          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_infile_column_dtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dtypes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_standardized</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col_name</span><span class="p">):</span>
+            <span class="n">dtypes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">col_name</span><span class="p">:</span> <span class="s2">&quot;TEXT&quot;</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dtypes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">col_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">col_name</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">dtypes</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="minall.tables.utils.ColumnParser.standardize_infile_columns" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">standardize_infile_columns</span><span class="p">()</span></code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>List[str]: <em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">standardize_infile_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Copy all the columns from the in-file</span>
+    <span class="n">standardized_infile_headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># If missing, add standardized columns to the list of in-file&#39;s columns</span>
+    <span class="k">for</span> <span class="n">standard_column_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">col_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">standard_column_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile_original</span><span class="p">:</span>
+            <span class="n">standardized_infile_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">standard_column_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">standardized_infile_headers</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="minall.tables.utils.check_csv_headers" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">check_csv_headers</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">infile_path</span><span class="p">,</span> <span class="n">url_col</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>table_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>infile_path</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>url_col</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Raises:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="minall.tables.exceptions.NoCSVHeaders" href="#minall.tables.exceptions.NoCSVHeaders">NoCSVHeaders</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="minall.tables.exceptions.NoURLColumn" href="#minall.tables.exceptions.NoURLColumn">NoURLColumn</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="minall.tables.exceptions.NoPrimaryKeyColumns" href="#minall.tables.exceptions.NoPrimaryKeyColumns">NoPrimaryKeyColumns</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>List[str]: <em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_csv_headers</span><span class="p">(</span>
+    <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">infile_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        table_name (str): _description_</span>
+<span class="sd">        infile_path (str): _description_</span>
+<span class="sd">        url_col (str | None): _description_</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NoCSVHeaders: _description_</span>
+<span class="sd">        NoURLColumn: _description_</span>
+<span class="sd">        NoPrimaryKeyColumns: _description_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">casanova</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">infile_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">fieldnames</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">List</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">NoCSVHeaders</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s2">&quot;links&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">url_col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoURLColumn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">url_col</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s2">&quot;shared_content&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;post_url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoPrimaryKeyColumns</span><span class="p">(</span><span class="s2">&quot;post_url&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;content_url&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoPrimaryKeyColumns</span><span class="p">(</span><span class="s2">&quot;content_url&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">columns</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="minall.tables.utils.insert_infile" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">insert_infile</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">standardized_columns</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">url_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>infile</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>standardized_columns</code></td>
+          <td>
+                <code>list</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>connection</code></td>
+          <td>
+                <code><span title="sqlite3.Connection">Connection</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>table_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>url_col</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em>. Defaults to None.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">insert_infile</span><span class="p">(</span>
+    <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">standardized_columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+    <span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        infile (str | None): _description_</span>
+<span class="sd">        standardized_columns (list): _description_</span>
+<span class="sd">        connection (Connection): _description_</span>
+<span class="sd">        table_name (str): _description_</span>
+<span class="sd">        url_col (str | None, optional): _description_. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">infile</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">executor</span> <span class="o">=</span> <span class="n">SQLiteWrapper</span><span class="p">(</span><span class="n">connection</span><span class="o">=</span><span class="n">connection</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">parse_rows</span><span class="p">(</span>
+                    <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="p">,</span>
+                    <span class="n">infile_standardized</span><span class="o">=</span><span class="n">standardized_columns</span><span class="p">,</span>
+                    <span class="n">url_col</span><span class="o">=</span><span class="n">url_col</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">n_values</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;?&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))])</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                INSERT OR IGNORE INTO </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">standardized_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">                VALUES (</span><span class="si">{</span><span class="n">n_values</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+                <span class="n">executor</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="minall.tables.utils.parse_rows" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">parse_rows</span><span class="p">(</span><span class="n">infile_standardized</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">url_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p><em>summary</em></p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>infile_standardized</code></td>
+          <td>
+                <code><span title="typing.List">List</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>row</code></td>
+          <td>
+                <code><span title="typing.Dict">Dict</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>url_col</code></td>
+          <td>
+                <code>str | None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em>. Defaults to None.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>tuple</code></td>          <td>
+                <code>tuple</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>minall/tables/utils.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">parse_rows</span><span class="p">(</span>
+    <span class="n">infile_standardized</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        infile_standardized (List): _description_</span>
+<span class="sd">        row (Dict): _description_</span>
+<span class="sd">        url_col (str | None, optional): _description_. Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">infile_standardized</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="s2">&quot;url&quot;</span> <span class="ow">and</span> <span class="n">url_col</span><span class="p">:</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">url_col</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+
+<h2 id="minall.tables.exceptions" class="doc doc-heading">
+          <code>minall.tables.exceptions</code>
+
+
+</h2>
+
+  <div class="doc doc-contents first">
+  
+      <p>Exceptions for validating CSV files used to create SQLite tables.</p>
+<p>This module contains exceptions to manage the process of validating a CSV file given as input for the enrichment process. The module contains the following exceptions:</p>
+<ul>
+<li><code>NoCSVHeaders</code> - The CSV does not have headers.</li>
+<li><code>NoURLColumn</code> - When building the 'links' table, the declared URL column is not in the CSV file.</li>
+<li><code>NoPrimaryKeyColumns</code> - When building the 'shared_content' table, either the 'post_url' column or the 'content_url' column are missing from the CSV file.</li>
+</ul>
+<p>When creating the 'links' table, the input CSV file must have a column for URLs; the URLs must be cleaned and/or ready to serve as the source for the data collection. The name of the URL column can vary and must be declared.</p>
+<p>When creating the 'shared_content' table, the column names are not modifiable. The CSV must have the columns 'post_url' and 'content_url;' the former relates to a URL in the 'links' table, and the latter incidates a URL for content embedded in the Web Content of the former.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h3 id="minall.tables.exceptions.NoCSVHeaders" class="doc doc-heading">
+          <code>NoCSVHeaders</code>
+
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code>Exception</code></p>
+
+  
+      <p>The CSV in-file lacks headers.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>minall/tables/exceptions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">NoCSVHeaders</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The CSV in-file lacks headers.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;No headers detected in CSV file.&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h3 id="minall.tables.exceptions.NoPrimaryKeyColumns" class="doc doc-heading">
+          <code>NoPrimaryKeyColumns</code>
+
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code>Exception</code></p>
+
+  
+      <p>The CSV in-file is missing a required column.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>minall/tables/exceptions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">NoPrimaryKeyColumns</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The CSV in-file is missing a required column.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Required primary key column &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39; is not a header in the given CSV file.&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h3 id="minall.tables.exceptions.NoURLColumn" class="doc doc-heading">
+          <code>NoURLColumn</code>
+
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code>Exception</code></p>
+
+  
+      <p>The CSV in-file is missing a user-declared column.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>minall/tables/exceptions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">NoURLColumn</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The CSV in-file is missing a user-declared column.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The declared URL column &#39;</span><span class="si">{</span><span class="n">url_col</span><span class="si">}</span><span class="s2">&#39; is not a header in the given CSV file.&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
 
   
 
@@ -1457,8 +3828,20 @@
 
 
 
+  </div>
+
+  </div>
+
+</div>
 
 
+
+
+
+
+
+  
+  
 
 
 
@@ -1499,7 +3882,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
