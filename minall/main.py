@@ -44,7 +44,7 @@ class Minall:
             >>> LINKS_FILE = OUT_DIR.joinpath('minall_init_example.csv')
             >>>
             >>> # Create Minall instance.
-            >>> minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col='url')
+            >>> minall = Minall(database=None, config={}, output_dir=str(OUT_DIR), links_file=str(LINKS_FILE), url_col='target_url')
             >>> minall.links_table.table
             LinksConstants(table_name='links', primary_key='url')
             >>>
@@ -72,8 +72,9 @@ class Minall:
         self.buzzsumo_only = buzzsumo_only
 
         # Set paths to output directory and out-files
-        [p.mkdir(exist_ok=True) for p in Path(output_dir).parents]
         self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(exist_ok=True)
+        [p.mkdir(exist_ok=True) for p in self.output_dir.parents]
         self.links_file = self.output_dir.joinpath("links.csv")
         self.shared_contents_file = self.output_dir.joinpath("shared_content.csv")
 
