@@ -1,44 +1,82 @@
-The main problem this project is designed to solve is the collection and updating of metadata about Web Content.
+The main problem this project is designed to solve is the collection and updating of metadata for a _diverse_ dataset of URLs.
 
-Let's say you have a list of URLs whose basic metadata and propagation online you want to track. You've stored those URLs in a CSV file with the column `target_url`.
+## Use as CLI
+
+How do you use `minall` on our dataset from the command line?
+
+### Set-up
+
+Create and activate a virtual Python environment, using version 3.11. Then install `minall`.
+```shell
+$ pip install git+https://github.com/medialab/minall.git
+```
+
+For the purposes of this demonstration, create two files in your current working directory.
+
+```
+.
+│
+├── config.yml
+│
+└── data.csv
+```
+
+The first is a YAML [configuration file](https://github.com/medialab/minet/blob/master/docs/cli.md#minetrc-config-files), which contains API keys.
+
+`config.yml`
+```yaml
+---
+buzzsumo:
+  token: "XXXX" # Used as --token for `minet bz` commands
+crowdtangle:
+  token: "XXXX" # Used as --token for `minet ct` commands
+  rate_limit: 50 # Used as --rate-limit for `minet ct` commands
+youtube:
+  key: "XXXX" # Used as --key for `minet yt` commands
+```
+
+The second is the dataset of target URLs.
+
+`data.csv`
 
 |target_url|
 |---|
-|https://github.com/medialab/minet|
-|https://zenodo.org/records/7974793|
 |https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/|
+|https://www.youtube.com/watch?v=BTvfWbAjh1w|
 
 
-## How to use from the command line
+### Run
 
-Download the code from this GitHub repository and place
-the `calculator/` folder in the same directory as your
-Python script:
+- `--config` : Path to the YAML configuration file, `./config.yml`
+- `--links` : Path to the dataset of target URLs, `./data.csv`
+- `--url-col`: Name of the column in the dataset file with the target URLs. `target_url`
+- `--output-dir`: Path to where `minall` will export its results. `./output/`
 
-    your_project/
-    │
-    ├── calculator/
-    │   ├── __init__.py
-    │   └── calculations.py
-    │
-    └── your_script.py
+```shell
+$ minall --config config.yml --output-dir output/ --links data.csv --url-col target_url
+```
 
-Inside of `your_script.py` you can now import the
-`add()` function from the `calculator.calculations`
-module:
+While `minall` is running, we'll see the following commands proceed:
 
-    # your_script.py
-    from calculator.calculations import add
+```
+Querying YouTube videos   1/1 0:00:00
+Querying YouTube channels   1/1 0:00:00
+Scraping webpage   1/1 0:00:00
+Calling Buzzsumo API   2/2 0:00:05
+```
 
-After you've imported the function, you can use it
-to add any two numbers that you need to add:
+### Results
 
-    # your_script.py
-    from calculator.calculations import add
+The results will be written to files in the directory whose path was given to the parameter `--output-dir`.
 
-    print(add(20, 22))  # OUTPUT: 42.0
-
-You're now able to add any two numbers, and you'll
-always get a `float` as a result.
-
-Example from [https://realpython.com/python-project-documentation-with-mkdocs/](https://realpython.com/python-project-documentation-with-mkdocs/)
+```
+.
+│
+├── config.yml
+│
+├── data.csv
+│
+└── output/
+    ├── links.csv
+    └── shared_content.csv
+```
