@@ -1,17 +1,27 @@
-The main problem this project is designed to solve is the collection and updating of metadata for a _diverse_ dataset of URLs.
+## Using `minall` from the command line
 
-## Use as CLI
+### Context
 
-How do you use `minall` on our dataset from the command line?
+Let's say we have a set of 2 URLs, one is a web page and the other is a YouTube video.
 
-### Set-up
+`data.csv`
 
-Create and activate a virtual Python environment, using version 3.11. Then install `minall`.
-```shell
-$ pip install git+https://github.com/medialab/minall.git
+|target_url|
+|---|
+|https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/|
+|https://www.youtube.com/watch?v=BTvfWbAjh1w|
+
+And we've stored the data file in our current working directory under the name `data.csv`.
+
+```
+.
+│
+└── data.csv
 ```
 
-For the purposes of this demonstration, create two files in your current working directory.
+### Set up files
+
+For the purposes of this demonstration, we'll need to create an additional file, `config.yml`.
 
 ```
 .
@@ -21,7 +31,7 @@ For the purposes of this demonstration, create two files in your current working
 └── data.csv
 ```
 
-The first is a YAML [configuration file](https://github.com/medialab/minet/blob/master/docs/cli.md#minetrc-config-files), which contains API keys.
+This YAML file is a configuration file [in the same format as that used in `minet`](https://github.com/medialab/minet/blob/master/docs/cli.md#minetrc-config-files), and it contains API keys.
 
 `config.yml`
 ```yaml
@@ -35,17 +45,17 @@ youtube:
   key: "XXXX" # Used as --key for `minet yt` commands
 ```
 
-The second is the dataset of target URLs.
+### Set up `minall`
 
-`data.csv`
+Now we'll install `minall`. Create and activate a virtual Python environment, using version 3.11. Then install the tool with pip.
 
-|target_url|
-|---|
-|https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/|
-|https://www.youtube.com/watch?v=BTvfWbAjh1w|
-
+```shell
+$ pip install git+https://github.com/medialab/minall.git
+```
 
 ### Run
+
+Finally, let's run the workflow on our dataset. We'll set the parameters as follows:
 
 - `--config` : Path to the YAML configuration file, `./config.yml`
 - `--links` : Path to the dataset of target URLs, `./data.csv`
