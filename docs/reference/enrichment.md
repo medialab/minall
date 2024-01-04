@@ -29,14 +29,14 @@ Little blurb
       show_source: false
       heading_level: 2
 
-::: minall.enrichment.article_text.get_data
+::: minall.enrichment.article_text.scraper
     handler: python
     options:
       show_root_heading: true
       show_source: true
       heading_level: 3
 
-::: minall.enrichment.article_text.scraper
+::: minall.enrichment.article_text.get_data
     handler: python
     options:
       show_root_heading: true

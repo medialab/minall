@@ -1,13 +1,15 @@
-This part of the project documentation focuses on a
-**problem-oriented** approach. You'll tackle common
-tasks that you might have, with the help of the code
-provided in this project.
+The main problem this project is designed to solve is the collection and updating of metadata about Web Content.
 
-## How To Add Two Numbers?
+Let's say you have a list of URLs whose basic metadata and propagation online you want to track. You've stored those URLs in a CSV file with the column `target_url`.
 
-You have two numbers and you need to add them together.
-You're in luck! The `calculator` package can help you
-get this done.
+|target_url|
+|---|
+|https://github.com/medialab/minet|
+|https://zenodo.org/records/7974793|
+|https://archive.fosdem.org/2020/schedule/event/open_research_web_mining/|
+
+
+## How to use from the command line
 
 Download the code from this GitHub repository and place
 the `calculator/` folder in the same directory as your
