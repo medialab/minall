@@ -330,6 +330,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../home/" class="md-nav__link">
+        
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2Z"/></svg>
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../main/" class="md-nav__link">
         
   
@@ -1131,7 +1154,39 @@
 
 
 <h1 id="enrichment-tools">Enrichment tools</h1>
-<p>Little blurb</p>
+<pre class="mermaid"><code>graph
+A("What is the nature of the URL?")
+B("Is the URL of a video?")
+C["Call YouTube API for video metadata, including channel ID."]
+D("Is the URL of a channel?")
+E["Call YouTube API for channel metadata"]
+
+F("Is the URL of a Facebook post?")
+G["Call CrowdTangle API for post metadata"]
+
+H("Is the URL from a media platform other than YouTube or Facebook?")
+I["Assign '@type' = 'SocialMediaPosting'."]
+
+J("Is the URL not from a social media platform?")
+K["Scrape text and metadata."]
+
+L["Call Buzzsumo API for metadata."]
+
+A==YouTube==&gt;B
+B==Y==&gt;C
+B==N==&gt;D
+C---E
+D---E
+A==Facebook==&gt;F
+F---G
+A==Other Social Media==&gt;H
+H---I
+A==Article==&gt;J
+J---K
+E---L
+G---L
+I---L
+K---L</code></pre>
 <hr />
 
 
@@ -1183,8 +1238,7 @@
 
             <details class="quote">
               <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 25</span>
-<span class="normal"> 26</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 26</span>
 <span class="normal"> 27</span>
 <span class="normal"> 28</span>
 <span class="normal"> 29</span>
@@ -1277,11 +1331,14 @@
 <span class="normal">116</span>
 <span class="normal">117</span>
 <span class="normal">118</span>
-<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Enrichment</span><span class="p">:</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Enrichment</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">links_table</span><span class="p">:</span> <span class="n">BaseTable</span><span class="p">,</span>
-        <span class="n">shared_content_table</span><span class="p">:</span> <span class="n">BaseTable</span><span class="p">,</span>
+        <span class="n">links_table</span><span class="p">:</span> <span class="n">LinksTable</span><span class="p">,</span>
+        <span class="n">shared_content_table</span><span class="p">:</span> <span class="n">SharedContentTable</span><span class="p">,</span>
         <span class="n">keys</span><span class="p">:</span> <span class="n">APIKeys</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;From given API keys and URL data set, filter URLs by domain and initialize data enrichment class.</span>
@@ -1306,7 +1363,7 @@
                 <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">buzzsumo_token</span><span class="p">,</span>
                 <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">scraper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For select URLs, collect data via scraping and coalesce in the database&#39;s &#39;links&#39; table.&quot;&quot;&quot;</span>
@@ -1316,7 +1373,7 @@
             <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">to_scrape</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span>
         <span class="p">)</span>
         <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">other_social_media</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For select URLs, update the &#39;work_type&#39; column in the database&#39;s &#39;links&#39; table with the value &#39;SocialMediaPosting&#39;.&quot;&quot;&quot;</span>
@@ -1325,7 +1382,7 @@
             <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">other_social</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span>
         <span class="p">)</span>
         <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">facebook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For Facebook URLs, collect data from CrowdTangle and coalesce in the database&#39;s &#39;links&#39; and &#39;shared_content&#39; tables.&quot;&quot;&quot;</span>
@@ -1338,8 +1395,10 @@
                 <span class="n">shared_content_outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span>
+                <span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">outfile</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">youtube</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;For YouTube URLs, collect data from YouTube API and coalesce in the database&#39;s &#39;links&#39; table.&quot;&quot;&quot;</span>
@@ -1351,15 +1410,15 @@
                 <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buzzsumo_only</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="n">executor</span> <span class="o">=</span> <span class="n">SQLiteWrapper</span><span class="p">(</span><span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
+        <span class="n">executor</span> <span class="o">=</span> <span class="n">SQLiteWrapper</span><span class="p">(</span><span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">conn</span><span class="p">)</span>
         <span class="c1"># apply domain to all urls</span>
         <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">all_links</span><span class="p">:</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">apply_domain</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">query</span> <span class="ow">and</span> <span class="n">domain</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">connection</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">conn</span>
                 <span class="n">executor</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">buzzsumo_only</span><span class="p">:</span>
@@ -1419,7 +1478,7 @@
         <tr>
           <td><code>links_table</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="minall.tables.base.BaseTable" href="../tables/#minall.tables.base.BaseTable">BaseTable</a></code>
+                <code>BaseTable</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1433,7 +1492,7 @@
         <tr>
           <td><code>shared_content_table</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="minall.tables.base.BaseTable" href="../tables/#minall.tables.base.BaseTable">BaseTable</a></code>
+                <code>BaseTable</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1463,8 +1522,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
-<span class="normal">27</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
@@ -1480,10 +1538,11 @@
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">links_table</span><span class="p">:</span> <span class="n">BaseTable</span><span class="p">,</span>
-    <span class="n">shared_content_table</span><span class="p">:</span> <span class="n">BaseTable</span><span class="p">,</span>
+    <span class="n">links_table</span><span class="p">:</span> <span class="n">LinksTable</span><span class="p">,</span>
+    <span class="n">shared_content_table</span><span class="p">:</span> <span class="n">SharedContentTable</span><span class="p">,</span>
     <span class="n">keys</span><span class="p">:</span> <span class="n">APIKeys</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;From given API keys and URL data set, filter URLs by domain and initialize data enrichment class.</span>
@@ -1522,8 +1581,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
@@ -1531,7 +1589,8 @@
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
-<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">buzzsumo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">buzzsumo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;For all URLs, collect data from Buzzsumo and coalesce in the database&#39;s &#39;links&#39; table.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">buzzsumo_token</span><span class="p">:</span>
@@ -1540,7 +1599,7 @@
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">buzzsumo_token</span><span class="p">,</span>
             <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1565,8 +1624,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
-<span class="normal">76</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
 <span class="normal">79</span>
@@ -1577,7 +1635,10 @@
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">facebook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">facebook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;For Facebook URLs, collect data from CrowdTangle and coalesce in the database&#39;s &#39;links&#39; and &#39;shared_content&#39; tables.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">crowdtangle_token</span><span class="p">:</span>
         <span class="n">get_facebook_post_data</span><span class="p">(</span>
@@ -1588,8 +1649,10 @@
             <span class="n">shared_content_outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span>
+            <span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_content_table</span><span class="o">.</span><span class="n">outfile</span>
+        <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1614,21 +1677,21 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
-<span class="normal">67</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">other_social_media</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">other_social_media</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;For select URLs, update the &#39;work_type&#39; column in the database&#39;s &#39;links&#39; table with the value &#39;SocialMediaPosting&#39;.&quot;&quot;&quot;</span>
     <span class="c1"># Assign default type to social media post</span>
     <span class="n">add_type_data</span><span class="p">(</span>
         <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">other_social</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span>
     <span class="p">)</span>
     <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1653,15 +1716,15 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
-<span class="normal">57</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">scraper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">scraper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;For select URLs, collect data via scraping and coalesce in the database&#39;s &#39;links&#39; table.&quot;&quot;&quot;</span>
 
     <span class="c1"># In multiple threads, scrape HTML data and write to a CSV file</span>
@@ -1669,7 +1732,7 @@
         <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">to_scrape</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span>
     <span class="p">)</span>
     <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1694,17 +1757,17 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/enrichment.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span>
-<span class="normal">96</span>
-<span class="normal">97</span>
-<span class="normal">98</span>
-<span class="normal">99</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">youtube</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">youtube</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;For YouTube URLs, collect data from YouTube API and coalesce in the database&#39;s &#39;links&#39; table.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">youtube_key</span><span class="p">:</span>
         <span class="c1"># In single thread, collect YouTube API data and write to a CSV file</span>
@@ -1714,7 +1777,7 @@
             <span class="n">outfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="c1"># Coalesce the results in the CSV File to the links table</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">infile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">update_from_csv</span><span class="p">(</span><span class="n">datafile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">outfile</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1789,7 +1852,8 @@
 
             <details class="quote">
               <summary>Source code in <code>minall/enrichment/utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 64</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 63</span>
+<span class="normal"> 64</span>
 <span class="normal"> 65</span>
 <span class="normal"> 66</span>
 <span class="normal"> 67</span>
@@ -1860,25 +1924,18 @@
 <span class="normal">132</span>
 <span class="normal">133</span>
 <span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FilteredLinks</span><span class="p">:</span>
+<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FilteredLinks</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Selects all URLs from SQL table and returns subsets.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">BaseTable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">LinksTable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Select and store all URLs from a target SQL table.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            table (BaseTable): Target SQL table.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">all_links</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;SELECT url FROM </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT url FROM </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
         <span class="p">]</span>
 
     <span class="nd">@property</span>
@@ -2171,7 +2228,7 @@
         <tr>
           <td><code>table</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="minall.tables.base.BaseTable" href="../tables/#minall.tables.base.BaseTable">BaseTable</a></code>
+                <code>BaseTable</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -2187,7 +2244,8 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/utils.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
+<span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
@@ -2195,22 +2253,15 @@
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">BaseTable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">LinksTable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Select and store all URLs from a target SQL table.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        table (BaseTable): Target SQL table.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">all_links</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;SELECT url FROM </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT url FROM </span><span class="si">{</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
           </details>
@@ -2306,7 +2357,8 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/utils.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">42</span>
+<span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
@@ -2323,8 +2375,7 @@
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">apply_domain</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">apply_domain</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compose SQL query to update the domain column of a URL&#39;s row in the &#39;links&#39; SQLite table.</span>
 
 <span class="sd">    Examples:</span>
@@ -2428,7 +2479,8 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/utils.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
@@ -2444,8 +2496,7 @@
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_domain</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_domain</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse the domain name of a given URL string.</span>
 
 <span class="sd">    Examples:</span>
