@@ -15,7 +15,8 @@ from minall.enrichment.crowdtangle import get_facebook_post_data
 from minall.enrichment.other_social_media import add_type_data
 from minall.enrichment.utils import FilteredLinks, apply_domain
 from minall.enrichment.youtube import get_youtube_data
-from minall.tables.base import BaseTable
+from minall.tables.links import LinksTable
+from minall.tables.shared_content import SharedContentTable
 from minall.utils.database import SQLiteWrapper
 from minall.utils.parse_config import APIKeys
 
@@ -25,8 +26,8 @@ bar = "\n===============\n"
 class Enrichment:
     def __init__(
         self,
-        links_table: BaseTable,
-        shared_content_table: BaseTable,
+        links_table: LinksTable,
+        shared_content_table: SharedContentTable,
         keys: APIKeys,
     ) -> None:
         """From given API keys and URL data set, filter URLs by domain and initialize data enrichment class.
@@ -51,7 +52,7 @@ class Enrichment:
                 token=self.keys.buzzsumo_token,
                 outfile=self.links_table.outfile,
             )
-            self.links_table.coalesce(infile=self.links_table.outfile)
+            self.links_table.update_from_csv(datafile=self.links_table.outfile)
 
     def scraper(self):
         """For select URLs, collect data via scraping and coalesce in the database's 'links' table."""
@@ -61,7 +62,7 @@ class Enrichment:
             data=self.filtered_links.to_scrape, outfile=self.links_table.outfile
         )
         # Coalesce the results in the CSV File to the links table
-        self.links_table.coalesce(infile=self.links_table.outfile)
+        self.links_table.update_from_csv(datafile=self.links_table.outfile)
 
     def other_social_media(self):
         """For select URLs, update the 'work_type' column in the database's 'links' table with the value 'SocialMediaPosting'."""
@@ -70,7 +71,7 @@ class Enrichment:
             data=self.filtered_links.other_social, outfile=self.links_table.outfile
         )
         # Coalesce the results in the CSV File to the links table
-        self.links_table.coalesce(infile=self.links_table.outfile)
+        self.links_table.update_from_csv(datafile=self.links_table.outfile)
 
     def facebook(self):
         """For Facebook URLs, collect data from CrowdTangle and coalesce in the database's 'links' and 'shared_content' tables."""
@@ -83,8 +84,10 @@ class Enrichment:
                 shared_content_outfile=self.shared_content_table.outfile,
             )
             # Coalesce the results in the CSV File to the links table
-            self.links_table.coalesce(infile=self.links_table.outfile)
-            self.shared_content_table.coalesce(infile=self.shared_content_table.outfile)
+            self.links_table.update_from_csv(datafile=self.links_table.outfile)
+            self.shared_content_table.update_from_csv(
+                datafile=self.shared_content_table.outfile
+            )
 
     def youtube(self):
         """For YouTube URLs, collect data from YouTube API and coalesce in the database's 'links' table."""
@@ -96,15 +99,15 @@ class Enrichment:
                 outfile=self.links_table.outfile,
             )
             # Coalesce the results in the CSV File to the links table
-            self.links_table.coalesce(infile=self.links_table.outfile)
+            self.links_table.update_from_csv(datafile=self.links_table.outfile)
 
     def __call__(self, buzzsumo_only: bool):
-        executor = SQLiteWrapper(connection=self.links_table.connection)
+        executor = SQLiteWrapper(connection=self.links_table.conn)
         # apply domain to all urls
         for link in self.filtered_links.all_links:
             query, domain = apply_domain(link)
             if query and domain:
-                self.links_table.connection
+                self.links_table.conn
                 executor(query=query)
 
         if not buzzsumo_only:

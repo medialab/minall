@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 def dir_path(path_name: str) -> str:
-    """Function to convert argument to created directory.
+    """Function to convert CLI argument to created directory.
 
     Args:
         path_name (str): Path to target directory.
@@ -32,7 +32,7 @@ def dir_path(path_name: str) -> str:
 
 
 def file_path(path_name: str) -> str:
-    """Function to convert argument to verified, found file path.
+    """Function to convert CLI argument to verified, found file path.
 
     Args:
         path_name (str): Path to data file.
@@ -50,7 +50,7 @@ def file_path(path_name: str) -> str:
 
 
 def has_parent(path_name: str) -> str:
-    """Function to convert argument to file path with created parent directories.
+    """Function to convert CLI argument to file path with created parent directories.
 
     Args:
         path_name (str): Path to out-file.

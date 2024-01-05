@@ -73,13 +73,6 @@ erDiagram
       show_source: true
       heading_level: 2
 
-::: minall.tables.links.constants
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: true
-      heading_level: 3
-
 ::: minall.tables.shared_content
     handler: python
     options:
@@ -87,21 +80,7 @@ erDiagram
       show_source: true
       heading_level: 2
 
-::: minall.tables.shared_content.constants
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: true
-      heading_level: 3
-
 ::: minall.tables.base
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: true
-      heading_level: 2
-
-::: minall.tables.utils
     handler: python
     options:
       show_root_heading: true

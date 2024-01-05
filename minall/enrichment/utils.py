@@ -16,8 +16,7 @@ from ural.facebook import is_facebook_url
 from ural.youtube import YOUTUBE_DOMAINS  # type: ignore
 from ural.youtube import is_youtube_url
 
-from minall.tables.base import BaseTable
-from minall.tables.links.constants import LinksConstants
+from minall.tables.links import LinksConstants, LinksTable
 
 
 def get_domain(url: str) -> str | None:
@@ -64,18 +63,15 @@ def apply_domain(url: str) -> Tuple[str | None, str | None]:
 class FilteredLinks:
     """Selects all URLs from SQL table and returns subsets."""
 
-    def __init__(self, table: BaseTable) -> None:
+    def __init__(self, table: LinksTable) -> None:
         """Select and store all URLs from a target SQL table.
 
         Args:
             table (BaseTable): Target SQL table.
         """
-        cursor = table.connection.cursor()
+        cursor = table.conn.cursor()
         self.all_links = [
-            row[0]
-            for row in cursor.execute(
-                f"SELECT url FROM {table.table.table_name}"
-            ).fetchall()
+            row[0] for row in cursor.execute(f"SELECT url FROM {table.name}").fetchall()
         ]
 
     @property

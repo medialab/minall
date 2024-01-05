@@ -2,7 +2,7 @@ import csv
 from pathlib import Path
 from typing import List
 
-from minall.tables.links.constants import LinksConstants
+from minall.tables.links import LinksConstants
 
 
 def add_data(data: List[str], outfile: Path):

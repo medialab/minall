@@ -37,6 +37,7 @@ nav:
   - Tutorials: "tutorials.md"
   - How-To Guides: "how-to-guides.md"
   - "Reference":
+      - "Home": "reference/home.md"
       - "main": "reference/main.md"
       - "cli": "reference/cli.md"
       - "utils": "reference/utils.md"

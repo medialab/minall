@@ -1,21 +1,14 @@
-This site contains the project documentation for the `minall` data enrichment workflow. The project's aim is to collect and update metadata about target Web Content.
+This site contains documentation for the `minall` data enrichment workflow. The project's aim is to collect and update metadata about web content, targeted via Unique Resource Identifiers (URIs / URLs).
 
-`minall` relies on the Python tool and library `minet`, which this project's name references.
+`minall` is built atop the data-mining tool `minet`, which was designed to collect data about media content online.
 
 ## Table Of Contents
 
-The documentation follows the best practice for
-project documentation as described by Daniele Procida
-in the [Diátaxis documentation framework](https://diataxis.fr/)
-and consists of four separate parts:
+- [Tutorials](tutorials.md) : Articles demonstrating how to use the project for various use cases.
+- [How-To Guides](how-to-guides.md) : Straight-to-the-point, step-by-step guides.
+- [Reference](reference/home.md) : Documentation of the project's code base.
+- [Explanation](explanation.md) : Article explaining the project's motivation and implementation.
 
-1. [Tutorials](tutorials.md)
-2. [How-To Guides](how-to-guides.md)
-3. [Reference](reference/main.md)
-4. [Explanation](explanation.md)
-
-Quickly find what you're looking for depending on
-your use case by looking at the different pages.
 
 ## Acknowledgements
 

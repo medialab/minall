@@ -11,14 +11,12 @@ The class contains the following methods:
 - `export()` - Write enriched SQL tables to CSV out-files.
 """
 
-import os
 from pathlib import Path
 from typing import Tuple
 
 from minall.enrichment.enrichment import Enrichment
-from minall.tables.base import BaseTable
-from minall.tables.links.constants import LinksConstants
-from minall.tables.shared_content.constants import ShareContentConstants
+from minall.tables.links import LinksTable
+from minall.tables.shared_content import SharedContentTable
 from minall.utils.database import connect_to_database
 from minall.utils.parse_config import APIKeys
 
@@ -30,10 +28,10 @@ class Minall:
         self,
         database: str | None,
         config: str | dict | None,
-        output_dir: str,
-        links_file: str,
+        output_dir: Path | str,
+        links_file: Path | str,
         url_col: str,
-        shared_content_file: str | None = None,
+        shared_content_file: Path | str | None = None,
         buzzsumo_only: bool = False,
     ) -> None:
         """Intialize SQLite database and out-file paths.
@@ -55,8 +53,8 @@ class Minall:
         Args:
             database (str | None): Path name to SQLite database. If None, creates database in memory.
             config (str | dict | None): Credentials for API keys.
-            output_dir (str): Path name to directory for enriched CSV files.
-            links_file (str): Path name to in-file for URLs.
+            output_dir (Path | str): Path to directory for enriched CSV files.
+            links_file (Path | str): Path to in-file for URLs.
             url_col (str): Name of URL column in URLs file.
             shared_content_file (str | None): Path name to CSV file of shared content related to URLs.
             buzzsumo_only (bool, optional): Whether to only run Buzzsumo enrichment. Defaults to False.
@@ -72,26 +70,30 @@ class Minall:
         self.buzzsumo_only = buzzsumo_only
 
         # Set paths to output directory and out-files
-        self.output_dir = Path(output_dir)
+        if not isinstance(output_dir, Path):
+            output_dir = Path(output_dir)
+        self.output_dir = output_dir
         self.output_dir.mkdir(exist_ok=True)
         [p.mkdir(exist_ok=True) for p in self.output_dir.parents]
         self.links_file = self.output_dir.joinpath("links.csv")
         self.shared_contents_file = self.output_dir.joinpath("shared_content.csv")
 
         # Input original data into the database
-        self.links_table = BaseTable(
-            sqlite_connection=self.connection,
+        if not isinstance(links_file, Path):
+            links_file = Path(links_file)
+        self.links_table = LinksTable(
+            conn=self.connection,
             infile=links_file,
-            outfile=self.links_file,
-            table=LinksConstants(),
             url_col=url_col,
+            outfile=self.links_file,
         )
 
-        self.shared_content_table = BaseTable(
-            sqlite_connection=self.connection,
+        if isinstance(shared_content_file, str):
+            shared_content_file = Path(shared_content_file)
+        self.shared_content_table = SharedContentTable(
+            conn=self.connection,
             infile=shared_content_file,
             outfile=self.shared_contents_file,
-            table=ShareContentConstants(),
         )
 
     def collect_and_coalesce(self):

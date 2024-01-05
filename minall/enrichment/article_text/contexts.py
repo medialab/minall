@@ -15,7 +15,7 @@ from rich.progress import (
     TimeElapsedColumn,
 )
 
-from minall.tables.links.constants import LinksConstants
+from minall.tables.links import LinksConstants
 
 
 class ContextManager:

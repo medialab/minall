@@ -9,8 +9,8 @@ from rich.progress import (
     TimeElapsedColumn,
 )
 
-from minall.tables.links.constants import LinksConstants
-from minall.tables.shared_content.constants import ShareContentConstants
+from minall.tables.links import LinksConstants
+from minall.tables.shared_content import ShareContentConstants
 
 
 class ContextManager:

@@ -1,4 +1,4 @@
-# minall/exceptions.py
+# minall/tables/exceptions.py
 
 """Exceptions for validating CSV files used to create SQLite tables.
 
