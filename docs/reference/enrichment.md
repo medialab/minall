@@ -97,6 +97,20 @@ icon: material/folder-outline
       show_source: true
       heading_level: 3
 
+::: minall.enrichment.other_social_media
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      heading_level: 2
+
+::: minall.enrichment.other_social_media.add_data
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: true
+      heading_level: 3
+
 ::: minall.enrichment.article_text
     handler: python
     options:
