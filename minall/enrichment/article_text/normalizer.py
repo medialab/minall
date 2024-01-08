@@ -18,7 +18,7 @@ class NormalizedScrapedWebPage(TabularRecord):
         title (str | None): Title scraped from HTML.
         text (str | None): Main text scraped from HTML.
         date_published (str | None): Date scraped from HTML.
-        work_type (str): Target URL's schema subtype. Default = "WebPage".
+        work_type (str): Target URL's ontological subtype. Default = "WebPage".
     """
 
     url: str

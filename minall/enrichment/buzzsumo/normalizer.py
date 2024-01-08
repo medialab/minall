@@ -27,7 +27,7 @@ class NormalizedBuzzsumoResult(TabularRecord):
 
     Attributes:
         url (str): Target URL searched in Buzzsumo database.
-        work_type (str): Target URL's schema subtype, i.e. "WebPage", "Article", "VideoObject".
+        work_type (str): Target URL's ontological subtype, i.e. "WebPage", "Article", "VideoObject".
         twitter_share (int): Number of times the target URL appeared on Twitter.
         facebook_share (int): Number of times the target URL appeared on Facebook.
         title (str): Title of target URL web content.
@@ -109,7 +109,7 @@ class NormalizedBuzzsumoResult(TabularRecord):
             data (BuzzsumoArticle | None): If target URL was found in Buzzsumo database, minet's result; otherwise, None.
 
         Returns:
-            NormalizedBuzzsumoResult: Dataclass that normalizes minet's Buzzsumo result object.
+            NormalizedBuzzsumoResult: Dataclass that normalizes minet's Buzzsumo data.
         """
         if data:
             return NormalizedBuzzsumoResult(
