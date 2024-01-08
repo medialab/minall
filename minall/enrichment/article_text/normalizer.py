@@ -1,6 +1,6 @@
 # minall/enrichment/article_text/constants.py
 
-"""Something.
+"""Dataclass to normlalize minet's Trafilatura result object.
 """
 
 from dataclasses import dataclass
@@ -11,14 +11,14 @@ from minet.extraction import TrafilaturaResult
 
 @dataclass
 class NormalizedScrapedWebPage(TabularRecord):
-    """_summary_
+    """Dataclass to normlalize minet's Trafilatura result object.
 
     Attributes:
-        url (str): __description__
-        title (str | None): __description__
-        text (str | None): __description__
-        date_published (str | None): __description__
-        work_type (str): __description__. Default = "WebPage".
+        url (str): URL targeted for scraping.
+        title (str | None): Title scraped from HTML.
+        text (str | None): Main text scraped from HTML.
+        date_published (str | None): Date scraped from HTML.
+        work_type (str): Target URL's schema subtype. Default = "WebPage".
     """
 
     url: str
