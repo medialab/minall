@@ -1,6 +1,16 @@
+# minall/enrichment/crowdtangle/exceptions.py
+
+"""Exceptions raised during data collection from CrowdTangle API.
+
+This module contains exceptions raised during data collection from CrowdTangle API. The module contains the following exceptions:
+
+- `NoPostID` - Neither minet nor minall's adhoc parser successfully recovered the Facebook post's ID.
+- `PostNotfound` - CrowdTangle did not return a post matching the given post ID.
+"""
+
+
 class NoPostID(Exception):
     def __init__(self, error, url):
-        # Call the base class constructor with the parameters it needs
         message = "Unable to parse the post ID from url: {url}. Encountered error: {error}".format(
             url=url, error=error
         )

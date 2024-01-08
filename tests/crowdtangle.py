@@ -31,7 +31,8 @@ class CTest(BaseTest):
             self.assertIsNotNone(response)
 
     def test_batch(self):
-        data = [POST[0] for _ in range(200)]
+        BATCH = 200
+        data = [POST[0] for _ in range(BATCH)]
         counter = Counter()
         with Timer(name=f"CT batch {len(data)}"):
             for url, response in track(
@@ -43,10 +44,8 @@ class CTest(BaseTest):
                 if response:
                     self.assertEqual(getattr(response, "platform"), "Facebook")
                     counter.update([url])
-        self.assertEqual(counter.total(), 200)
+        self.assertEqual(counter.total(), BATCH)
 
 
 if __name__ == "__main__":
     unittest.main()
-##
-##
