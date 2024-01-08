@@ -2816,6 +2816,333 @@
 
 
 <h1 id="enrichment-tools">Enrichment tools</h1>
+<p>The enrichment workflow uses scraping and <code>minet</code>'s API clients to collect data about URLs in the SQLite database's <code>links</code> table. The collection method is dependent on the URL's domain name.</p>
+<ul>
+<li>URLs from Facebook -&gt; <code>minall.enrichment.crowdtangle</code> -&gt; <strong>Normalized Facebook Post Data</strong></li>
+<li>URLs from YouTube -&gt; <code>minall.enrichment.youtube</code> -&gt; <strong>Normalized YouTube Video Data</strong>, <strong>Normalized YouTube Channel Data</strong></li>
+<li>URLs from other social media platforms (because they cannot be scraped) -&gt; <code>minall.enrichment.other_social_media</code></li>
+<li>URLs not from social media platforms (they can be scraped) -&gt; <code>minall.enrichment.article_text</code> -&gt; <strong>Normalized Scraped Web Page Data</strong></li>
+<li>all URLs -&gt; <code>minall.enrichment.buzzsumo</code> -&gt; <strong>Normalized Buzzsumo Exact URL Data</strong></li>
+</ul>
+<p><em>Note: <code>creator_facebook_follow</code> and <code>hashtags</code> do not have any data field feeding to them. <code>hashtags</code> was fed by Twitter API, which has been depreciated. Still need to confirm <code>creator_facebook_follow</code> (Facebook account's <code>FollowAction</code> might be obsolete via <code>SubscribeAction</code>).</em></p>
+<table>
+<thead>
+<tr>
+<th><code>links</code> SQL table</th>
+<th>Normalized Scraped Web Page Data</th>
+<th>Normalized Buzzsumo Exact URL Data</th>
+<th>Normalized Facebook Post Data</th>
+<th>Normalized YouTube Video Data</th>
+<th>Normalized YouTube Channel Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url (TEXT)</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>domain (TEXT)</td>
+<td></td>
+<td>X</td>
+<td>X ("facebook.com")</td>
+<td>X ("youtube.com")</td>
+<td>X ("youtube.com")</td>
+</tr>
+<tr>
+<td>work_type (TEXT)</td>
+<td>X ("WebPage")</td>
+<td>X ("WebPage", "Article", "VideoObject")</td>
+<td>X ("SocialMediaPosting", "ImageObject", "VideoObject")</td>
+<td>X ("VideoObject")</td>
+<td>X ("WebPage")</td>
+</tr>
+<tr>
+<td>duration (TEXT)</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>identifier (TEXT)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>date_published (TEXT)</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>date_modified (TEXT)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>country_of_origin (TEXT)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>abstract (TEXT)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>keywords (TEXT)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>title (TEXT)</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>text (TEXT)</td>
+<td>X</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hashtags (TEXT)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>creator_type (TEXT)</td>
+<td></td>
+<td></td>
+<td>X ("defacto:SocialMediaAccount")</td>
+<td>X ("WebPgae")</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_date_created (TEXT)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_location_created (TEXT)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_identifier (TEXT)</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_facebook_follow (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>creator_facebook_subscribe (INTEGER)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>creator_twitter_follow (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>creator_youtube_subscribe (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_create_video (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_name (TEXT)</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>creator_url (TEXT)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>facebook_comment (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>facebook_like (INTEGER)</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>facebook_share (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pinterest_share (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>twitter_share (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tiktok_share (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tiktok_comment (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>reddit_engagement (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>youtube_watch (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>youtube_comment (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>youtube_like (INTEGER)</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr>
+<td>youtube_favorite (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>youtube_subscribe (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>create_video (INTEGER)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
 <hr />
 
 
