@@ -1,10 +1,15 @@
+# minall/enrichment/buzzsumo/get_data.py
+
+"""Module containing a function that runs all of the Buzzsumo enrichment process.
+"""
+
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Generator, List
 
 from minall.enrichment.buzzsumo.client import BuzzsumoClient
-from minall.enrichment.buzzsumo.constants import NormalizedBuzzsumoResult
 from minall.enrichment.buzzsumo.contexts import GeneratorContext, WriterContext
+from minall.enrichment.buzzsumo.normalizer import NormalizedBuzzsumoResult
 
 
 def get_buzzsumo_data(data: List[str], token: str, outfile: Path):
