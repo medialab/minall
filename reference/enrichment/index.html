@@ -2816,15 +2816,60 @@
 
 
 <h1 id="enrichment-tools">Enrichment tools</h1>
-<p>The enrichment workflow uses scraping and <code>minet</code>'s API clients to collect data about URLs in the SQLite database's <code>links</code> table. The collection method is dependent on the URL's domain name.</p>
-<ul>
-<li>URLs from Facebook -&gt; <code>minall.enrichment.crowdtangle</code> -&gt; <strong>Normalized Facebook Post Data</strong></li>
-<li>URLs from YouTube -&gt; <code>minall.enrichment.youtube</code> -&gt; <strong>Normalized YouTube Video Data</strong>, <strong>Normalized YouTube Channel Data</strong></li>
-<li>URLs from other social media platforms (because they cannot be scraped) -&gt; <code>minall.enrichment.other_social_media</code></li>
-<li>URLs not from social media platforms (they can be scraped) -&gt; <code>minall.enrichment.article_text</code> -&gt; <strong>Normalized Scraped Web Page Data</strong></li>
-<li>all URLs -&gt; <code>minall.enrichment.buzzsumo</code> -&gt; <strong>Normalized Buzzsumo Exact URL Data</strong></li>
-</ul>
-<p><em>Note: <code>creator_facebook_follow</code> and <code>hashtags</code> do not have any data field feeding to them. <code>hashtags</code> was fed by Twitter API, which has been depreciated. Still need to confirm <code>creator_facebook_follow</code> (Facebook account's <code>FollowAction</code> might be obsolete via <code>SubscribeAction</code>).</em></p>
+<p>The enrichment workflow uses scraping and <code>minet</code>'s API clients to collect data about URLs and associated shared content in the SQLite database's <code>links</code> table and <code>shared_content</code> table, respectively. The collection method that <code>minall</code> deploys is dependent on the URL's domain name.</p>
+<p>The URLs in the SQLite database's <code>links</code> table are parsed using the <a href="https://github.com/medialab/ural"><code>ural</code></a> Python library and grouped in the following subsets:</p>
+<p>Subsets of URLs</p>
+<table>
+<thead>
+<tr>
+<th>subset</th>
+<th>dataclass</th>
+<th>module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URLs from Facebook</td>
+<td><strong>Normalized Facebook Post Data</strong></td>
+<td><code>minall.enrichment.crowdtangle.get_data</code></td>
+</tr>
+<tr>
+<td>URLs from YouTube</td>
+<td><strong>Normalized YouTube Video Data</strong>, <strong>Normalized YouTube Channel Data</strong></td>
+<td><code>minall.enrichment.youtube.get_data</code></td>
+</tr>
+<tr>
+<td>URLs from other social media platforms (because they cannot be scraped)</td>
+<td>NA</td>
+<td><code>minall.enrichment.other_social_media.add_data</code></td>
+</tr>
+<tr>
+<td>URLs not from social media platforms (they can be scraped)</td>
+<td><strong>Normalized Scraped Web Page Data</strong></td>
+<td><code>minall.enrichment.article_text.get_data</code></td>
+</tr>
+</tbody>
+</table>
+<p>If the user has a Buzzsumo API token, all URLs, regardless of grouping by domain name, are searched in the Buzzsumo database.</p>
+<p>All URLs</p>
+<table>
+<thead>
+<tr>
+<th>subset</th>
+<th>dataclass</th>
+<th>module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all URLs</td>
+<td><strong>Normalized Buzzsumo Exact URL Data</strong></td>
+<td><code>minall.enrichment.buzzsumo.get_data</code></td>
+</tr>
+</tbody>
+</table>
+<p>Due to the diversity of data available for different types of URLs and provided by different data sources, an important step in all the enrichment procedures is normalizing the data. Each target URL's metadata, regardless of its domain name, must conform to the SQLite database's <code>links</code> table. Such harmonization of data fields constitutes an important feature of the <code>minall</code> workflow and is not (yet) something replicated in <code>minet</code>.</p>
+<p>The following table illustrates which of each data source's data fields are matched to which column in the database's <code>links</code> table.</p>
 <table>
 <thead>
 <tr>
@@ -3143,6 +3188,7 @@
 </tr>
 </tbody>
 </table>
+<p><em>Note: <code>creator_facebook_follow</code> and <code>hashtags</code> do not have any data field feeding to them. <code>hashtags</code> was fed by the Twitter API, which has been depreciated. I still need to confirm the use of <code>creator_facebook_follow</code> (Facebook accounts' <code>FollowAction</code> might have been made redundant by the <code>SubscribeAction</code>).</em></p>
 <hr />
 
 
