@@ -70,7 +70,13 @@ class BaseTable:
             for row in reader:
                 placeholder = ", ".join(["?" for _ in range(len(row.items()))])
                 cols_in_csv = ", ".join(row.keys())
-                values = tuple(list(row.values()))
+                # Replace empty strings in values set with None
+                values = []
+                for v in row.values():
+                    if v == "":
+                        values.append(None)
+                    else:
+                        values.append(v)
                 coalesce_stmt = self.coalesce_statement(row.keys())
                 query = """
                 INSERT INTO {table}({cols_in_csv})
@@ -84,7 +90,7 @@ class BaseTable:
                     pk=self.pk_str,
                     coalesce_stmt=coalesce_stmt,
                 )
-                self.execute(query=query, values=values)
+                self.execute(query=query, values=tuple(values))
 
     def coalesce_statement(self, cols: Iterable[str]) -> str:
         """Compose SQL coalesce statement from columns to be updated.

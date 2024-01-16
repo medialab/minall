@@ -3,7 +3,6 @@
 """Module containing a function that runs all of the Buzzsumo enrichment process.
 """
 
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Generator, List
 

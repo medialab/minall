@@ -3,10 +3,6 @@
 """Class for data collection and coalescing.
 
 With the class `Enrichment`, this module manages the data collection process.
-
-The class contains the following methods:
-
-- `__init__(links_table, shared_content_table, keys)` - 
 """
 
 from minall.enrichment.article_text import get_article_text
