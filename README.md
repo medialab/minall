@@ -14,8 +14,9 @@ New Releases:
 
 1. Run tests locally.
 2. Increment the version number in `minall/__version__.py`
-3. `git add minall/__version__.py`
-4. `git commit -m "Bump version x.y.z"`
-5. `git tag vx.y.z -m "Release vx.y.z"`
-6. `git push origin vx.y.z`
-7. On GitHub, publish a new release with the tag `x.y.z`.
+3. `git add minall/__version__.py` Add the updated version file.
+4. `git commit -m "Bump version x.y.z"` Commit the updated version file with a message.
+5. `git push origin main` Push the updated version file to the remote repository, which is still governed by the old/current release.
+6. `git tag vx.y.z -m "Release vx.y.z"` Create a tag for the new version.
+7. `git push origin vx.y.z` Push the tag to the remote repository.
+8. On the remote repository, publish a new release of the current version of the directory with the pushed tag `x.y.z`.
