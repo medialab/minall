@@ -117,7 +117,7 @@ def parse_shared_content(
                 elif media_type == "photo":
                     media_type = "ImageObject"
                 else:
-                    media_type = "MediaContent"
+                    media_type = "MediaObject"
                 yield NormalizedSharedLink(
                     post_url=url, content_url=media_url, media_type=media_type
                 )
