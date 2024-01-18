@@ -29,48 +29,48 @@ Due to the diversity of data available for different types of URLs and provided 
 
 The following table illustrates which of each data source's data fields are matched to which column in the database's `links` table.
 
-|`links` SQL table|Normalized Scraped Web Page Data|Normalized Buzzsumo Exact URL Data|Normalized Facebook Post Data|Normalized YouTube Video Data|Normalized YouTube Channel Data|
-|--|--|--|--|--|--|
-|url (TEXT)|X|X|X|X|X|
-|domain (TEXT)||X|X ("facebook.com")|X ("youtube.com")|X ("youtube.com")|
-|work_type (TEXT)|X ("WebPage")|X ("WebPage", "Article", "VideoObject")|X ("SocialMediaPosting", "ImageObject", "VideoObject")|X ("VideoObject")|X ("WebPage")|
-|duration (TEXT)||X|X|X||
-|identifier (TEXT)|||X|X|X|
-|date_published (TEXT)|X|X|X|X|X|
-|date_modified (TEXT)|||X|||
-|country_of_origin (TEXT)|||||X|
-|abstract (TEXT)|||X|X|X|
-|keywords (TEXT)||||X|X|
-|title (TEXT)|X|X|X|X|X|
-|text (TEXT)|X||X|||
-|hashtags (TEXT)||||||
-|creator_type (TEXT)|||X ("defacto:SocialMediaAccount")|X ("WebPgae")||
-|creator_date_created (TEXT)||||X||
-|creator_location_created (TEXT)|||X|X||
-|creator_identifier (TEXT)||X|X|X||
-|creator_facebook_follow (INTEGER)|||||
-|creator_facebook_subscribe (INTEGER)|||X||
-|creator_twitter_follow (INTEGER)|||||
-|creator_youtube_subscribe (INTEGER)||||X||
-|creator_create_video (INTEGER)||||X||
-|creator_name (TEXT)||X|X|X||
-|creator_url (TEXT)|||X|||
-|facebook_comment (INTEGER)||X|X|||
-|facebook_like (INTEGER)|||X|||
-|facebook_share (INTEGER)||X|X|||
-|pinterest_share (INTEGER)||X||||
-|twitter_share (INTEGER)||X||||
-|tiktok_share (INTEGER)||X||||
-|tiktok_comment (INTEGER)||X||||
-|reddit_engagement (INTEGER)||X||||
-|youtube_watch (INTEGER)||X||X||
-|youtube_comment (INTEGER)||||X||
-|youtube_like (INTEGER)||X||X||
-|youtube_favorite (INTEGER)||||||
-|youtube_subscribe (INTEGER)|||||X|
-|create_video (INTEGER)|||||X|
+|`links` SQL table|Normalized Scraped Web Page Data|Normalized Buzzsumo Exact URL Data|Normalized Facebook Post Data|Normalized YouTube Video Data|Normalized YouTube Channel Data|Normalized Tweet|
+|--|--|--|--|--|--|--|
+|url (TEXT)|X|X|X|X|X|X|
+|domain (TEXT)||X|X ("facebook.com")|X ("youtube.com")|X ("youtube.com")|X ("twitter.com")|
+|work_type (TEXT)|X ("WebPage")|X ("WebPage", "Article", "VideoObject")|X ("SocialMediaPosting", "ImageObject", "VideoObject")|X ("VideoObject")|X ("WebPage")|X ("SocialMediaPosting")|
+|duration (TEXT)||X|X|X|||
+|identifier (TEXT)|||X|X|X|X|
+|date_published (TEXT)|X|X|X|X|X|X|
+|date_modified (TEXT)|||X||||
+|country_of_origin (TEXT)|||||X||
+|abstract (TEXT)|||X|X|X||
+|keywords (TEXT)||||X|X||
+|title (TEXT)|X|X|X|X|X||
+|text (TEXT)|X||X|||X|
+|hashtags (TEXT)||||||X|
+|creator_type (TEXT)|||X ("defacto:SocialMediaAccount")|X ("WebPgae")||X ("defacto:SocialMediaAccount")|
+|creator_date_created (TEXT)||||X||X|
+|creator_location_created (TEXT)|||X|X|||
+|creator_identifier (TEXT)||X|X|X||X|
+|creator_facebook_follow (INTEGER)||||||
+|creator_facebook_subscribe (INTEGER)|||X|||
+|creator_twitter_follow (INTEGER)|||||X|
+|creator_youtube_subscribe (INTEGER)||||X|||
+|creator_create_video (INTEGER)||||X|||
+|creator_name (TEXT)||X|X|X||X|
+|creator_url (TEXT)|||X||||
+|facebook_comment (INTEGER)||X|X||||
+|facebook_like (INTEGER)|||X||||
+|facebook_share (INTEGER)||X|X||||
+|pinterest_share (INTEGER)||X|||||
+|twitter_share (INTEGER)||X||||X|
+|tiktok_share (INTEGER)||X|||||
+|tiktok_comment (INTEGER)||X|||||
+|reddit_engagement (INTEGER)||X|||||
+|youtube_watch (INTEGER)||X||X|||
+|youtube_comment (INTEGER)||||X|||
+|youtube_like (INTEGER)||X||X|||
+|youtube_favorite (INTEGER)|||||||
+|youtube_subscribe (INTEGER)|||||X||
+|create_video (INTEGER)|||||X||
 
-_Note: `creator_facebook_follow` and `hashtags` do not have any data field feeding to them. `hashtags` was fed by the Twitter API, which has been depreciated. I still need to confirm the use of `creator_facebook_follow` (Facebook accounts' `FollowAction` might have been made redundant by the `SubscribeAction`)._
+_Note: `creator_facebook_follow` does not have any data field feeding to it. I still need to confirm the use of `creator_facebook_follow` (Facebook accounts' `FollowAction` might have been made redundant by the `SubscribeAction`)._
 
 ---
 
@@ -117,6 +117,34 @@ _Note: `creator_facebook_follow` and `hashtags` do not have any data field feedi
       heading_level: 3
 
 ::: minall.enrichment.buzzsumo.contexts
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: true
+      heading_level: 3
+
+::: minall.enrichment.twitter
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      heading_level: 2
+
+::: minall.enrichment.twitter.normalizer
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: true
+      heading_level: 3
+
+::: minall.enrichment.twitter.scraper
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: true
+      heading_level: 3
+
+::: minall.enrichment.twitter.get_data
     handler: python
     options:
       show_root_heading: true

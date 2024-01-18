@@ -33,3 +33,13 @@ jobs:
 
       - name: Test Buzzsumo API calls
         run: python -m unittest tests.buzzsumo.Buzzsumo
+
+      - name: Test CrowdTangle API calls
+        run: python -m unittest tests.crowdtangle.CTest
+
+      - name: Test tables
+        run: python -m unittest tests.table.TableTest
+
+      - name: Test Twitter scraper
+        run: |
+          python -m unittest tests.twitter.Twitter

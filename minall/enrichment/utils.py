@@ -13,6 +13,7 @@ from typing import List, Tuple
 
 import ural
 from ural.facebook import is_facebook_url
+from ural.twitter import is_twitter_url
 from ural.youtube import YOUTUBE_DOMAINS  # type: ignore
 from ural.youtube import is_youtube_url
 
@@ -73,6 +74,15 @@ class FilteredLinks:
         self.all_links = [
             row[0] for row in cursor.execute(f"SELECT url FROM {table.name}").fetchall()
         ]
+
+    @property
+    def twitter(self) -> List[str]:
+        """List of URLs from Twitter.
+
+        Returns:
+            List[str]: List of URL strings.
+        """
+        return [url for url in self.all_links if is_twitter_url(url=url)]
 
     @property
     def youtube(self) -> List[str]:

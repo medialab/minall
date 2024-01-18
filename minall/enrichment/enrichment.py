@@ -9,6 +9,7 @@ from minall.enrichment.article_text import get_article_text
 from minall.enrichment.buzzsumo import get_buzzsumo_data
 from minall.enrichment.crowdtangle import get_facebook_post_data
 from minall.enrichment.other_social_media import add_type_data
+from minall.enrichment.twitter import get_twitter_data
 from minall.enrichment.utils import FilteredLinks, apply_domain
 from minall.enrichment.youtube import get_youtube_data
 from minall.tables.links import LinksTable
@@ -57,7 +58,7 @@ class Enrichment:
         get_article_text(
             data=self.filtered_links.to_scrape, outfile=self.links_table.outfile
         )
-        # Coalesce the results in the CSV File to the links table
+        # Coalesce the results in the CSV file to the links table
         self.links_table.update_from_csv(datafile=self.links_table.outfile)
 
     def other_social_media(self):
@@ -66,8 +67,21 @@ class Enrichment:
         add_type_data(
             data=self.filtered_links.other_social, outfile=self.links_table.outfile
         )
-        # Coalesce the results in the CSV File to the links table
+        # Coalesce the results in the CSV file to the links table
         self.links_table.update_from_csv(datafile=self.links_table.outfile)
+
+    def twitter(self):
+        """For Twitter URLs, scrape data from site and coalesce in teh database's 'links' and 'shared_content' tables."""
+        get_twitter_data(
+            data=self.filtered_links.twitter,
+            links_outfile=self.links_table.outfile,
+            shared_content_outfile=self.shared_content_table.outfile,
+        )
+        # Coalesce the results in the CSV files to the links and shared content tables
+        self.links_table.update_from_csv(datafile=self.links_table.outfile)
+        self.shared_content_table.update_from_csv(
+            datafile=self.shared_content_table.outfile
+        )
 
     def facebook(self):
         """For Facebook URLs, collect data from CrowdTangle and coalesce in the database's 'links' and 'shared_content' tables."""
@@ -79,7 +93,7 @@ class Enrichment:
                 links_outfile=self.links_table.outfile,
                 shared_content_outfile=self.shared_content_table.outfile,
             )
-            # Coalesce the results in the CSV File to the links table
+            # Coalesce the results in the CSV files to the links and shared content tables
             self.links_table.update_from_csv(datafile=self.links_table.outfile)
             self.shared_content_table.update_from_csv(
                 datafile=self.shared_content_table.outfile
@@ -94,7 +108,7 @@ class Enrichment:
                 keys=self.keys.youtube_key,
                 outfile=self.links_table.outfile,
             )
-            # Coalesce the results in the CSV File to the links table
+            # Coalesce the results in the CSV file to the links table
             self.links_table.update_from_csv(datafile=self.links_table.outfile)
 
     def __call__(self, buzzsumo_only: bool):

@@ -59,6 +59,7 @@ class LinksConstants:
         "facebook_share": "INTEGER",
         "pinterest_share": "INTEGER",
         "twitter_share": "INTEGER",
+        "twitter_like": "INTEGER",
         "tiktok_share": "INTEGER",
         "tiktok_comment": "INTEGER",
         "reddit_engagement": "INTEGER",
