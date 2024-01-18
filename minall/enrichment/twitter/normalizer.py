@@ -114,7 +114,7 @@ def parse_shared_content(
             for media_type, media_url, media_file in medias:
                 if media_type == "video":
                     media_type = "VideoObject"
-                elif media_type == "image":
+                elif media_type == "photo":
                     media_type = "ImageObject"
                 else:
                     media_type = "MediaContent"
