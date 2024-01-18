@@ -4,17 +4,29 @@ from pathlib import Path
 
 from minet.twitter import TwitterGuestAPIScraper
 
+from minall.enrichment.enrichment import Enrichment
 from minall.enrichment.twitter.get_data import get_twitter_data
+from minall.main import Minall
+from minall.utils.parse_config import APIKeys
 from tests.base import BaseTest
 
 
 class Twitter(BaseTest):
     def setUp(self) -> None:
-        self.links_outfile = Path(__file__).parent.joinpath("tweet.csv")
-        self.shared_content_outfile = Path(__file__).parent.joinpath("tweet_links.csv")
-        self.scraper = TwitterGuestAPIScraper()
+        # Set up out-files
+        self.outdir = Path(__file__).parent.joinpath("twitter_test_results")
+        self.outdir.mkdir(exist_ok=True)
+        self.links_outfile = self.outdir.joinpath("links.csv")
+        self.shared_content_outfile = self.outdir.joinpath("shared_content.csv")
 
-    def test(self):
+        # Set up in-file
+        self.links_infile = Path(__file__).parent.joinpath("tweets.csv")
+
+        # Set up scraper and keys
+        self.scraper = TwitterGuestAPIScraper()
+        self.keys = APIKeys(self.config)
+
+    def test_module(self):
         get_twitter_data(
             DATA,
             links_outfile=self.links_outfile,
@@ -24,8 +36,46 @@ class Twitter(BaseTest):
             reader = csv.DictReader(f)
             for row in reader:
                 self.assertEqual(row["domain"], "twitter.com")
+                self.assertEqual(row["work_type"], "SocialMediaPosting")
                 self.assertEqual(row["creator_type"], "defacto:SocialMediaAccount")
                 break
+
+    def test_workflow(self):
+        with open(self.links_outfile, "w") as f:
+            writer = csv.writer(f)
+            writer.writerow(["url"])
+            writer.writerow(
+                ["https://twitter.com/Paris2024/status/1551605445156012038"]
+            )
+
+        app = Minall(
+            database=None,
+            config=None,
+            output_dir=self.links_outfile.parent,
+            links_file=self.links_outfile,
+            url_col="url",
+        )
+        app.collect_and_coalesce()
+        app.export()
+
+        with open(app.links_table.outfile) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                self.assertEqual(row["domain"], "twitter.com")
+                self.assertEqual(row["work_type"], "SocialMediaPosting")
+                self.assertEqual(row["creator_type"], "defacto:SocialMediaAccount")
+                break
+
+    def tearDown(self) -> None:
+        # Empty the out-file directory
+        for file in self.outdir.iterdir():
+            file.unlink()
+        # Remove the out-file directory
+        self.outdir.rmdir()
+        # Remove the in-file
+        if self.links_infile.is_file():
+            self.links_infile.unlink()
+        return super().tearDown()
 
 
 DATA = [

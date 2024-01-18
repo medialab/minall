@@ -120,6 +120,10 @@ class Enrichment:
                 self.links_table.conn
                 executor(query=query)
 
+        # Must collect Buzzsumo data first because, when platform-specific data (below)
+        # is not None, we want to replace the Buzzsumo data with the latter
+        self.buzzsumo()
+
         if not buzzsumo_only:
             if len(self.filtered_links.youtube) > 0:
                 self.youtube()
@@ -131,4 +135,3 @@ class Enrichment:
                 self.other_social_media()
             if len(self.filtered_links.to_scrape) > 0:
                 self.scraper()
-        self.buzzsumo()

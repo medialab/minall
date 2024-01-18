@@ -41,7 +41,7 @@ class NormalizedTweet(TabularRecord):
     creator_name: Optional[str] = None
     twitter_share: Optional[int] = None
     twitter_like: Optional[int] = None
-    domain: Optional[str] = "twitter.com"
+    domain: str = "twitter.com"
     work_type: str = "SocialMediaPosting"
     hashtags: List = field(default_factory=lambda: [])
     creator_type: str = "defacto:SocialMediaAccount"
