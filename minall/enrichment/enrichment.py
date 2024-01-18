@@ -123,6 +123,8 @@ class Enrichment:
         if not buzzsumo_only:
             if len(self.filtered_links.youtube) > 0:
                 self.youtube()
+            if len(self.filtered_links.twitter) > 0:
+                self.twitter()
             if len(self.filtered_links.facebook) > 0:
                 self.facebook()
             if len(self.filtered_links.other_social) > 0:
