@@ -10,6 +10,10 @@ See full documentation here: [https://medialab.github.io/minall/](https://medial
 
 ---
 
+See [here](main.pdf) a conference presentation given that describes the context in which `minall` was created.
+
+---
+
 New Releases:
 
 1. Run tests locally.
