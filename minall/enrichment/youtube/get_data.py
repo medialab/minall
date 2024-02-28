@@ -6,7 +6,7 @@
 from pathlib import Path
 
 from minet.youtube.client import YouTubeAPIClient
-from ural.youtube import YoutubeVideo
+from ural.youtube import YoutubeShort, YoutubeVideo
 
 from minall.enrichment.youtube.context import ProgressBar, Writer
 from minall.enrichment.youtube.normalizer import ParsedLink, normalize
@@ -22,7 +22,13 @@ def get_youtube_data(data: list[str], keys: list[str], outfile: Path) -> None:
     """
     # Sort the URLs into channels and videos
     parsed_links = [ParsedLink(url) for url in data]
-    n_videos = len([i for i in parsed_links if isinstance(i.type, YoutubeVideo)])
+    n_videos = len(
+        [
+            i
+            for i in parsed_links
+            if isinstance(i.type, YoutubeVideo) or isinstance(i.type, YoutubeShort)
+        ]
+    )
 
     client = YouTubeAPIClient(key=keys)
 
@@ -32,7 +38,7 @@ def get_youtube_data(data: list[str], keys: list[str], outfile: Path) -> None:
             description="[bold red]Querying YouTube videos", total=n_videos
         )
         for pl in parsed_links:
-            if isinstance(pl.type, YoutubeVideo):
+            if isinstance(pl.type, YoutubeVideo) or isinstance(pl.type, YoutubeShort):
                 for _, result in client.videos(videos=[pl.video_id]):
                     setattr(pl, "video_result", result)
                     setattr(pl, "channel_id", getattr(result, "channel_id"))

@@ -9,7 +9,7 @@ from typing import List
 from casanova import TabularRecord
 from minet.youtube.types import YouTubeChannel as MinetYouTubeChannelResult
 from minet.youtube.types import YouTubeVideo as MinetYouTubeVideoResult
-from ural.youtube import YoutubeChannel, YoutubeVideo, parse_youtube_url
+from ural.youtube import YoutubeChannel, YoutubeShort, YoutubeVideo, parse_youtube_url
 
 
 class ParsedLink:
@@ -36,13 +36,16 @@ class ParsedLink:
 
         self.type = parse_youtube_url(url)
 
-        if isinstance(self.type, YoutubeVideo):
+        if isinstance(self.type, YoutubeVideo) or isinstance(self.type, YoutubeShort):
             self.video_id = getattr(self.type, "id")
             self.channel_id = None
 
         elif isinstance(self.type, YoutubeChannel):
             self.channel_id = getattr(self.type, "id")
             self.video_id = None
+
+        else:
+            print(self.type)
 
         self.video_result = None
         self.channel_result = None
