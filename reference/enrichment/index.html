@@ -12,8 +12,6 @@
         <link rel="prev" href="../tables/">
       
       
-        <link rel="next" href="../../explanation/">
-      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
@@ -1784,26 +1782,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../explanation/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Explanation
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -3696,7 +3674,12 @@
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Enrichment</span><span class="p">:</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Enrichment</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">links_table</span><span class="p">:</span> <span class="n">LinksTable</span><span class="p">,</span>
@@ -3796,16 +3779,21 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">links_table</span><span class="o">.</span><span class="n">conn</span>
                 <span class="n">executor</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
 
+        <span class="c1"># Must collect Buzzsumo data first because, when platform-specific data (below)</span>
+        <span class="c1"># is not None, we want to replace the Buzzsumo data with the latter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buzzsumo</span><span class="p">()</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">buzzsumo_only</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">youtube</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">youtube</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">twitter</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">twitter</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">facebook</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">facebook</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">other_social</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">other_social_media</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered_links</span><span class="o">.</span><span class="n">to_scrape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">scraper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">buzzsumo</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -7480,7 +7468,7 @@
     <span class="n">creator_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">twitter_share</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">twitter_like</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">domain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;twitter.com&quot;</span>
+    <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;twitter.com&quot;</span>
     <span class="n">work_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SocialMediaPosting&quot;</span>
     <span class="n">hashtags</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[])</span>
     <span class="n">creator_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;defacto:SocialMediaAccount&quot;</span>
@@ -7675,10 +7663,10 @@
             <span class="k">for</span> <span class="n">media_type</span><span class="p">,</span> <span class="n">media_url</span><span class="p">,</span> <span class="n">media_file</span> <span class="ow">in</span> <span class="n">medias</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">media_type</span> <span class="o">==</span> <span class="s2">&quot;video&quot;</span><span class="p">:</span>
                     <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;VideoObject&quot;</span>
-                <span class="k">elif</span> <span class="n">media_type</span> <span class="o">==</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">media_type</span> <span class="o">==</span> <span class="s2">&quot;photo&quot;</span><span class="p">:</span>
                     <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;ImageObject&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;MediaContent&quot;</span>
+                    <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;MediaObject&quot;</span>
                 <span class="k">yield</span> <span class="n">NormalizedSharedLink</span><span class="p">(</span>
                     <span class="n">post_url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">content_url</span><span class="o">=</span><span class="n">media_url</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span>
                 <span class="p">)</span>
@@ -11287,10 +11275,7 @@
 
             <details class="quote">
               <summary>Source code in <code>minall/enrichment/youtube/normalizer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">172</span>
 <span class="normal">173</span>
 <span class="normal">174</span>
 <span class="normal">175</span>
@@ -11344,7 +11329,10 @@
 <span class="normal">223</span>
 <span class="normal">224</span>
 <span class="normal">225</span>
-<span class="normal">226</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NormalizedYouTubeChannel</span><span class="p">(</span><span class="n">TabularRecord</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass to normalize minet&#39;s YoutubeChannel result object.</span>
 
@@ -11507,10 +11495,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/youtube/normalizer.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">202</span>
 <span class="normal">203</span>
 <span class="normal">204</span>
 <span class="normal">205</span>
@@ -11534,7 +11519,10 @@
 <span class="normal">223</span>
 <span class="normal">224</span>
 <span class="normal">225</span>
-<span class="normal">226</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_payload</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -11825,10 +11813,7 @@
 
             <details class="quote">
               <summary>Source code in <code>minall/enrichment/youtube/normalizer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 81</span>
 <span class="normal"> 82</span>
 <span class="normal"> 83</span>
 <span class="normal"> 84</span>
@@ -11913,7 +11898,10 @@
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NormalizedYouTubeVideo</span><span class="p">(</span><span class="n">TabularRecord</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass to normalize minet&#39;s YoutubeVideo result object.</span>
 
@@ -12121,10 +12109,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/youtube/normalizer.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
@@ -12162,7 +12147,10 @@
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_payload</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -12271,7 +12259,10 @@
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParsedLink</span><span class="p">:</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParsedLink</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to store up-to-date metadata about target YouTube URL.</span>
 
 <span class="sd">    This class&#39;s instance variables will be updated during the data collection process to reflect the target URL&#39;s video and/or channel metadata. If the target URL is of a video, its `ParsedLink` class instance should eventually be mutated to have a value in both the `video_result` and `channel_result` attributes because 2 API calls will be made. If the target URL is of a channel, its `ParsedLink` class instance should eventually be mutated to have a value in the `channel_result` attribute, after 1 call to the YouTube API&#39;s channels endpoint.</span>
@@ -12295,13 +12286,16 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">parse_youtube_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeShort</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">video_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">channel_id</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeChannel</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">channel_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">video_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">video_result</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel_result</span> <span class="o">=</span> <span class="kc">None</span>
@@ -12476,7 +12470,10 @@
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine type of YouTube web content.</span>
 
 <span class="sd">    Args:</span>
@@ -12494,13 +12491,16 @@
 
     <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">parse_youtube_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeShort</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">video_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel_id</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeChannel</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">video_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">video_result</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">channel_result</span> <span class="o">=</span> <span class="kc">None</span>
@@ -12591,10 +12591,7 @@
 
           <details class="quote">
             <summary>Source code in <code>minall/enrichment/youtube/normalizer.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
 <span class="normal">57</span>
@@ -12615,7 +12612,10 @@
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">parsed_link</span><span class="p">:</span> <span class="n">ParsedLink</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">parsed_link</span><span class="p">:</span> <span class="n">ParsedLink</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize minet result objects stored in instance variables of the `ParsedLink` class.</span>
 
 <span class="sd">    Args:</span>
@@ -12808,7 +12808,13 @@
 <span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_youtube_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_youtube_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Collects and writes metadata about target YouTube videos and channels to a CSV file that will be inserted into &#39;links&#39; SQL table.</span>
 
 <span class="sd">    Args:</span>
@@ -12818,7 +12824,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Sort the URLs into channels and videos</span>
     <span class="n">parsed_links</span> <span class="o">=</span> <span class="p">[</span><span class="n">ParsedLink</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-    <span class="n">n_videos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">parsed_links</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">)])</span>
+    <span class="n">n_videos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">i</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">parsed_links</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeShort</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
 
     <span class="n">client</span> <span class="o">=</span> <span class="n">YouTubeAPIClient</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">keys</span><span class="p">)</span>
 
@@ -12828,7 +12840,7 @@
             <span class="n">description</span><span class="o">=</span><span class="s2">&quot;[bold red]Querying YouTube videos&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">n_videos</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">pl</span> <span class="ow">in</span> <span class="n">parsed_links</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeVideo</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">YoutubeShort</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">videos</span><span class="p">(</span><span class="n">videos</span><span class="o">=</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">video_id</span><span class="p">]):</span>
                     <span class="nb">setattr</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="s2">&quot;video_result&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
                     <span class="nb">setattr</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="s2">&quot;channel_id&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;channel_id&quot;</span><span class="p">))</span>
