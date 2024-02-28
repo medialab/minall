@@ -7,7 +7,6 @@ This site contains documentation for the `minall` data enrichment workflow. The 
 - [Tutorials](tutorials.md) : Articles demonstrating how to use the project for various use cases.
 - [How-To Guides](how-to-guides.md) : Straight-to-the-point, step-by-step guides.
 - [Reference](reference/home.md) : Documentation of the project's code base.
-- [Explanation](explanation.md) : Article explaining the project's motivation and implementation.
 
 
 ## Acknowledgements
