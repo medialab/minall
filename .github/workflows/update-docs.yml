@@ -1,0 +1,45 @@
+name: Update Doc
+
+on:
+  push:
+    paths:
+      - "minall/**"
+
+jobs:
+  update:
+    name: Update Doc
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+
+      - name: Write changes in code to MK docs
+        run: |
+          mkdocs build
+
+      - name: Commit doc changes
+        run: |
+          if git diff docs | grep . > /dev/null ; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git pull
+            git commit -m "commit doc changes" docs
+            git push
+          fi
+
+      - name: Deploy new GitHub Pages
+        run: |
+          mkdocs gh-deploy
