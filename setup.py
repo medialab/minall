@@ -20,7 +20,8 @@ setup(
     python_requires=">=3.11",
     packages=find_packages(exclude=["tests"]),
     install_requires=[
-        "minet==1.3.2",
+        "minet==1.4.0",
+        "ural==1.3.0",
         "babel==2.14.0",
         "click==8.1.7",
         "colorama==0.4.6",

@@ -43,3 +43,7 @@ jobs:
       - name: Test Twitter scraper
         run: |
           python -m unittest tests.twitter.Twitter
+
+      - name: Test YouTube API calls
+        run: |
+          python -m unittest tests.youtube.YTest
