@@ -41,7 +41,7 @@ def get_youtube_data(data: list[str], keys: list[str], outfile: Path) -> None:
             if isinstance(pl.type, YoutubeVideo) or isinstance(pl.type, YoutubeShort):
                 for _, result in client.videos(videos=[pl.video_id]):
                     setattr(pl, "video_result", result)
-                    setattr(pl, "channel_id", getattr(result, "channel_id"))
+                    setattr(pl, "channel_id", getattr(result, "channel_id") if result is not None else None)
                     progress.advance(t)
 
     # Get a unique set of channels from video and channel data
