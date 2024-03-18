@@ -3,6 +3,10 @@ import unittest
 from pathlib import Path
 
 from minet.twitter import TwitterGuestAPIScraper
+from minet.loggers import sleepers_logger
+from minet.cli.utils import CLIRetryerHandler
+
+sleepers_logger.addHandler(CLIRetryerHandler())
 
 from minall.enrichment.enrichment import Enrichment
 from minall.enrichment.twitter.get_data import get_twitter_data
