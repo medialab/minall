@@ -21,7 +21,7 @@ setup(
     packages=find_packages(exclude=["tests"]),
     install_requires=[
         "minet==2.0.7",
-        "ural==1.3.0",
+        "ural>=1.3.2,<2",
         "babel==2.14.0",
         "click==8.1.7",
         "colorama==0.4.6",
